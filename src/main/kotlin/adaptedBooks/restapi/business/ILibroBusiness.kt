@@ -1,0 +1,11 @@
+package adaptedBooks.restapi.business
+
+import adaptedBooks.restapi.model.Libro
+
+interface ILibroBusiness {
+
+    fun getAll(): List<Libro>
+    fun get (idLibro: Long):Libro
+    fun save(libro:Libro):Libro
+    fun remove(idLibro:Long)
+}
