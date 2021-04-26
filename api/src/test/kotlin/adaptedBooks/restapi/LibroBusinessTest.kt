@@ -19,10 +19,10 @@ class LibroBusinessTest {
 
 	@Before
 	 fun setUp(){
-		piedraFilosofal = Libro("la piedra filosofal","jk rowling","inglaterra", LocalDate.now())
-		calizDeFuego = Libro("el caliz de fuego","jk rowling","inglaterra", LocalDate.now())
-		crepusculo = Libro("crepusculo","no se","EEUU", LocalDate.now())
-		amanecer = Libro("amanecer","no se","EEUU", LocalDate.now())
+		piedraFilosofal = Libro("la piedra filosofal","jk rowling","inglaterra","", listOf<String>(), LocalDate.now())
+		calizDeFuego = Libro("el caliz de fuego","jk rowling","inglaterra","", listOf<String>(), LocalDate.now())
+		crepusculo = Libro("crepusculo","no se","EEUU", "", listOf<String>(),LocalDate.now())
+		amanecer = Libro("amanecer","no se","EEUU","", listOf<String>(), LocalDate.now())
 
 		libroBusiness = LibroBusiness()
 	}
