@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
-/*const libros = [
-  {id: '1', imageName: 'https://www.gestiontpv.com/img/modulos/posts/url1.jpg', tag: 'free'},
-  {id: '2', imageName: 'https://i.blogs.es/e86c3b/bitly-codigo-qr/450_1000.jpg', tag: 'new'},
-  {id: '3', imageName : 'https://www.gestiontpv.com/img/modulos/posts/url1.jpg', tag: 'free'},
-  {id: '4', imageName : 'https://www.gestiontpv.com/img/modulos/posts/url1.jpg', tag: 'free'},
-  {id: '5', imageName : 'https://www.gestiontpv.com/img/modulos/posts/url1.jpg', tag: 'pro'},
-  {id: '6', imageName: 'https://www.gestiontpv.com/img/modulos/posts/url1.jpg', tag: 'free'}
-];
-*/
-
 const App = () => {
 
   //proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
