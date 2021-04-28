@@ -76,4 +76,26 @@ class LibroBusiness:ILibroBusiness{
             throw BusinessException(e.message)
         }
     }
+
+    @Throws(BusinessException::class,NotFoundException::class)
+    override fun findByTituloContaining(titulo: String): List<Libro> {
+        val optional: Optional<List<Libro>>
+        try{
+            optional = libroRepository!!.findByTituloContaining(titulo)
+        }catch (e:Exception){
+            throw NotFoundException("No se encontro el libro con titulo: $titulo")
+        }
+        return optional.get()
+    }
+
+    @Throws(BusinessException::class,NotFoundException::class)
+    override fun findByAutorContaining(autor: String): List<Libro> {
+        val optional: Optional<List<Libro>>
+        try{
+            optional = libroRepository!!.findByAutorContaining(autor)
+        }catch (e:Exception){
+            throw NotFoundException("No se encontro el libro con Autor: $autor")
+        }
+        return optional.get()
+    }
 }

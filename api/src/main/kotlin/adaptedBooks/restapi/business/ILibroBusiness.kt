@@ -8,4 +8,6 @@ interface ILibroBusiness {
     fun get (idLibro: Long):Libro
     fun save(libro:Libro):Libro
     fun remove(idLibro:Long)
+    fun findByTituloContaining(titulo: String): List<Libro>
+    fun findByAutorContaining(autor: String): List<Libro>
 }

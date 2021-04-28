@@ -71,4 +71,26 @@ class LibroRestController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
+
+    @GetMapping("/={titulo}")
+    fun getByTitulo(@PathVariable("titulo") titulo:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByTituloContaining(titulo.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @GetMapping("/@={autor}")
+    fun getByAutor(@PathVariable("autor") autor:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByAutorContaining(autor.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
 }
