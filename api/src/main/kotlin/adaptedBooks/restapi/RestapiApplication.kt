@@ -58,7 +58,7 @@ class RestapiApplication: CommandLineRunner {
 		val cdhyf5 = Libro("Danza de Dragones", "George RR Martin","Estados Unidos", cdhyf5Imagen,cdhyfLinks,LocalDate.parse("12-07-2011",formatter))
 		libros.add(cdhyf5)
 
-		val HPPiedraFilosofalImagen = "https://static.wikia.nocookie.net/esharrypotter/images/6/62/HP1_ES_versi%C3%B3n_Pottermore.jpg/revision/latest/scale-to-width-down/719?cb=20170711202411"
+		val HPPiedraFilosofalImagen = "https://i.imgur.com/ufyhlaih.jpg"
 		val HPPiedraFilosofalLinks = listOf<String>("https://www.youtube.com/watch?v=2BXHcqtFU8k")
 		val HPPiedraFilosofal = Libro("Harry Potter y la piedra filosofal","J. K. Rowling","Reino Unido",HPPiedraFilosofalImagen,HPPiedraFilosofalLinks, LocalDate.parse("30-06-1997",formatter))
 		libros.add(HPPiedraFilosofal)
@@ -83,7 +83,7 @@ class RestapiApplication: CommandLineRunner {
 		val HPFenix = Libro("Harry Potter y la Orden del Fénix","J. K. Rowling","Reino Unido",HPFenixImagen,HPFenixLinks, LocalDate.parse("21-06-2003",formatter))
 		libros.add(HPFenix)
 
-		val HPPincipelImagen = "https://static.wikia.nocookie.net/esharrypotter/images/e/eb/HP6_ES_versi%C3%B3n_Pottermore.jpg/revision/latest/scale-to-width-down/719?cb=20170711202408"
+		val HPPincipelImagen = "https://i.imgur.com/EtSWtWt.jpg"
 		val HPPincipeLinks = listOf<String>("https://www.youtube.com/watch?v=wI0W7ClBLDs")
 		val HPPincipe = Libro("Harry Potter y el misterio del príncipe","J. K. Rowling","Reino Unido",HPPincipelImagen,HPPincipeLinks, LocalDate.parse("16-07-2005",formatter))
 		libros.add(HPPincipe)
