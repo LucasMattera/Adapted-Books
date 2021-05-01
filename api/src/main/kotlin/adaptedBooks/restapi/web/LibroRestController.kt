@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+
 @RestController
 @RequestMapping(Constants.URL_BASE_LIBROS)
 class LibroRestController {
@@ -18,6 +19,7 @@ class LibroRestController {
     @Autowired
     val libroBusiness:ILibroBusiness? = null
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("")
     fun getAll(): ResponseEntity<List<Libro>>{
         return try {
@@ -27,6 +29,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/{id}")
     fun get(@PathVariable("id") idLibro:Long): ResponseEntity<Any>{
         return try {
@@ -65,6 +68,28 @@ class LibroRestController {
         return try {
             libroBusiness!!.remove(idLibro)
             ResponseEntity(HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @GetMapping("/={titulo}")
+    fun getByTitulo(@PathVariable("titulo") titulo:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByTituloContaining(titulo.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @GetMapping("/@={autor}")
+    fun getByAutor(@PathVariable("autor") autor:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByAutorContaining(autor.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){
