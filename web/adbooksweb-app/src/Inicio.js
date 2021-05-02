@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './Inicio.css';
 
-const App = () => {
+function Inicio() {
 
 	//proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
 	const [libros, setLibros] = useState([])
