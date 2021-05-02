@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './Inicio.css';
 
-const App = () => {
+function Inicio() {
 
   //proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
   const [libros, setLibros] = useState([])
@@ -25,7 +25,7 @@ const App = () => {
       <div className="contenido">
         {libros.map(libro =>
           <div key={libro.id}>
-            <a href={libro.imagen}><img className="imagen" src={`${libro.imagen}`} alt="no cargo imagen" /></a>
+            <a href={libro.imagen}><img className="imagen" src={`${libro.imagen}`} alt="no cargo imagen"/></a>
             <p>{libro.titulo}</p>
           </div>)
         }
