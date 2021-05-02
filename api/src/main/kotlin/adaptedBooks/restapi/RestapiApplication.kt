@@ -211,8 +211,7 @@ class RestapiApplication: CommandLineRunner {
 		"https://www.youtube.com/watch?v=nf3EUJT9pjY")
 		val HPReliquias = 
 				Libro(
-					"Harry Potter y las Reliquias de la M
-					uerte",
+					"Harry Potter y las Reliquias de la Muerte",
 					"J. K.Rowling",
 					"ReinoUnido",
 					HPReliquiasImagen,
