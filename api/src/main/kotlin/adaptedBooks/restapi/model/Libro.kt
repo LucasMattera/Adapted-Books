@@ -11,7 +11,8 @@ import javax.persistence.*
 data class Libro(val titulo:String = "",val autor:String = "",val pais:String = "",val imagen:String ="",
                  @ElementCollection()
                  val links:List<String> = listOf(),
-                 val fechaDePublicacion: LocalDate? = null) {
+                 val fechaDePublicacion: LocalDate? = null,
+                 val descripcion:String= "Descripcion de $titulo") {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
