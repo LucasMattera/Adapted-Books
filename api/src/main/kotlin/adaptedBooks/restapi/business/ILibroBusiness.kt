@@ -10,4 +10,7 @@ interface ILibroBusiness {
     fun remove(idLibro:Long)
     fun findByTituloContaining(titulo: String): List<Libro>
     fun findByAutorContaining(autor: String): List<Libro>
+    fun findByPaisContaining(autor: String): List<Libro>
+    fun findByGeneroContaining(autor: String): List<Libro>
+    fun busquedaPor(palabra: String): List<Libro>
 }
