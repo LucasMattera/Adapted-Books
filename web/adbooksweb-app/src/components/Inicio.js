@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Inicio.css';
+import ArticuloMiniatura from './ArticuloMiniatura'
 
 function Inicio() {
 
@@ -25,16 +26,7 @@ function Inicio() {
 			<div className="contenido">
 				{
 					libros.map(libro =>
-						<div key={libro.id}>
-							<a href={libro.imagen}>
-								<img 
-									className="imagen" 
-									src={`${libro.imagen}`} 
-									alt="no cargo imagen"
-								/>
-							</a>
-							<p>{libro.titulo}</p>
-						</div>
+						<ArticuloMiniatura to={`/libro/${libro.id} `} key={libro.id} libro={libro} />
 					)
 				}
 			</div>
