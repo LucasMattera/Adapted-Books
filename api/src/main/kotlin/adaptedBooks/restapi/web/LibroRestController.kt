@@ -75,7 +75,7 @@ class LibroRestController {
         }
     }
 
-    @GetMapping("/={titulo}")
+    @GetMapping("/titulo={titulo}")
     fun getByTitulo(@PathVariable("titulo") titulo:String): ResponseEntity<List<Libro>>{
         return try {
             ResponseEntity(libroBusiness!!.findByTituloContaining(titulo.replace('-', ' ')),HttpStatus.OK)
@@ -86,7 +86,7 @@ class LibroRestController {
         }
     }
 
-    @GetMapping("/@={autor}")
+    @GetMapping("/autor={autor}")
     fun getByAutor(@PathVariable("autor") autor:String): ResponseEntity<List<Libro>>{
         return try {
             ResponseEntity(libroBusiness!!.findByAutorContaining(autor.replace('-', ' ')),HttpStatus.OK)
@@ -96,4 +96,38 @@ class LibroRestController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
+
+    @GetMapping("/pais={pais}")
+    fun getByPais(@PathVariable("pais") pais:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByPaisContaining(pais.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @GetMapping("/genero={genero}")
+    fun getByGenero(@PathVariable("genero") genero:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.findByGeneroContaining(genero.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @GetMapping("/coincidenteCon={palabra}")
+    fun getByCoincidence(@PathVariable("palabra") palabra:String): ResponseEntity<List<Libro>>{
+        return try {
+            ResponseEntity(libroBusiness!!.busquedaPor(palabra.replace('-', ' ')),HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }catch (e:NotFoundException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
+
 }

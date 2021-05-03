@@ -98,4 +98,53 @@ class LibroBusiness:ILibroBusiness{
         }
         return optional.get()
     }
+
+    @Throws(BusinessException::class,NotFoundException::class)
+    override fun findByPaisContaining(pais: String): List<Libro> {
+        val optional: Optional<List<Libro>>
+        try{
+            optional = libroRepository!!.findByPaisContaining(pais)
+        }catch (e:Exception){
+            throw NotFoundException("No se encontro ningun libro del pais: $pais")
+        }
+        return optional.get()
+    }
+
+    @Throws(BusinessException::class,NotFoundException::class)
+    override fun findByGeneroContaining(genero: String): List<Libro> {
+        val optional: Optional<List<Libro>>
+        try{
+            optional = libroRepository!!.findByGenerosContaining(genero)
+        }catch (e:Exception){
+            throw NotFoundException("No se encontro ningun libro con genero: $genero")
+        }
+        return optional.get()
+    }
+
+    override fun busquedaPor(palabra: String): List<Libro> {
+        val optional1: Optional<List<Libro>>
+        val optional2: Optional<List<Libro>>
+        val optional3: Optional<List<Libro>>
+        val optional4: Optional<List<Libro>>
+        try{
+            optional1 = libroRepository!!.findByAutorContaining(palabra)
+            optional2 = libroRepository!!.findByTituloContaining(palabra)
+            optional3 = libroRepository!!.findByPaisContaining(palabra)
+            optional4 = libroRepository!!.findByGenerosContaining(palabra)
+        }catch (e:Exception){
+            throw NotFoundException("No se encontro coincidencia con: $palabra")
+        }
+        var list1 = optional1.get()
+        var list2 = optional2.get()
+        var list3 = optional3.get()
+        var list4 = optional4.get()
+        var resultados: MutableSet<Libro> = mutableSetOf<Libro>()
+        resultados.addAll(list1)
+        resultados.addAll(list2)
+        resultados.addAll(list3)
+        resultados.addAll(list4)
+        return resultados.toList()
+    }
+
+
 }
