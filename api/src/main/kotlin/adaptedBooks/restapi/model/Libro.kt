@@ -12,7 +12,11 @@ data class Libro(val titulo:String = "",val autor:String = "",val pais:String = 
                  @ElementCollection()
                  val links:List<String> = listOf(),
                  val fechaDePublicacion: LocalDate? = null,
+                 @ElementCollection()
+                 val generos:List<String> = listOf(),
                  val descripcion:String= "Descripcion de $titulo") {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
