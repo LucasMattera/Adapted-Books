@@ -1,0 +1,32 @@
+.articulo-view{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+
+}
+
+.one {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    margin-left: 5%;
+}
+.two {
+    grid-row: 1;
+    grid-column: 2 / 4;
+}
+
+.descripcion {
+
+    text-align:left;
+}
+.detalle{
+    text-align:left;
+}
+
+.portada{
+    width: 350px;
+    height: 400px;
+    
+    padding: 5px;
+  }

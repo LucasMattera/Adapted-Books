@@ -32,7 +32,7 @@ function Inicio() {
 			<div className="contenido">
 				{
 					libros.map(libro =>
-						<ArticuloMiniatura to={`/libro/${libro.id} `} key={libro.id} libro={libro} />
+						<ArticuloMiniatura to={`/libros/${libro.id}`} id={libro.id} libro={libro} />
 					)
 				}
 			</div>

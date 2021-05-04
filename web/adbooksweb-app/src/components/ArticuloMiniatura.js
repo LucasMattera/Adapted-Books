@@ -3,10 +3,10 @@ function ArticuloMiniatura ({libro, id, to}){
     const {titulo, imagen}= libro;       
         return  (  
           <div key = {id}>
-              <a href={imagen}>
+              <a href={to}>
                       <img 
                           className="imagen" 
-                          src={`${imagen}`} 
+                          src={imagen} 
                           alt={titulo}
                       />
               </a>
