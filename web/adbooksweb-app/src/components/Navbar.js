@@ -11,10 +11,11 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-light bg-light justify-content-between">
-                <a 
+            <nav className="navbar navbar-dark bg-primary justify-content-between">
+                <a className="navbar-brand">Adapted Books</a>
+                <a
+                    className="boton-inicio"
                     type="submit" 
-                    className="navbar-brand" 
                     onClick={goHome}
                 >
                     Inicio

@@ -3,6 +3,12 @@
     font-size: 180%;
 }
 
-.navbar-profile {
+.navbar{
+    background-color: #dddddd;
+    
+}
+
+.boton-inicio{
     margin-left: 75%;
+    
 }
