@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Inicio from './components/Inicio';
 import Libro from './components/Libro';
 import Footer from './components/Footer';
-import './styles/AppK.css';
+import './styles/App.css';
 
 class App extends React.Component {
 
