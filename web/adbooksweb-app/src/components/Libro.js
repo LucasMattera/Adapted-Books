@@ -11,11 +11,11 @@ function Libro(){
     const [fecha, setFecha] = useState("")
     const [links, setLinks] = useState([])
     const [portada, setPortada] = useState("")
-  //  const [descripcion, setDescripcion] = useState("")
-  //  const [genero, setGenero] = useState("")
+    const [descripcion, setDescripcion] = useState("")
+    const [generos, setGeneros] = useState([])
 
 	
-	useEffect(() => {	obtenerLibro()})
+	useEffect(() => {	obtenerLibro()}, {})
   const location = useLocation().pathname
 	
 	const obtenerLibro = async () => {
@@ -28,8 +28,11 @@ function Libro(){
     setLinks(libro.links)
     setPortada(libro.imagen)
     setPais(libro.pais)
+    setDescripcion(libro.descripcion)
+    setGeneros(libro.generos)
     console.log("titulo:", titulo)
   }
+
 
 
         return  (  
@@ -40,16 +43,16 @@ function Libro(){
               <img className="portada" src={portada} alt={titulo}/>
               <p className="detalle">Fecha de publicación: {fecha}</p>
               <p className="detalle">País: {pais}</p>
-              <p className="detalle">Género: género</p>
+              <p className="detalle">Géneros: {generos.toString()}</p>
             </div>
             <div className="two">
               <h1 >{titulo}</h1>
               <h2>{autor}</h2>
-              <p className="descripcion">descripcion</p>
+              <p className="descripcion">{descripcion}</p>
               <h2>Adaptaciones</h2>
               <ul>
                 {links.map(link =>{
-                  return <li>{link}</li>
+                  return <li><a href={link}>{link}</a></li>
                 })}
               </ul>
             </div>
