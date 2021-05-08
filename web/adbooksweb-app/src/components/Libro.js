@@ -15,7 +15,7 @@ function Libro(){
   //  const [genero, setGenero] = useState("")
 
 	
-	useEffect(() => {	obtenerLibro()})
+	useEffect(() => {	obtenerLibro()},[])
   const location = useLocation().pathname
 	
 	const obtenerLibro = async () => {
