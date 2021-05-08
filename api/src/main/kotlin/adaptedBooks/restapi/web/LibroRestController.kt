@@ -119,7 +119,7 @@ class LibroRestController {
         }
     }
 
-    @GetMapping("/coincidenteCon={palabra}")
+    @GetMapping("/coincidentesCon={palabra}")
     fun getByCoincidence(@PathVariable("palabra") palabra:String): ResponseEntity<List<Libro>>{
         return try {
             ResponseEntity(libroBusiness!!.busquedaPor(palabra.replace('-', ' ')),HttpStatus.OK)
