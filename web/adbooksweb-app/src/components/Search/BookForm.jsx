@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const initialForm = {
-    autor: "",
+
     libro: "",
 };
 
@@ -18,7 +18,7 @@ const BookForm = ({ handleSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!form.autor || !form.libro) {
+        if (!form.libro) {
             alert("datos incompletos")
             return;
         }
@@ -29,11 +29,6 @@ const BookForm = ({ handleSearch }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input type="text"
-                    name="autor"
-                    placeholder="autor del libro"
-                    onChange={handleChange} value={form.autor}
-                />
 
                 <input type="text"
                     name="libro"
