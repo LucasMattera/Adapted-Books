@@ -25,17 +25,15 @@ function Inicio() {
 
 	return (
 		<div className="app">
-
 			<BookSearch/>
-
-			<h1 className="h1">AdaptedBooks</h1>
-			<div className="contenido">
-				{
-					libros.map(libro =>
-						<ArticuloMiniatura to={`/libros/${libro.id}`} id={libro.id} libro={libro} />
-					)
-				}
-			</div>
+				<h1 className="h1">AdaptedBooks</h1>
+				<div className="contenido">
+					{
+						libros.map(libro =>
+							<ArticuloMiniatura to={`/libros/${libro.id}`} id={libro.id} libro={libro} />
+						)
+					}
+				</div>
     	</div>
   	);
 }

@@ -75,6 +75,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/titulo={titulo}")
     fun getByTitulo(@PathVariable("titulo") titulo:String): ResponseEntity<List<Libro>>{
         return try {
@@ -86,6 +87,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/autor={autor}")
     fun getByAutor(@PathVariable("autor") autor:String): ResponseEntity<List<Libro>>{
         return try {
@@ -97,6 +99,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/pais={pais}")
     fun getByPais(@PathVariable("pais") pais:String): ResponseEntity<List<Libro>>{
         return try {
@@ -108,6 +111,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/genero={genero}")
     fun getByGenero(@PathVariable("genero") genero:String): ResponseEntity<List<Libro>>{
         return try {
@@ -119,6 +123,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/coincidentesCon={palabra}")
     fun getByCoincidence(@PathVariable("palabra") palabra:String): ResponseEntity<List<Libro>>{
         return try {

@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 
-const initialForm = {
-
-    libro: "",
-};
 
 const BookForm = ({ handleSearch }) => {
 
-    const [form, setForm] = useState(initialForm);
+    const [search, setForm] = useState('');
 
     const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
+        setForm(e.target.value)
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!form.libro) {
+        if (!search) {
             alert("datos incompletos")
             return;
         }
-        handleSearch(form);
-        setForm(initialForm);
+        handleSearch(search);
+        setForm('');
     };
 
     return (
@@ -33,11 +26,9 @@ const BookForm = ({ handleSearch }) => {
                 <input type="text"
                     name="libro"
                     placeholder="nombre del libro"
-                    onChange={handleChange} value={form.libro}
+                    onChange={handleChange} value={search}
                 />
-
                 <br />
-
                 <input type="submit"
                     value="Buscar" />
             </form>

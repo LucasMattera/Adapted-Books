@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import '../styles/Libro.css';
-import BookSearch from './Search/BookSearch';
 function Libro(){
     
     const [titulo, setTitulo] = useState("")

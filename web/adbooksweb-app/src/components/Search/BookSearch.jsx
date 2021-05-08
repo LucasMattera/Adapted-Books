@@ -6,29 +6,22 @@ import ArticuloMiniatura from '../ArticuloMiniatura';
 
 const BookSearch = () => {
 
-    const [search, setSearch] = useState(null);
-    const [books, setLibro] = useState([]);
+    const [search, setSearch] = useState('');
+    const [books, setBooks] = useState([]);
+    
+    const fetchData = async () => {
+
+        let bookUrl = `http://localhost:8080/api/v1/libros/titulo=${search}`;
+
+        const [bookRes] = await Promise.all([
+            helpHttp().get(bookUrl),
+        ]);
+        setBooks(bookRes);
+    };
 
     //proposito: obtiene los libros por medio de una funcion una vez que la vista renderiza.
-    useEffect(() => {
-        if (search === null) return;
-
-        const fetchData = async () => {
-            console.log(search)
-            const { libro } = search;
-
-            let bookUrl = `http://localhost:8080/api/v1/libros/titulo=${libro}`;
-            console.log(bookUrl)
-
-            const [bookRes] = await Promise.all([
-                helpHttp().get(bookUrl),
-            ]);
-
-            console.log(bookRes)
-            setLibro(bookRes);
-        };
-
-        fetchData();
+    useEffect(() => {   
+        fetchData();  
     }, [search]);
 
 
