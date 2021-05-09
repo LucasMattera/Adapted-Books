@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import '../styles/Navbar.css';
+import BookSearch from './Search/BookSearch';
 
 const Navbar = () => {
     const history = useHistory();
@@ -13,6 +14,7 @@ const Navbar = () => {
         <div>
             <nav className="navbar navbar-dark bg-primary justify-content-between">
                 <a className="navbar-brand">Adapted Books</a>
+                <BookSearch/>
                 <a
                     className="boton-inicio"
                     type="submit" 

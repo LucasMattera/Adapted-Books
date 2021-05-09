@@ -25,7 +25,7 @@ const BookForm = ({ handleSearch }) => {
 
                 <input type="text"
                     name="libro"
-                    placeholder="nombre del libro"
+                    placeholder="Buscar por autor, titulo, genero, etc"
                     onChange={handleChange} value={search}
                 />
                 <br />
