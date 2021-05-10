@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import './styles/App.css';
 import SearchResult from './components/Search/SearchResult';
+import AddBook from './components/AddBook';
 
 class App extends React.Component {
 
@@ -21,6 +22,7 @@ class App extends React.Component {
                             <Route exact path="/" component={Inicio} /> 
                             <Route path="/libros/" component={Libro}/>
                             <Route path="/search" component={SearchResult}/>
+                            <Route path="/admin/add" component={AddBook}/>
                             <Route path="*" render= {() =>
                                 <h1>Not Found</h1>
                             }/>

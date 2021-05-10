@@ -41,7 +41,8 @@ class LibroRestController {
         }
     }
 
-    @PostMapping("")
+    @CrossOrigin(origins = ["http://localhost:3000"])
+    @PostMapping("/add")
     fun insert(@RequestBody libro:Libro): ResponseEntity<Any>{
         return try {
             libroBusiness!!.save(libro)
