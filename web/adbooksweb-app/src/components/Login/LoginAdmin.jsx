@@ -7,6 +7,7 @@ export default function LoginAdmin() {
 
     //usuario unico registrado (solo se puede logear este usuario), usuario de prueba.
     const adminUser = {
+        authorization: '123456',
         email: "admin@123.com",
         password: "admin123"
     }
@@ -15,7 +16,7 @@ export default function LoginAdmin() {
     const Login = emailYPassword => {
         console.log(emailYPassword);
 
-        if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password)
+        if (emailYPassword.email == localStorage.getItem("emailAdmin") && emailYPassword.password == localStorage.getItem("passAdmin"))
             console.log("Logged in")
         else {
             console.log("emailYPassword do not match!");
@@ -37,6 +38,9 @@ export default function LoginAdmin() {
     //boton login.
     function handleSubmit(e) {
         e.preventDefault();
+        localStorage.setItem('accessToken',adminUser.authorization);
+        localStorage.setItem('emailAdmin',adminUser.email);
+        localStorage.setItem('passAdmin',adminUser.password);
         Login(emailYPassword)
     }
 
