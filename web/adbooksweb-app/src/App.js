@@ -7,11 +7,10 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import './styles/App.css';
 import SearchResult from './components/Search/SearchResult';
-<<<<<<< Updated upstream
 import AddBook from './components/AddBook';
-=======
+
 import LoginAdmin from './components/Login/LoginAdmin';
->>>>>>> Stashed changes
+
 
 class App extends React.Component {
 
@@ -26,11 +25,11 @@ class App extends React.Component {
                             <Route exact path="/" component={Inicio} /> 
                             <Route path="/libros/" component={Libro}/>
                             <Route path="/search" component={SearchResult}/>
-<<<<<<< Updated upstream
+
                             <Route path="/admin/add" component={AddBook}/>
-=======
+
                             <Route exact path="/admin/login" component={LoginAdmin} /> 
->>>>>>> Stashed changes
+
                             <Route path="*" render= {() =>
                                 <h1>Not Found</h1>
                             }/>
