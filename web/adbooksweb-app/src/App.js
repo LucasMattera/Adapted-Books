@@ -21,6 +21,7 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path="/" component={Inicio} /> 
                             <Route path="/libros/" component={Libro}/>
+                            
                             <Route path="*" render= {() =>
                                 <h1>Not Found</h1>
                             }/>
