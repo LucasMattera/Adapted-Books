@@ -3,6 +3,8 @@ import {useHistory} from "react-router-dom";
 import "../styles/AddBook.css";
 import { helpHttp } from "../helpers/helpHttp";
 import axios from "axios";
+import AdminHomeButton from "./AdminHomeButton";
+import AdminLogOutButtom from "./AdminLogOutButton";
 
 function AddBook() {
     const history = useHistory();
@@ -64,7 +66,7 @@ function AddBook() {
     }
     
     return(
-       
+    <>
         <div className="loginBorder">
         <div className="centro">
             <form  className="login "onSubmit={handleSubmit}>
@@ -169,6 +171,7 @@ function AddBook() {
             </form>
             </div>
             </div>
+        </>
     )
 };
 

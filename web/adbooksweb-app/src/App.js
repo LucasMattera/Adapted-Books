@@ -10,6 +10,11 @@ import SearchResult from './components/Search/SearchResult';
 import AddBook from './components/AddBook';
 
 import LoginAdmin from './components/Login/LoginAdmin';
+import AdminLogOutButtom from './components/AdminLogOutButton';
+import AdminHomeButton from './components/AdminHomeButton';
+import AdminNavbar from './components/AdminNavbar';
+import UserRoutes from './components/UserRoutes';
+import AdminRoutes from './components/AdminRoutes';
 
 
 class App extends React.Component {
@@ -20,16 +25,9 @@ class App extends React.Component {
             <div className="page-container">
                 <div className="content-wrap">
                     <BrowserRouter>
-                        <Navbar/>   
                         <Switch>
-                            <Route exact path="/" component={Inicio} /> 
-                            <Route path="/libros/" component={Libro}/>
-                            <Route path="/search" component={SearchResult}/>
-
-                            <Route path="/admin/add" component={AddBook}/>
-
-                            <Route exact path="/admin/login" component={LoginAdmin} /> 
-
+                            <Route exact path="/" component={UserRoutes} /> 
+                            <Route path="/admin" component={AdminRoutes} /> 
                             <Route path="*" render= {() =>
                                 <h1>Not Found</h1>
                             }/>
