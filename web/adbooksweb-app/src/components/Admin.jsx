@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import axios from "axios";
 import '../styles/Admin.css';
-import UseQuery from './Search/UseQuery';
-import AddBook from './AddBook';
 
 function Admin(){
     
-    const [books, setBooks] = useState([])
-    const [search, setSearch] = useState('')
-    const history= useHistory()
+    const [books, setBooks] = useState([]);
+    const [search, setSearch] = useState('');
+    const history= useHistory();
 
     useEffect(() => {
 		getBooks()
-	}, [])
+	}, []);
 
-	var id = 0
+	var id = 0;
 
     const idPlus = () => {
        var ret = id
@@ -34,9 +32,20 @@ function Admin(){
        return book.titulo.toLowerCase().includes(search.toLowerCase())
     })
 
-    const handleClick = (e) => {
+    const handleClickAdd = (e) => {
         history.push("/admin/add");
     }
+
+    const handleClickDelete = (idBook, e) => {
+        //event.preventDefault();
+        getBooks();
+        axios
+            .delete(`http://localhost:8080/api/v1/libros/${idBook}`)
+            .then(response => {
+                console.log(response)
+            });
+    }
+    
 
     return  (  
         <div className= "admin">
@@ -52,36 +61,38 @@ function Admin(){
                         <button 
                             type="button" 
                             class="btn btn-secondary add" 
-                            onClick={handleClick}
+                            onClick={handleClickAdd}
                         >Agregar</button>
                             <table className="table table-hover table-dark">
-                            <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Autor</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    filteredBooks.map(libro =>
-                                    
-                                        <tr>
-                                            <th scope="row">{idPlus()}</th>
-                                            <td>
-                                                {libro.titulo}
-                                            </td>
-                                            <td>
-                                                {libro.autor}
-                                            </td>
-                                            <td>
-                                                eliminar
-                                            </td>
-                                        </tr> 
-                                    )
-                                }
-                              </tbody>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Autor</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        filteredBooks.map(libro =>
+                                            <tr>
+                                                <th scope="row">{idPlus()}</th>
+                                                <td>
+                                                    {libro.titulo}
+                                                </td>
+                                                <td>
+                                                    {libro.autor}
+                                                </td>
+                                                <button
+                                                    type="button" 
+                                                    onClick={e => handleClickDelete(libro.id, e)}
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </tr> 
+                                        )
+                                    }
+                                </tbody>
                             </table>
                 </div>
         </div>
