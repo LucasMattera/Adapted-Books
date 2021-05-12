@@ -3,7 +3,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import AddBook from './AddBook';
 import Admin from './Admin';
 import AdminNavbar from './AdminNavbar';
-import Footer from './Footer';
 import LoginAdmin from './Login/LoginAdmin';
 
 

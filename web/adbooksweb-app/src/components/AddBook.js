@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import "../styles/AddBook.css";
-import { helpHttp } from "../helpers/helpHttp";
 import axios from "axios";
-import AdminHomeButton from "./AdminHomeButton";
-import AdminLogOutButtom from "./AdminLogOutButton";
 
 function AddBook() {
     const history = useHistory();
