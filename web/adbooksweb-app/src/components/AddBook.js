@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import "../styles/AddBook.css";
-import { helpHttp } from "../helpers/helpHttp";
 import axios from "axios";
-import AdminHomeButton from "./AdminHomeButton";
-import AdminLogOutButtom from "./AdminLogOutButton";
 
 function AddBook() {
     const history = useHistory();
@@ -110,10 +107,10 @@ function AddBook() {
                 <label htmlFor="link">
                     Links: {data.links.toString()}
                     <input type="text"
-                    value = {link}
-                    name="link"
-                    onChange={handleImputLink}
-                    className="form-control"
+                            value = {link}
+                            name="link"
+                            onChange={handleImputLink}
+                            className="form-control"
                     ></input>
                 </label>
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>

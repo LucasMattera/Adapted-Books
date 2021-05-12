@@ -54,6 +54,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @PutMapping("")
     fun update(@RequestBody libro: Libro): ResponseEntity<Any>{
         return try {
@@ -64,6 +65,7 @@ class LibroRestController {
         }
     }
 
+    @CrossOrigin(origins = ["http://localhost:3000"])
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") idLibro: Long):ResponseEntity<Any>{
         return try {
