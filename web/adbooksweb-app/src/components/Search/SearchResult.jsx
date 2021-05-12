@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import BookForm from './BookForm';
 import { useHistory, useLocation } from 'react-router-dom';
 import { helpHttp } from "../../helpers/helpHttp";
-import ArticuloMiniatura from '../ArticuloMiniatura';
+import ArticleMiniature from '../ArticleMiniature';
 import UseQuery from './UseQuery';
 
 
@@ -35,7 +35,7 @@ function SearchResult()  {
 		</div>
         <div className="contenido">
             {books.map(libro =>
-						<ArticuloMiniatura to={`/libros/${libro.id}`} id={libro.id} libro={libro} />
+						<ArticleMiniature  id={libro.id} libro={libro} />
 					)}
         </div>
         

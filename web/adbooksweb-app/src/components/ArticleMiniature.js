@@ -1,9 +1,16 @@
-function ArticuloMiniatura ({libro, id, to}){
-    
+import { useHistory } from 'react-router-dom';
+
+function ArticleMiniature ({libro, id}){
+    const history= useHistory()
+
+    const handleClick = (e) => {
+     history.push("/libros?q="+id)
+    }
     const {titulo, imagen}= libro;       
-        return  (  
+    
+    return (  
           <div key = {id}>
-              <a href={to}>
+              <a onClick= {handleClick}>
                       <img 
                           className="imagen" 
                           src={imagen} 
@@ -14,4 +21,4 @@ function ArticuloMiniatura ({libro, id, to}){
           </div>)
   }
   
-  export default ArticuloMiniatura;
+  export default ArticleMiniature;

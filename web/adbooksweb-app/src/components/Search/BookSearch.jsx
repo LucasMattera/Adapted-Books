@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import BookForm from './BookForm';
 import { helpHttp } from "../../helpers/helpHttp";
-import ArticuloMiniatura from '../ArticuloMiniatura';
+import ArticleMiniature from '../ArticleMiniature';
 import SearchResult from './SearchResult'
 
 
