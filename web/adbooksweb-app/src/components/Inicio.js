@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import React, { useEffect, useState,  } from 'react';
 import '../styles/Inicio.css';
-import ArticuloMiniatura from './ArticuloMiniatura'
+import ArticleMiniature from './ArticleMiniature'
 import BookSearch from './Search/BookSearch';
 
 
@@ -23,13 +23,14 @@ function Inicio() {
 		setLibros(todosLosLibros)
   	}
 
+
 	return (
 		<div className="app">
 				<h1 className="h1">AdaptedBooks</h1>
 				<div className="contenido">
 					{
 						libros.map(libro =>
-							<ArticuloMiniatura to={`/libros/${libro.id}`} id={libro.id} libro={libro} />
+							<ArticleMiniature id = {libro.id} libro={libro} />
 						)
 					}
 				</div>
