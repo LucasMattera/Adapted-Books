@@ -62,7 +62,7 @@ function Admin(){
                                                 {libro.autor}
                                             </td>
                                             <td>
-                                                eliminar
+                                            editar  |  eliminar
                                             </td>
                                         </tr> 
                                     )
