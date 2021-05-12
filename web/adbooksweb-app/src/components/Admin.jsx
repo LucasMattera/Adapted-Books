@@ -16,9 +16,7 @@ function Admin(){
 	var id = 0;
 
     const idPlus = () => {
-       var ret = id
-        id++
-        return ret
+        return id++
     }
     
 	const getBooks = async () => {
@@ -32,10 +30,6 @@ function Admin(){
        return book.titulo.toLowerCase().includes(search.toLowerCase())
     })
 
-    const handleClickAdd = (e) => {
-        history.push("/admin/add");
-    }
-
     const handleClickDelete = (idBook, e) => {
         //event.preventDefault();
         getBooks();
@@ -45,7 +39,10 @@ function Admin(){
                 console.log(response)
             });
     }
-    
+
+    const toAdd = (e) => {
+        history.push("/admin/add");
+    }
 
     return  (  
         <div className= "admin">
@@ -60,8 +57,8 @@ function Admin(){
                         />
                         <button 
                             type="button" 
-                            class="btn btn-secondary add" 
-                            onClick={handleClickAdd}
+                            className="btn btn-secondary add" 
+                            onClick={e => toAdd(e)}
                         >Agregar</button>
                             <table className="table table-hover table-dark">
                                 <thead>
@@ -83,20 +80,33 @@ function Admin(){
                                                 <td>
                                                     {libro.autor}
                                                 </td>
-                                                <button
-                                                    type="button" 
-                                                    onClick={e => handleClickDelete(libro.id, e)}
-                                                >
-                                                    Eliminar
-                                                </button>
+                                                <td>
+                                                    <button
+                                                        type="button" 
+                                                        onClick={}
+                                                    >
+                                                        Editar
+                                                    </button>
+                                                    <button
+                                                        type="button" 
+                                                        onClick={e => handleClickDelete(libro.id, e)}
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </td>
                                             </tr> 
                                         )
                                     }
                                 </tbody>
                             </table>
-                </div>
-        </div>
+                        </div>
+            </div>
     )
+
+
+    
+
+
 }   
   
   export default Admin;
