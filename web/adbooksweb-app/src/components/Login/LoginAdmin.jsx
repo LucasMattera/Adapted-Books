@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import Main from '../Main';
 import '../../styles/LoginAdmin.css';
+import { useHistory } from 'react-router';
 
 export default function LoginAdmin() {
 
@@ -12,13 +13,16 @@ export default function LoginAdmin() {
         password: "admin123"
     }
 
+    const history = useHistory()
+
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
-    const Login = emailYPassword => {
+    const Login = (emailYPassword) => {
         console.log(emailYPassword);
 
         if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password) {
             localStorage.setItem('token', adminUser.token)
             console.log("Logged in")
+            history.push("/admin")
         }
         else {
             console.log("emailYPassword do not match!");
@@ -50,7 +54,7 @@ export default function LoginAdmin() {
             <div className="FormContainer">
                 <h1 className="Form__titulo">AdaptedBooks</h1>
                 <div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={e=> handleSubmit(e)}>
                         <input
                             type="email"
                             name="email"
