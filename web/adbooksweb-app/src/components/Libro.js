@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import '../styles/Libro.css';
+import UseQuery from './Search/UseQuery';
 function Libro(){
     
     const [titulo, setTitulo] = useState("")
@@ -15,11 +16,11 @@ function Libro(){
 
 	
 	useEffect(() => {	obtenerLibro()},[])
-
-  const location = useLocation().pathname
+  const query = UseQuery()
 	
 	const obtenerLibro = async () => {
-		const data = await fetch(`http://localhost:8080/api/v1${location}`)
+    console.log("query: ", query.toString().replace('q=', ''))
+		const data = await fetch(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')))
 		const libro = await data.json()
 		setTitulo(libro.titulo)
     setId(libro.id)
