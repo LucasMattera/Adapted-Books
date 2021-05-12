@@ -16,7 +16,7 @@ class UserRoutes extends React.Component {
                             <Navbar/>   
                             <Switch>
                                 <Route exact path="/" component={Inicio} /> 
-                                <Route path="/libros" component={Libro}/>
+                                <Route path="/libros/" component={Libro}/>
                                 <Route path="/search" component={SearchResult}/>
                                 <Route path="*" render= {() =>
                                     <h1>Not Found</h1>
@@ -24,7 +24,6 @@ class UserRoutes extends React.Component {
                             </Switch>
                             </BrowserRouter>
                     </div>
-                    <Footer/> 
                 </div>
                 )
             }
