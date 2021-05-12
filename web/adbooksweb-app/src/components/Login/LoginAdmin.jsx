@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import Main from '../Main';
 import '../../styles/LoginAdmin.css';
+import AdminNavbar from '../AdminNavbar';
 
 export default function LoginAdmin() {
 

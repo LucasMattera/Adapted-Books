@@ -7,13 +7,14 @@ function AdminHomeButton(){
 
     const history = useHistory();
   
-    const goAdminHome = () => {
+    const goAdminHome = (e) => {
+        e.preventDefault();
         history.push("/admin") ;
     }
 
    return (
         <div>
-            <a class="nav-link active" aria-current="page" href="/admin">Home</a>
+            <a class="nav-link active" aria-current="page" onClick={e=> goAdminHome(e)}>Home</a>
         </div>
     );
 

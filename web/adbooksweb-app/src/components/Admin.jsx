@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import '../styles/Admin.css';
+import AdminLogOutButtom from './AdminLogOutButton';
+import AdminNavbar from './AdminNavbar';
 
 function Admin(){
     
@@ -31,12 +33,12 @@ function Admin(){
     })
 
     const handleClickDelete = (idBook, e) => {
-        //event.preventDefault();
-        getBooks();
+        e.preventDefault();
         axios
             .delete(`http://localhost:8080/api/v1/libros/${idBook}`)
             .then(response => {
                 console.log(response)
+                getBooks();
             });
     }
 
@@ -59,7 +61,7 @@ function Admin(){
                             type="button" 
                             className="btn btn-secondary add" 
                             onClick={e => toAdd(e)}
-                        >Agregar</button>
+                        >+</button>
                             <table className="table table-hover table-dark">
                                 <thead>
                                     <tr>
@@ -83,7 +85,7 @@ function Admin(){
                                                 <td>
                                                     <button
                                                         type="button" 
-                                                        onClick={}
+                                                      
                                                     >
                                                         Editar
                                                     </button>

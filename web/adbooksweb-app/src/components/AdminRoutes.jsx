@@ -11,9 +11,9 @@ class AdminRoutes extends React.Component {
 
     return (
         <div className="page-container">
-            <div className="content-wrap">
-                <AdminNavbar/>
-                <BrowserRouter> 
+            <div className="content-wrap">     
+                <BrowserRouter>
+                    <AdminNavbar/>
                     <Switch>
                         <Route exact path="/admin" component={Admin}/>
                         <Route exact path="/admin/add" component={AddBook}/>
