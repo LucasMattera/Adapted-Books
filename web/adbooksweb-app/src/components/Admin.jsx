@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import '../styles/Admin.css';
 import UseQuery from './Search/UseQuery';
+import AddBook from './AddBook';
+
 function Admin(){
     
     const [books, setBooks] = useState([])
     const [search, setSearch] = useState('')
+    const history= useHistory()
 
     useEffect(() => {
 		getBooks()
@@ -19,7 +23,6 @@ function Admin(){
         return ret
     }
     
-	
 	const getBooks = async () => {
 		const data = await fetch('http://localhost:8080/api/v1/libros')
 		const todosLosLibros = await data.json()
@@ -27,17 +30,30 @@ function Admin(){
         console.log(books)
   	}
     
-    
     const filteredBooks = books.filter(book => {
        return book.titulo.toLowerCase().includes(search.toLowerCase())
     })
 
-        return  (  
+    const handleClick = (e) => {
+        history.push("/admin/add");
+    }
+
+    return  (  
         <div className= "admin">
           <h2 className="mb">Manage Books</h2>
                 <div className="filterTab">
-                        <input className="form-control filter filter-container" onChange={e => setSearch(e.target.value)} id="myInput" type="text" placeholder="Search by title.."/>
-                        <button type="button" class="btn btn-secondary add">Agregar</button>
+                        <input 
+                            className="form-control filter filter-container" 
+                            onChange={e => setSearch(e.target.value)} 
+                            id="myInput" 
+                            type="text" 
+                            placeholder="Search by title.."
+                        />
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary add" 
+                            onClick={handleClick}
+                        >Agregar</button>
                             <table className="table table-hover table-dark">
                             <thead>
                                   <tr>
@@ -68,7 +84,8 @@ function Admin(){
                               </tbody>
                             </table>
                 </div>
-        </div>)
-  }
+        </div>
+    )
+}   
   
   export default Admin;

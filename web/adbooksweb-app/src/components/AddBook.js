@@ -110,10 +110,10 @@ function AddBook() {
                 <label htmlFor="link">
                     Links: {data.links.toString()}
                     <input type="text"
-                    value = {link}
-                    name="link"
-                    onChange={handleImputLink}
-                    className="form-control"
+                            value = {link}
+                            name="link"
+                            onChange={handleImputLink}
+                            className="form-control"
                     ></input>
                 </label>
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
