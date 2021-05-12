@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import '../styles/Admin.css';
-import UseQuery from './Search/UseQuery';
 function Admin(){
     
     const [books, setBooks] = useState([])
     const [search, setSearch] = useState('')
+    const history = useHistory()
 
     useEffect(() => {
 		getBooks()
@@ -14,9 +14,7 @@ function Admin(){
 	var id = 0
 
     const idPlus = () => {
-       var ret = id
-        id++
-        return ret
+        return id++
     }
     
 	
@@ -32,12 +30,16 @@ function Admin(){
        return book.titulo.toLowerCase().includes(search.toLowerCase())
     })
 
+    const toAdd = (e) => {
+        history.push("/admin/add")
+    }
+
         return  (  
         <div className= "admin">
           <h2 className="mb">Manage Books</h2>
                 <div className="filterTab">
                         <input className="form-control filter filter-container" onChange={e => setSearch(e.target.value)} id="myInput" type="text" placeholder="Search by title.."/>
-                        <button type="button" class="btn btn-secondary add">Agregar</button>
+                        <button type="button" onClick={e =>toAdd(e)} className="btn btn-secondary add">+</button>
                             <table className="table table-hover table-dark">
                             <thead>
                                   <tr>
