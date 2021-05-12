@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import AddBook from './AddBook';
+import Admin from './Admin';
 import AdminNavbar from './AdminNavbar';
 import Footer from './Footer';
 import LoginAdmin from './Login/LoginAdmin';
@@ -15,8 +16,12 @@ class AdminRoutes extends React.Component {
                 <AdminNavbar/>
                 <BrowserRouter> 
                     <Switch>
-                        <Route path="/admin/add" component={AddBook}/>
-                        <Route path="/admin/login" component={LoginAdmin} />
+                        <Route exact path="/admin" component={Admin}/>
+                        <Route exact path="/admin/add" component={AddBook}/>
+                        <Route exact path="/admin/login" component={LoginAdmin} />
+                        <Route path="*" render= {() =>
+                                <h1>Not Found</h1>
+                            }/>
                     </Switch>
                     </BrowserRouter>
             </div>

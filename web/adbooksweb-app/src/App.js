@@ -28,13 +28,9 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path="/" component={UserRoutes} /> 
                             <Route path="/admin" component={AdminRoutes} /> 
-                            <Route path="*" render= {() =>
-                                <h1>Not Found</h1>
-                            }/>
                         </Switch>
                         </BrowserRouter>
                 </div>
-
                 <Footer/> 
             </div>
         )
