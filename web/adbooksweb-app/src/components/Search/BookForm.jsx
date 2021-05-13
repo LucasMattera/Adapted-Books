@@ -22,17 +22,19 @@ const BookForm = ({ handleSearch }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-
-                <input type="text"
+                <input 
+                    type="text"
                     name="libro"
                     placeholder="Buscar por autor, titulo, genero, etc"
-                    onChange={handleChange} value={search}
+                    onChange={handleChange} 
+                    value={search}
                 />
-                <br />
-                <input type="submit"
-                    value="Buscar" />
+                <br/>
+                <input 
+                    type="submit"
+                    value="Buscar" 
+                />
             </form>
-
         </div>
     );
 };

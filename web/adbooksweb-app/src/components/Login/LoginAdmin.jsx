@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import Main from '../Main';
 import '../../styles/LoginAdmin.css';
 import { useHistory } from 'react-router';
@@ -13,16 +12,16 @@ export default function LoginAdmin() {
         password: "admin123"
     }
 
-    const history = useHistory()
+    const history = useHistory();
 
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
     const Login = (emailYPassword) => {
         console.log(emailYPassword);
 
         if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password) {
-            localStorage.setItem('token', adminUser.token)
-            console.log("Logged in")
-            history.push("/admin")
+            localStorage.setItem('token', adminUser.token);
+            console.log("Logged in");
+            history.push("/admin");
         }
         else {
             console.log("emailYPassword do not match!");
@@ -44,9 +43,8 @@ export default function LoginAdmin() {
     //boton login
     function handleSubmit(e) {
         e.preventDefault();
-        Login(emailYPassword)
+        Login(emailYPassword);
     }
-
 
     return (
         //componente Main sirve para centrar el cuerpo html.
@@ -73,11 +71,18 @@ export default function LoginAdmin() {
                             onChange={handleInputChange}
                             value={emailYPassword.password}
                         />
-                        <button type="submit" className="Form__submit">
+                        <button 
+                            type="submit" 
+                            className="Form__submit"
+                        >
                             Login
-           </button>
+                        </button>
                         <p className="FormContainer__info">
-                            <h1 className="hForm">Don't have an account? <br></br> You are not admin.</h1>
+                            <h1 className="hForm">Don't have an account? 
+                                <br>
+                                    You are not admin.
+                                </br> 
+                            </h1>
                         </p>
                     </form>
                 </div>

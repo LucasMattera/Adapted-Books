@@ -9,16 +9,16 @@ function ArticleMiniature ({libro, id}){
     const {titulo, imagen}= libro;       
     
     return (  
-          <div key = {id}>
-              <a onClick= {handleClick}>
-                      <img 
-                          className="imagen" 
-                          src={imagen} 
-                          alt={titulo}
-                      />
-              </a>
-          <p>{titulo}</p>
-          </div>)
+        <div key = {id}>
+            <a onClick= {handleClick}>
+                <img 
+                    className="imagen" 
+                    src={imagen} 
+                    alt={titulo}
+                />
+            </a>
+            <p>{titulo}</p>
+        </div>)
   }
   
   export default ArticleMiniature;

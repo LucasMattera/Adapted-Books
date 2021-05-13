@@ -1,18 +1,13 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import BookForm from './BookForm';
-import { helpHttp } from "../../helpers/helpHttp";
-import ArticleMiniature from '../ArticleMiniature';
-import SearchResult from './SearchResult'
-
 
 const BookSearch = () => {
 
     let history = useHistory()
 
     const handleSearch = (data) => {
-        history.push("/search?q=" + (data.replaceAll(' ','-')))
-        
+        history.push("/search?q=" + (data.replaceAll(' ','-')));
     }
 
    return (

@@ -1,24 +1,11 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-
-import Inicio from './components/Inicio';
-import Libro from './components/Libro';
 import Footer from './components/Footer';
-import Navbar from './components/Navbar';
 import './styles/App.css';
-import SearchResult from './components/Search/SearchResult';
-import AddBook from './components/AddBook';
-
-import LoginAdmin from './components/Login/LoginAdmin';
-import AdminLogOutButtom from './components/AdminLogOutButton';
-import AdminHomeButton from './components/AdminHomeButton';
-import AdminNavbar from './components/AdminNavbar';
 import UserRoutes from './components/UserRoutes';
-import AdminRoutes from './components/AdminRoutes';
-
+import AdminRoutes from './components/Admin/AdminRoutes';
 
 class App extends React.Component {
-
 
     render(){
         return (
@@ -26,10 +13,16 @@ class App extends React.Component {
                 <div className="content-wrap">
                     <BrowserRouter>
                         <Switch>
-                            <Route exact path="/" component={UserRoutes} /> 
-                            <Route path="/admin" component={AdminRoutes} /> 
+                            <Route 
+                                exact path="/" 
+                                component={UserRoutes} 
+                            /> 
+                            <Route 
+                                path="/admin" 
+                                component={AdminRoutes}
+                            /> 
                         </Switch>
-                        </BrowserRouter>
+                    </BrowserRouter>
                 </div>
                 <Footer/> 
             </div>

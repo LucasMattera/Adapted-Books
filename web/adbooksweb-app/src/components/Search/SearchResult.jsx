@@ -1,11 +1,8 @@
 import React, { useState, useEffect} from 'react'
-import BookForm from './BookForm';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { helpHttp } from "../../helpers/helpHttp";
 import ArticleMiniature from '../ArticleMiniature';
 import UseQuery from './UseQuery';
-
-
 
 function SearchResult()  {
     const query = UseQuery();
@@ -29,17 +26,17 @@ function SearchResult()  {
     };
 
     return(
-    <> 
-        <div div className="contenido">
-            {!thereAreBooks && 'no hay libros con ese criterio'}
-		</div>
-        <div className="contenido">
-            {books.map(libro =>
-						<ArticleMiniature  id={libro.id} libro={libro} />
-					)}
-        </div>
+        <> 
+            <div div className="contenido">
+                {!thereAreBooks && 'no hay libros con ese criterio'}
+            </div>
+            <div className="contenido">
+                {books.map(libro =>
+                            <ArticleMiniature  id={libro.id} libro={libro} />
+                        )}
+            </div>
         
-    </>
+        </>
     );
 }
 
