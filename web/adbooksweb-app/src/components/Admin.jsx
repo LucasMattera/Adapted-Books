@@ -44,6 +44,10 @@ function Admin(){
         history.push("/admin/add");
     }
 
+    const toEdit = (e,id) => {
+        history.push("/admin/edit/"+id)
+    }
+ 
     return  (  
         <div className= "admin">
           <h2 className="mb">Manage Books</h2>
@@ -83,7 +87,7 @@ function Admin(){
                                                 <td>
                                                     <button
                                                         type="button" 
-                                                        onClick={}
+                                                        onClick={e => toEdit(e,libro.id)}
                                                     >
                                                         Editar
                                                     </button>
