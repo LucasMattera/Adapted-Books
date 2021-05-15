@@ -48,7 +48,7 @@ function Admin(){
 
     return  (  
         <div className= "admin">
-          <h2 className="mb">Manage Books</h2>
+          <h1 className="mb">Administrador de Libros</h1>
                 <div className="filterTab">
                         <input 
                             className="form-control filter filter-container" 
@@ -61,12 +61,12 @@ function Admin(){
                             type="button" 
                             className="btn btn-secondary add" 
                             onClick={e => toAdd(e)}
-                        >+</button>
-                            <table className="table table-hover table-dark">
+                        ><h1 className="btn-work">+</h1></button>
+                            <table className="table table-hover table-dark margin">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Titulo</th>
                                         <th scope="col">Autor</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -83,18 +83,21 @@ function Admin(){
                                                     {libro.autor}
                                                 </td>
                                                 <td>
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <button
                                                         type="button" 
-                                                      
+                                                        class="btn btn-secondary"
                                                     >
                                                         Editar
                                                     </button>
                                                     <button
                                                         type="button" 
+                                                        class="btn btn-secondary"
                                                         onClick={e => handleClickDelete(libro.id, e)}
                                                     >
                                                         Eliminar
                                                     </button>
+                                                    </div>
                                                 </td>
                                             </tr> 
                                         )
