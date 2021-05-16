@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 
 function AdminNavbar(){
 
+    const isAuthenticated = !!localStorage.getItem("token");
     
     return(
         <>
@@ -15,10 +16,10 @@ function AdminNavbar(){
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                        <AdminHomeButton/>
+                        {isAuthenticated && <AdminHomeButton/>}
                         </li>
                         <li class="nav-item">
-                        <AdminLogOutButtom/>
+                        {isAuthenticated && <AdminLogOutButtom/>}
                         </li>
                     </ul>
                 </div>

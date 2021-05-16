@@ -15,13 +15,7 @@ const Navbar = () => {
             <nav className="navbar navbar-dark bg-primary justify-content-between">
                 <a className="navbar-brand">Adapted Books</a>
                 <BookSearch/>
-                <a
-                    className="boton-inicio"
-                    type="submit" 
-                    onClick={goHome}
-                >
-                    Inicio
-                </a>
+                <button type="button" class="btn btn-dark" onClick={goHome}>Home</button> 
             </nav>
         </div>
 
