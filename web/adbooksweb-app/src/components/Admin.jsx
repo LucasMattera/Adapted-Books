@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import '../styles/Admin.css';
+import EditBook from './EditBook';
 
 function Admin(){
     
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState('');
+    const [editBook, setEditBook] = useState(false)
+    const [bookToEdit, setBookToEdit] = useState(undefined)
     const history= useHistory();
 
     useEffect(() => {
@@ -23,7 +26,6 @@ function Admin(){
 		const data = await fetch('http://localhost:8080/api/v1/libros')
 		const todosLosLibros = await data.json()
 		setBooks(todosLosLibros)
-        console.log(books)
   	}
     
     const filteredBooks = books.filter(book => {
@@ -32,11 +34,12 @@ function Admin(){
 
     const handleClickDelete = (idBook, e) => {
         //event.preventDefault();
-        getBooks();
+        
         axios
             .delete(`http://localhost:8080/api/v1/libros/${idBook}`)
             .then(response => {
                 console.log(response)
+                getBooks();
             });
     }
 
@@ -44,9 +47,20 @@ function Admin(){
         history.push("/admin/add");
     }
 
-    const toEdit = (e,id) => {
-        history.push("/admin/edit/"+id)
+    const handleEdit = (e,libro) => {
+        setEditBook(true)
+        setBookToEdit(libro)    
+        //history.push("/admin/edit/"+id)
     }
+
+    const handleCloseEdit = useCallback(
+        event => {
+          
+          setEditBook(false);
+          setBookToEdit(undefined)
+          getBooks()
+        },[editBook, bookToEdit]
+      );
  
     return  (  
         <div className= "admin">
@@ -87,7 +101,7 @@ function Admin(){
                                                 <td>
                                                     <button
                                                         type="button" 
-                                                        onClick={e => toEdit(e,libro.id)}
+                                                        onClick={e => handleEdit(e,libro)}
                                                     >
                                                         Editar
                                                     </button>
@@ -104,7 +118,10 @@ function Admin(){
                                 </tbody>
                             </table>
                         </div>
+                    {editBook && <EditBook book={bookToEdit} handleClose={e => handleCloseEdit(e)} />}
+                    
             </div>
+            
     )
 
 
