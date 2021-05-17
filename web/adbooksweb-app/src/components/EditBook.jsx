@@ -1,44 +1,39 @@
-import React, {useCallback, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/AddBook.css";
 import "../styles/EditBook.css"
 import axios from "axios";
 import UseQuery from "./Search/UseQuery";
+import { useHistory } from "react-router";
 
 function EditBook(){  
     
-    const query = UseQuery(
+    const query = UseQuery()
+    const history = useHistory()
+    
+    useEffect(() => {
+		obtenerLibro()
+	}, [])
 
-        useEffect(() => {	obtenerLibro()},[])
-    )
-
-    const obtenerLibro = async () => {
-        console.log("query: ", query.toString().replace('q=', ''))
-            const data = await fetch(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')))
-            const libro = await data.json()
-            setTitulo(libro.titulo)
-            setId(libro.id)
-            setAutor(libro.autor)
-            setFecha(libro.fechaDePublicacion)
-            setLinks(libro.links)
-            setPortada(libro.imagen)
-            setPais(libro.pais)
-            setDescripcion(libro.descripcion)
-            setGeneros(libro.generos)
-    }
+    
 
     const [link, setLink] = useState("")
     const [genero, setGenero] = useState("")
+    
+    const [error, setError] = useState(false)
     const [id, setId] = useState(NaN)
     const [titulo, setTitulo] = useState("")
     const [autor, setAutor] = useState("")
     const [pais, setPais] = useState("")
-    const [imagen, setImagen] = useState("")
+    const [imagen, setPortada] = useState("")
     const [links, setLinks] = useState([])
-    const [fechaDePublicacion, setFechaDePublicacion] = useState("")
+    const [fechaDePublicacion, setFecha] = useState("")
     const [generos, setGeneros] = useState([])
     const [descripcion, setDescripcion] = useState("")
 
-    const [data,setData] = useState({
+    
+    
+
+    const [data, setData] = useState({
         id:id,
         titulo: titulo,
         autor:autor,
@@ -49,7 +44,34 @@ function EditBook(){
         generos: generos,
         descripcion: descripcion
     })
+    
 
+    const obtenerLibro = async () => {
+        console.log("query: ", query.toString().replace('q=', ''))
+            axios.get(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')))
+            .then((response) => {
+                const libro = response.data
+                console.log("LIBRO: ", libro)
+                  
+                setTitulo(libro.titulo)
+                setId(libro.id)
+                setAutor(libro.autor)
+                setFecha(libro.fechaDePublicacion)
+                setLinks(libro.links)
+                setPortada(libro.imagen)
+                setPais(libro.pais)
+                setDescripcion(libro.descripcion)
+                setGeneros(libro.generos) 
+                setData(libro)
+                  
+            })
+            .catch((error) => setError(true))
+            
+            
+    }
+
+
+    
     
     const handleImputChange = (event,) => {
         setData({...data,
@@ -64,8 +86,9 @@ function EditBook(){
             .then((response) => {
                 console.log(data)
                 console.log(response)
-                handleClose()
+                
             })
+            history.push("/admin")
     }
 
     const handleImputLink = (event) =>{
@@ -91,16 +114,17 @@ function EditBook(){
         setGenero("")
     }
 
-    return(
+    return(  
     <>
-        <div className="addBookContainer">
+        
+        (<div className="addBookContainer">
         <div className="centro">
             <form  className="login">
             
             
             <div class="form-group" >
                 <label htmlFor="titulo">
-                    Titulo:
+                <p class="text-light">Titulo:</p>
                     <input type="text"
                     value = {data.titulo}
                     name="titulo"
@@ -109,10 +133,9 @@ function EditBook(){
                     required></input>
                 </label>
             </div>
-            <div class="form-group" >
-                
-                <label htmlFor="email">
-                    Autor:
+            <div class="form-group" >                
+                <label htmlFor="autor">
+                <p className="text-light">Autor:</p>
                     <input type="text"
                     value = {data.autor}
                     name="autor"
@@ -123,7 +146,7 @@ function EditBook(){
             </div>
             <div class="form-group" >
                 <label htmlFor="pais">
-                    Pais:
+                <p class="text-light">Pais:</p>
                     <input type="text"
                     value = {data.pais}
                     name="pais"
@@ -134,17 +157,18 @@ function EditBook(){
             </div>
             <div class="form-group" >
                 <label htmlFor="link">
-                    Links: 
+                <p className="text-light" >Links: </p>
                     <div className="links-container">
-                        <ul>
+                        
                         {
                         data.links.map(link =>
-                           <li>
-                            {link.toString()}
+                           <>
+                            <i class="text-light">{link}</i>
                             <a className="close" onClick={e=> handleDeleteLink(e,link)}>x</a>
-                           </li>   
+                            <br></br>
+                           </>   
                         )}
-                        </ul>
+                        
                     </div>
                     
                     <input type="text"
@@ -154,11 +178,12 @@ function EditBook(){
                             className="form-control"
                     ></input>
                 </label>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
             </div>
             <div class="form-group" >
                 <label htmlFor="genero">
-                    Generos: {data.generos.toString()}
+                <p class="text-light">Generos: </p>
+                <i class="text-light">{data.generos.toString()}</i>
                     <input type="text"
                     value = {genero}
                     name="genero"
@@ -166,11 +191,11 @@ function EditBook(){
                     className="form-control"
                     ></input>
                 </label>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
             </div>
             <div class="form-group" >
                 <label htmlFor="descripcion">
-                    Descripcion:
+                <p class="text-light">Descripcion:</p>
                     <input type="text"
                     value = {data.descripcion}
                     name="descripcion"
@@ -185,7 +210,7 @@ function EditBook(){
                 </div>
             <div class="form-group">
                 <label htmlFor="fechaDePublicacion">
-                    Fecha:
+                <p class="text-light">Fecha:</p>
                     <input type="date"
                         value = {data.fechaDePublicacion}
                         name="fechaDePublicacion"
@@ -196,7 +221,7 @@ function EditBook(){
                 </label>
                 <div class="form-group" >
                 <label htmlFor="imagen">
-                    Imagen:
+                <p class="text-light">Imagen:</p>
                     <input type="text"
                         value = {data.imagen}
                         name="imagen"
@@ -204,13 +229,14 @@ function EditBook(){
                         className="form-control"
                     required>
                     </input>
+                    <img src={data.imagen} className="imagePreview" alt=""></img>
                 </label>
                 </div>
             </div>
                <button className="btn btn-primary" onClick={e=> handleSubmit(e)} >Guardar</button>
             </form>
             </div>
-            </div>
+            </div>)
         </>
     )
 };

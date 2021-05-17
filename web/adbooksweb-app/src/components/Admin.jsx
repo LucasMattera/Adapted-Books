@@ -10,8 +10,6 @@ function Admin(){
     
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState('');
-//    const [editBook, setEditBook] = useState(false)
-//    const [bookToEdit, setBookToEdit] = useState(undefined)
     const history= useHistory();
 
     useEffect(() => {
@@ -44,20 +42,10 @@ function Admin(){
         history.push("/admin/add");
     }
 
-    const handleEdit = (e,libro) => {
-        //setEditBook(true)
-        //setBookToEdit(libro)    
-        history.push("/admin/edit/"+id)
+    const handleEdit = (e,id) => {
+        history.push("/admin/edit?q="+id)
     }
 
-//    const handleCloseEdit = useCallback(
-//        event => {
-//          
-//          setEditBook(false);
-//          setBookToEdit(undefined)
-//          getBooks()
-//        },[editBook, bookToEdit]
-//      );
  
     return  (  
         <div className= "admin">
@@ -99,7 +87,7 @@ function Admin(){
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <button
                                             type="button" 
-                                            onClick={e => handleEdit(e,libro)}
+                                            onClick={e => handleEdit(e,libro.id)}
                                             class="btn btn-secondary"
                                         >
                                             Editar
