@@ -1,14 +1,27 @@
 .navbar-brand {
     font-family: 'Lobster Two', cursive;
     font-size: 180%;
+    margin-left: 80px;
+    margin-bottom: 10px;
 }
+
 
 .navbar{
     background-color: #dddddd;
-    
+   
 }
 
 .boton-inicio{
     margin-left: 75%;
     
+}
+
+.buttonHome{
+    margin-left: 70em;
+    width: 100px;
+    height: 60px;
+}
+
+.h1{
+    font-size: 40px;
 }

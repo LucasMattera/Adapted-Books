@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
-import React, { useEffect, useState,  } from 'react';
+import React, { useEffect, useState, } from 'react';
 import '../styles/Inicio.css';
 import ArticleMiniature from './ArticleMiniature'
-import BookSearch from './Search/BookSearch';
+
 
 
 function Inicio() {
-	
+
 	//proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
 	const [libros, setLibros] = useState([])
 
@@ -21,21 +21,20 @@ function Inicio() {
 		const todosLosLibros = await data.json()
 		console.log(todosLosLibros)
 		setLibros(todosLosLibros)
-  	}
+	}
 
 
 	return (
 		<div className="app">
-				<h1 className="h1">AdaptedBooks</h1>
-				<div className="contenido">
-					{
-						libros.map(libro =>
-							<ArticleMiniature id = {libro.id} libro={libro} />
-						)
-					}
-				</div>
-    	</div>
-  	);
+			<div className="contenido">
+				{
+					libros.map(libro =>
+						<ArticleMiniature id={libro.id} libro={libro} />
+					)
+				}
+			</div>
+		</div>
+	);
 }
 
 export default Inicio;
