@@ -2,7 +2,8 @@
   margin-left: 5%;
    display: grid;
    grid-template-columns: repeat(4,1fr);
-   
+   margin-right: 5px;
+   margin-top: 20px;
 }
 
 .h1{

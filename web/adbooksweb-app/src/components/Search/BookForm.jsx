@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import '../../styles/Navbar.css';
 
 const BookForm = ({ handleSearch }) => {
 
@@ -21,16 +21,15 @@ const BookForm = ({ handleSearch }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-
-                <input type="text"
+            <form class="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
+                <input class="form-control mr-sm-2"placeholder="Search" aria-label="Search" type="search"
                     name="libro"
                     placeholder="Buscar por autor, titulo, genero, etc"
                     onChange={handleChange} value={search}
                 />
                 <br />
-                <input type="submit"
-                    value="Buscar" />
+                <button class="btn btn-outline-success buttom-search"  type="submit">
+                   Search</button>
             </form>
 
         </div>

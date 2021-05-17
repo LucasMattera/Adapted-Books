@@ -10,9 +10,11 @@ export default function LoginAdmin() {
     const adminUser = {
         token: "123456",
         email: "admin@123.com",
-        password: "admin123"
+        password: "admin123",
     }
 
+
+    const [error,setError] = useState("");
     const history = useHistory()
 
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
@@ -21,11 +23,10 @@ export default function LoginAdmin() {
 
         if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password) {
             localStorage.setItem('token', adminUser.token)
-            console.log("Logged in")
             history.push("/admin")
         }
         else {
-            console.log("emailYPassword do not match!");
+            setError("email or Password do not match!")
         }
     }
 
@@ -54,7 +55,7 @@ export default function LoginAdmin() {
             <div className="FormContainer">
                 <h1 className="Form__titulo">AdaptedBooks</h1>
                 <div>
-                    <form onSubmit={e=> handleSubmit(e)}>
+                    <form onSubmit={e => handleSubmit(e)}>
                         <input
                             type="email"
                             name="email"
@@ -73,15 +74,21 @@ export default function LoginAdmin() {
                             onChange={handleInputChange}
                             value={emailYPassword.password}
                         />
+                        <div class="error" role="alert">
+                            {error}
+                        </div>
                         <button type="submit" className="Form__submit">
                             Login
-           </button>
+                        </button>
+                        
                         <p className="FormContainer__info">
                             <h1 className="hForm">Don't have an account? <br></br> You are not admin.</h1>
                         </p>
                     </form>
                 </div>
             </div>
+
+
         </Main>
     );
 }
