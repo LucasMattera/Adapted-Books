@@ -3,24 +3,21 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import '../styles/Admin.css';
 import EditBook from './EditBook';
+import AdminLogOutButtom from './AdminLogOutButton';
+import AdminNavbar from './AdminNavbar';
 
 function Admin(){
     
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState('');
-    const [editBook, setEditBook] = useState(false)
-    const [bookToEdit, setBookToEdit] = useState(undefined)
+//    const [editBook, setEditBook] = useState(false)
+//    const [bookToEdit, setBookToEdit] = useState(undefined)
     const history= useHistory();
 
     useEffect(() => {
 		getBooks()
 	}, []);
 
-	var id = 0;
-
-    const idPlus = () => {
-        return id++
-    }
     
 	const getBooks = async () => {
 		const data = await fetch('http://localhost:8080/api/v1/libros')
@@ -33,8 +30,8 @@ function Admin(){
     })
 
     const handleClickDelete = (idBook, e) => {
-        //event.preventDefault();
         
+        e.preventDefault();
         axios
             .delete(`http://localhost:8080/api/v1/libros/${idBook}`)
             .then(response => {
@@ -48,79 +45,81 @@ function Admin(){
     }
 
     const handleEdit = (e,libro) => {
-        setEditBook(true)
-        setBookToEdit(libro)    
-        //history.push("/admin/edit/"+id)
+        //setEditBook(true)
+        //setBookToEdit(libro)    
+        history.push("/admin/edit/"+id)
     }
 
-    const handleCloseEdit = useCallback(
-        event => {
-          
-          setEditBook(false);
-          setBookToEdit(undefined)
-          getBooks()
-        },[editBook, bookToEdit]
-      );
+//    const handleCloseEdit = useCallback(
+//        event => {
+//          
+//          setEditBook(false);
+//          setBookToEdit(undefined)
+//          getBooks()
+//        },[editBook, bookToEdit]
+//      );
  
     return  (  
         <div className= "admin">
-          <h2 className="mb">Manage Books</h2>
-                <div className="filterTab">
-                        <input 
-                            className="form-control filter filter-container" 
-                            onChange={e => setSearch(e.target.value)} 
-                            id="myInput" 
-                            type="text" 
-                            placeholder="Search by title.."
-                        />
-                        <button 
-                            type="button" 
-                            className="btn btn-secondary add" 
-                            onClick={e => toAdd(e)}
-                        >Agregar</button>
-                            <table className="table table-hover table-dark">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Autor</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        filteredBooks.map(libro =>
-                                            <tr>
-                                                <th scope="row">{idPlus()}</th>
-                                                <td>
-                                                    {libro.titulo}
-                                                </td>
-                                                <td>
-                                                    {libro.autor}
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        type="button" 
-                                                        onClick={e => handleEdit(e,libro)}
-                                                    >
-                                                        Editar
-                                                    </button>
-                                                    <button
-                                                        type="button" 
-                                                        onClick={e => handleClickDelete(libro.id, e)}
-                                                    >
-                                                        Eliminar
-                                                    </button>
-                                                </td>
-                                            </tr> 
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    {editBook && <EditBook book={bookToEdit} handleClose={e => handleCloseEdit(e)} />}
-                    
+            <h1 className="mb">Administrador de Libros</h1>
+            <div className="filterTab">
+                <input 
+                    className="form-control filter filter-container" 
+                    onChange={e => setSearch(e.target.value)} 
+                    id="myInput" 
+                    type="text" 
+                    placeholder="Search by title.."
+                />
+                <button 
+                    type="button" 
+                    className="btn btn-secondary add" 
+                    onClick={e => toAdd(e)}
+                ><h1 className="btn-work">+</h1></button>
+                <table className="table table-hover table-dark margin">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            filteredBooks.map(libro =>
+                                <tr>
+                                    <th scope="row">{libro.id}</th>
+                                    <td>
+                                        {libro.titulo}
+                                    </td>
+                                    <td>
+                                        {libro.autor}
+                                    </td>
+                                    <td>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <button
+                                            type="button" 
+                                            onClick={e => handleEdit(e,libro)}
+                                            class="btn btn-secondary"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button
+                                            type="button" 
+                                            class="btn btn-secondary"
+                                            onClick={e => handleClickDelete(libro.id, e)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                        </div>
+                                    </td>
+                                </tr> 
+                            )
+                        }
+                    </tbody>
+                </table>
             </div>
+        </div>
             
     )
 

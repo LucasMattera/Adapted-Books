@@ -1,26 +1,34 @@
 import React, {useCallback, useState} from "react";
-import {useHistory} from "react-router-dom";
 import "../styles/AddBook.css";
 import "../styles/EditBook.css"
 import axios from "axios";
+import UseQuery from "./Search/UseQuery";
 
-const EditBook = ({book, handleClose}) => {  
-    const history = useHistory();
+function EditBook(){  
+    
+    const query = UseQuery(
+
+        useEffect(() => {	obtenerLibro()},[])
+    )
+
+    const obtenerLibro = async () => {
+        console.log("query: ", query.toString().replace('q=', ''))
+            const data = await fetch(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')))
+            const libro = await data.json()
+            setTitulo(libro.titulo)
+            setId(libro.id)
+            setAutor(libro.autor)
+            setFecha(libro.fechaDePublicacion)
+            setLinks(libro.links)
+            setPortada(libro.imagen)
+            setPais(libro.pais)
+            setDescripcion(libro.descripcion)
+            setGeneros(libro.generos)
+    }
 
     const [link, setLink] = useState("")
     const [genero, setGenero] = useState("")
-
-    const [data,setData] = useState({
-        id:book.id,
-        titulo: book.titulo,
-        autor:book.autor,
-        pais:book.pais,
-        imagen:book.imagen,
-        links: book.links,
-        fechaDePublicacion: book.fechaDePublicacion,
-        generos: book.generos,
-        descripcion: book.descripcion
-    })
+    const [id, setId] = useState(NaN)
     const [titulo, setTitulo] = useState("")
     const [autor, setAutor] = useState("")
     const [pais, setPais] = useState("")
@@ -29,6 +37,18 @@ const EditBook = ({book, handleClose}) => {
     const [fechaDePublicacion, setFechaDePublicacion] = useState("")
     const [generos, setGeneros] = useState([])
     const [descripcion, setDescripcion] = useState("")
+
+    const [data,setData] = useState({
+        id:id,
+        titulo: titulo,
+        autor:autor,
+        pais:pais,
+        imagen:imagen,
+        links: links,
+        fechaDePublicacion:fechaDePublicacion,
+        generos: generos,
+        descripcion: descripcion
+    })
 
     
     const handleImputChange = (event,) => {
@@ -58,7 +78,7 @@ const EditBook = ({book, handleClose}) => {
     }
 
     const handleDeleteLink = (event,toDelete) => {
-       
+       data.links= data.links.filter(link => link!== toDelete)
         setLinks([])
     }
 
@@ -71,17 +91,15 @@ const EditBook = ({book, handleClose}) => {
         setGenero("")
     }
 
-    let i = 0    
     return(
     <>
-        <div className="background">
-        <div className="loginBorder">
+        <div className="addBookContainer">
         <div className="centro">
-            <form  className="login" onSubmit={e=> handleSubmit(e)}>
+            <form  className="login">
             
             
             <div class="form-group" >
-                <label htmlFor="name">
+                <label htmlFor="titulo">
                     Titulo:
                     <input type="text"
                     value = {data.titulo}
@@ -123,7 +141,7 @@ const EditBook = ({book, handleClose}) => {
                         data.links.map(link =>
                            <li>
                             {link.toString()}
-                            <button className="close" onClick={e=> handleDeleteLink(e,link)}>x</button>
+                            <a className="close" onClick={e=> handleDeleteLink(e,link)}>x</a>
                            </li>   
                         )}
                         </ul>
@@ -189,9 +207,8 @@ const EditBook = ({book, handleClose}) => {
                 </label>
                 </div>
             </div>
-               <button type="submit" className="btn btn-primary" >Guardar</button>
+               <button className="btn btn-primary" onClick={e=> handleSubmit(e)} >Guardar</button>
             </form>
-            </div>
             </div>
             </div>
         </>

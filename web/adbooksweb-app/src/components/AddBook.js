@@ -8,6 +8,9 @@ function AddBook() {
     const [link, setLink] = useState("")
     const [genero, setGenero] = useState("")
 
+    const [error,setError] = useState(false)
+    const [agregado,setAgregado] = useState(false)
+
     const [data,setData] = useState({
         titulo: "",
         autor:"",
@@ -36,12 +39,15 @@ function AddBook() {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
+        window.scrollTo(0, 0)
+        setAgregado(false)
+        setError(false)
         axios
             .post("http://localhost:8080/api/v1/libros/add",data)
             .then((response) => {
-                console.log(data)
-                console.log(response)
+                setAgregado(true)
             })
+            .catch((error) => setError(true)) 
     }
 
     const handleImputLink = (event) =>{
@@ -64,14 +70,21 @@ function AddBook() {
     
     return(
     <>
-        <div className="loginBorder">
+        <div className="addBookContainer">
         <div className="centro">
+        {agregado && (<div class="alert alert-success" role="alert">
+            Libro agregado Correctamente!
+        </div>)}
+        {error && (
+        <div class="alert alert-danger" role="alert">
+            El Libro no fue Agregado!
+        </div>)}
             <form  className="login "onSubmit={handleSubmit}>
             
             
             <div class="form-group" >
-                <label htmlFor="name">
-                    Titulo:
+                <label htmlFor="titulo">
+                <p class="text-light">Titulo:</p>
                     <input type="text"
                     value = {data.titulo}
                     name="titulo"
@@ -81,9 +94,8 @@ function AddBook() {
                 </label>
             </div>
             <div class="form-group" >
-                
-                <label htmlFor="email">
-                    Autor:
+                <label htmlFor="autor">
+                <p className="text-light">Autor:</p>
                     <input type="text"
                     value = {data.autor}
                     name="autor"
@@ -94,7 +106,7 @@ function AddBook() {
             </div>
             <div class="form-group" >
                 <label htmlFor="pais">
-                    Pais:
+                <p class="text-light">Pais:</p>
                     <input type="text"
                     value = {data.pais}
                     name="pais"
@@ -105,7 +117,7 @@ function AddBook() {
             </div>
             <div class="form-group" >
                 <label htmlFor="link">
-                    Links: {data.links.toString()}
+                <p className="text-light" >Links: </p>
                     <input type="text"
                             value = {link}
                             name="link"
@@ -113,11 +125,13 @@ function AddBook() {
                             className="form-control"
                     ></input>
                 </label>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                
             </div>
+            {data.links.map (link => <i class="text-light">{link}<br></br></i>)}
             <div class="form-group" >
                 <label htmlFor="genero">
-                    Generos: {data.generos.toString()}
+                <p class="text-light">Generos: </p>
                     <input type="text"
                     value = {genero}
                     name="genero"
@@ -125,11 +139,12 @@ function AddBook() {
                     className="form-control"
                     ></input>
                 </label>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
             </div>
+            <i class="text-light">{data.generos.toString()}</i>
             <div class="form-group" >
                 <label htmlFor="descripcion">
-                    Descripcion:
+                <p class="text-light">Descripcion:</p>
                     <input type="text"
                     value = {data.descripcion}
                     name="descripcion"
@@ -144,7 +159,7 @@ function AddBook() {
                 </div>
             <div class="form-group">
                 <label htmlFor="fechaDePublicacion">
-                    Fecha:
+                <p class="text-light">Fecha:</p>
                     <input type="date"
                     value = {data.fechaDePublicacion}
                     name="fechaDePublicacion"
@@ -154,20 +169,22 @@ function AddBook() {
                 </label>
                 <div class="form-group" >
                 <label htmlFor="imagen">
-                    Imagen:
+                <p class="text-light">Imagen:</p>
                     <input type="text"
                     value = {data.imagen}
                     name="imagen"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
+                    <img src={data.imagen} className="imagePreview" alt=""></img>
                 </label>
                 </div>
             </div>
-               <button type="submit" className="btn btn-primary">Agregar Libro</button>
+               <button type="submit" className="btn btn-dark">Agregar Libro</button>
             </form>
             </div>
             </div>
+   
         </>
     )
 };

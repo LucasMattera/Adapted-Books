@@ -4,6 +4,9 @@ import AddBook from './AddBook';
 import Admin from './Admin';
 import AdminNavbar from './AdminNavbar';
 import LoginAdmin from './Login/LoginAdmin';
+import AdminPrivateRoute from './AdminPrivateRoute';
+import AdminPublicRoute from './AdminPublicRoute';
+
 
 
 class AdminRoutes extends React.Component {
@@ -11,13 +14,12 @@ class AdminRoutes extends React.Component {
 
     return (
         <div className="page-container">
-            <div className="content-wrap">
-                <AdminNavbar/>
-                <BrowserRouter> 
+            <div className="content-wrap">     
+                <BrowserRouter>
                     <Switch>
-                        <Route exact path="/admin" component={Admin}/>
-                        <Route exact path="/admin/add" component={AddBook}/>
-                        <Route exact path="/admin/login" component={LoginAdmin} />
+                        <AdminPrivateRoute exact path="/admin" component={Admin}/>
+                        <AdminPrivateRoute exact path="/admin/add" component={AddBook}/>
+                        <AdminPublicRoute exact path="/admin/login" component={LoginAdmin}/>
                         <Route path="*" render= {() =>
                                 <h1>Not Found</h1>
                             }/>

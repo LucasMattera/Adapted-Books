@@ -22,7 +22,7 @@ class App extends React.Component {
 
     render(){
         return (
-            <div className="page-container">
+            <div className="page-container backgroundPage">
                 <div className="content-wrap">
                     <BrowserRouter>
                         <Switch>

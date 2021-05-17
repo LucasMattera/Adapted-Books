@@ -1,16 +1,21 @@
 .admin{
-    padding-top: 80px; 
+    padding-top: 30px; 
+    margin: auto ;
+    width: auto;
 }
 
 .mb {
-    display: block;
-    margin-left: 25%;
-    margin-right: auto;
+    text-align: center;
+    margin-top: 5%;
+    color: snow;
+    border: black;
+    font-size: 300%;
+    margin-bottom: 5%;
 }
 
 .filterTab{
     display: grid;
-    margin-right: auto;
+    margin-right: 3%;
     margin-left: 3%;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
@@ -21,23 +26,29 @@
 }
 .filter-container {
     grid-row: 1 ;
-    grid-column: 1 / 4;
-    margin-top: 15%;
+    grid-column: 1 / 5;
+    margin-top: 0%;
 }
 
 .add {
-    margin-top: 45%;
+    margin-top: 0%;
     grid-row: 1;
     grid-column: 4 / 5;
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0%;
     width: 20%;
     font-size:xx-large;
-    font-weight:900;
     
 }
 .table {
     grid-row: 2;
     grid-column: 1 / 5;
 }
+
+.nav-link{
+    cursor:pointer;
+}
+
+.btn-work{ text-align: center; }
+
