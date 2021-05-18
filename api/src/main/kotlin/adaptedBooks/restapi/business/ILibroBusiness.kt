@@ -5,12 +5,12 @@ import adaptedBooks.restapi.model.Libro
 interface ILibroBusiness {
 
     fun getAll(): List<Libro>
-    fun get (idLibro: Long):Libro
-    fun save(libro:Libro):Libro
-    fun remove(idLibro:Long)
-    fun findByTituloContaining(titulo: String): List<Libro>
-    fun findByAutorContaining(autor: String): List<Libro>
-    fun findByPaisContaining(autor: String): List<Libro>
-    fun findByGeneroContaining(autor: String): List<Libro>
-    fun busquedaPor(palabra: String): List<Libro>
+    fun get (idBook: Long):Libro
+    fun save(book:Libro):Libro
+    fun remove(idBook:Long)
+    fun findByTitleContaining(title: String): List<Libro>
+    fun findByAuthorContaining(author: String): List<Libro>
+    fun findByCountryContaining(author: String): List<Libro>
+    fun findByGenreContaining(author: String): List<Libro>
+    fun findBy(word: String): List<Libro>
 }

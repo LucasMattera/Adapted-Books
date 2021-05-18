@@ -6,7 +6,7 @@ function ArticleMiniature ({libro, id}){
     const handleClick = (e) => {
      history.push("/libros?q="+id)
     }
-    const {titulo, imagen}= libro;       
+    const {title, image}= libro;       
     
     return (  
         <div key = {id}>

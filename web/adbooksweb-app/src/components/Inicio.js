@@ -20,14 +20,13 @@ function Inicio() {
 		setLibros(todosLosLibros);
   	}
 
-
 	return (
 		<div className="app">
             <h1 className="h1">AdaptedBooks</h1>
             <div className="contenido">
                 {
                     libros.map(libro =>
-                        <ArticleMiniature id = {libro.id} libro={libro} />
+                        <ArticleMiniature id={libro.id} libro={libro} />
                     )
                 }
             </div>

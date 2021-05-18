@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping(Constants.URL_BASE_LIBROS)
+@RequestMapping(Constants.URL_BASE_BOOKS)
 class LibroRestController {
 
     @Autowired
@@ -47,7 +47,7 @@ class LibroRestController {
         return try {
             libroBusiness!!.save(libro)
             val responseHeader = HttpHeaders()
-            responseHeader.set("location",Constants.URL_BASE_LIBROS + "/" + libro.id)
+            responseHeader.set("location",Constants.URL_BASE_BOOKS + "/" + libro.id)
             ResponseEntity(responseHeader,HttpStatus.CREATED)
         }catch (e:Exception){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -67,9 +67,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") idLibro: Long):ResponseEntity<Any>{
+    fun delete(@PathVariable("id") idBook: Long):ResponseEntity<Any>{
         return try {
-            libroBusiness!!.remove(idLibro)
+            libroBusiness!!.remove(idBook)
             ResponseEntity(HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -80,9 +80,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/titulo={titulo}")
-    fun getByTitulo(@PathVariable("titulo") titulo:String): ResponseEntity<List<Libro>>{
+    fun getByTitulo(@PathVariable("titulo") title:String): ResponseEntity<List<Libro>>{
         return try {
-            ResponseEntity(libroBusiness!!.findByTituloContaining(titulo.replace('-', ' ')),HttpStatus.OK)
+            ResponseEntity(libroBusiness!!.findByTitleContaining(title.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){
@@ -92,9 +92,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/autor={autor}")
-    fun getByAutor(@PathVariable("autor") autor:String): ResponseEntity<List<Libro>>{
+    fun getByAutor(@PathVariable("autor") author:String): ResponseEntity<List<Libro>>{
         return try {
-            ResponseEntity(libroBusiness!!.findByAutorContaining(autor.replace('-', ' ')),HttpStatus.OK)
+            ResponseEntity(libroBusiness!!.findByAuthorContaining(author.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){
@@ -104,9 +104,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/pais={pais}")
-    fun getByPais(@PathVariable("pais") pais:String): ResponseEntity<List<Libro>>{
+    fun getByPais(@PathVariable("pais") country:String): ResponseEntity<List<Libro>>{
         return try {
-            ResponseEntity(libroBusiness!!.findByPaisContaining(pais.replace('-', ' ')),HttpStatus.OK)
+            ResponseEntity(libroBusiness!!.findByCountryContaining(country.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){
@@ -116,9 +116,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/genero={genero}")
-    fun getByGenero(@PathVariable("genero") genero:String): ResponseEntity<List<Libro>>{
+    fun getByGenero(@PathVariable("genero") genre:String): ResponseEntity<List<Libro>>{
         return try {
-            ResponseEntity(libroBusiness!!.findByGeneroContaining(genero.replace('-', ' ')),HttpStatus.OK)
+            ResponseEntity(libroBusiness!!.findByGenreContaining(genre.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){
@@ -128,9 +128,9 @@ class LibroRestController {
 
     @CrossOrigin(origins = ["http://localhost:3000"])
     @GetMapping("/coincidentesCon={palabra}")
-    fun getByCoincidence(@PathVariable("palabra") palabra:String): ResponseEntity<List<Libro>>{
+    fun getByCoincidence(@PathVariable("palabra") word:String): ResponseEntity<List<Libro>>{
         return try {
-            ResponseEntity(libroBusiness!!.busquedaPor(palabra.replace('-', ' ')),HttpStatus.OK)
+            ResponseEntity(libroBusiness!!.findBy(word.replace('-', ' ')),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }catch (e:NotFoundException){

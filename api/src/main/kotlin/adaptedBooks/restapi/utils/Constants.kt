@@ -7,6 +7,6 @@ class Constants {
         private const val URL_BASE = URL_API_BASE + URL_API_VERSION
 
         //Base API endpoint para libros
-        const val URL_BASE_LIBROS = "$URL_BASE/libros"
+        const val URL_BASE_BOOKS = "$URL_BASE/libros"
     }
 }

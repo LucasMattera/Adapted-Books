@@ -9,24 +9,24 @@ function AddBook() {
     const [genero, setGenero] = useState("");
 
     const [data,setData] = useState({
-        titulo: "",
-        autor:"",
-        pais:"",
-        imagen:"",
+        title: "",
+        author:"",
+        country:"",
+        image:"",
         links: [],
-        fechaDePublicacion: "",
-        generos: [],
-        descripcion:""
+        publicationDate: "",
+        genres: [],
+        decription:""
     });
 
-    const [titulo, setTitulo] = useState("");
-    const [autor, setAutor] = useState("");
-    const [pais, setPais] = useState("");
-    const [imagen, setImagen] = useState("");
+    const [title, setTitulo] = useState("");
+    const [author, setAutor] = useState("");
+    const [country, setPais] = useState("");
+    const [image, setImagen] = useState("");
     const [links, setLinks] = useState([]);
-    const [fechaDePublicacion, setFechaDePublicacion] = useState("");
-    const [generos, setGeneros] = useState([]);
-    const [descripcion, setDescripcion] = useState("");
+    const [publicationDate, setFechaDePublicacion] = useState("");
+    const [genres, setGeneros] = useState([]);
+    const [decription, setDescripcion] = useState("");
 
     
     const handleImputChange = (event) => {

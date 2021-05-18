@@ -6,7 +6,6 @@ import UserRoutes from './components/UserRoutes';
 import AdminRoutes from './components/Admin/AdminRoutes';
 
 class App extends React.Component {
-
     render(){
         return (
             <div className="page-container">
