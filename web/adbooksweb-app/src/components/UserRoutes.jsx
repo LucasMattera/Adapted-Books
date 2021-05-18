@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Footer from './Footer';
 import Inicio from './Inicio';
 import Libro from './Libro';
 import Navbar from './Navbar';
@@ -16,7 +15,7 @@ class UserRoutes extends React.Component {
                             <Navbar/>   
                             <Switch>
                                 <Route exact path="/" component={Inicio} /> 
-                                <Route path="/libros/" component={Libro}/>
+                                <Route path="/libros" component={Libro}/>
                                 <Route path="/search" component={SearchResult}/>
                                 <Route path="*" render= {() =>
                                     <h1>Not Found</h1>
