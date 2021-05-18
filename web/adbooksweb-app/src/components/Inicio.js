@@ -1,9 +1,12 @@
-import React, { useEffect, useState,  } from 'react';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import React, { useEffect, useState, } from 'react';
 import '../styles/Inicio.css';
 import ArticleMiniature from './ArticleMiniature'
 
+
+
 function Inicio() {
-	
+
 	//proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
 	const [libros, setLibros] = useState([])
 

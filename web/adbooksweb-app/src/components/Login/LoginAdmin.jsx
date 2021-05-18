@@ -9,22 +9,33 @@ export default function LoginAdmin() {
     const adminUser = {
         token: "123456",
         email: "admin@123.com",
-        password: "admin123"
+        password: "admin123",
     }
 
+<<<<<<< HEAD
     const history = useHistory();
+=======
+
+    const [error,setError] = useState("");
+    const history = useHistory()
+>>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
 
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
     const Login = (emailYPassword) => {
         console.log(emailYPassword);
 
         if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password) {
+<<<<<<< HEAD
             localStorage.setItem('token', adminUser.token);
             console.log("Logged in");
             history.push("/admin");
+=======
+            localStorage.setItem('token', adminUser.token)
+            history.push("/admin")
+>>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
         }
         else {
-            console.log("emailYPassword do not match!");
+            setError("email or Password do not match!")
         }
     }
 
@@ -52,7 +63,7 @@ export default function LoginAdmin() {
             <div className="FormContainer">
                 <h1 className="Form__titulo">AdaptedBooks</h1>
                 <div>
-                    <form onSubmit={e=> handleSubmit(e)}>
+                    <form onSubmit={e => handleSubmit(e)}>
                         <input
                             type="email"
                             name="email"
@@ -71,12 +82,22 @@ export default function LoginAdmin() {
                             onChange={handleInputChange}
                             value={emailYPassword.password}
                         />
+<<<<<<< HEAD
                         <button 
                             type="submit" 
                             className="Form__submit"
                         >
                             Login
                         </button>
+=======
+                        <div class="error" role="alert">
+                            {error}
+                        </div>
+                        <button type="submit" className="Form__submit">
+                            Login
+                        </button>
+                        
+>>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
                         <p className="FormContainer__info">
                             <h1 className="hForm">Don't have an account? 
                                 <br>
@@ -87,6 +108,8 @@ export default function LoginAdmin() {
                     </form>
                 </div>
             </div>
+
+
         </Main>
     );
 }

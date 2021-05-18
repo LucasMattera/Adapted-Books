@@ -3,6 +3,7 @@ import '../styles/Libro.css';
 import UseQuery from './Search/UseQuery';
 
 function Libro(){
+<<<<<<< HEAD
     
     const [title, setTitle] = useState("");
     const [id, setId] = useState("");
@@ -13,6 +14,18 @@ function Libro(){
     const [coverPage, setCoverPage] = useState("");
     const [description, setDescription] = useState("");
     const [genres, setGenres] = useState([]);
+=======
+
+    const [titulo, setTitulo] = useState("")
+    const [id, setId] = useState("")
+    const [autor, setAutor] = useState("")
+    const [pais, setPais] = useState("")
+    const [fecha, setFecha] = useState("")
+    const [links, setLinks] = useState([])
+    const [portada, setPortada] = useState("")
+    const [descripcion, setDescripcion] = useState("")
+    const [generos, setGeneros] = useState([])
+>>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
 
 	useEffect(() => {	getLibro()},[]);
     const query = UseQuery();
@@ -33,8 +46,15 @@ function Libro(){
         console.log("titulo:", title);
     }
 
+<<<<<<< HEAD
     return ( 
         <div key = {id} className="articulo-view">
+=======
+        return  (  
+         
+          <div key = {id} className="articulo-view">
+
+>>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
             <div  className="one">
                 <img 
                     className="portada" 
