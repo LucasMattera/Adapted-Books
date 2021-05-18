@@ -14,38 +14,32 @@ function EditBook(){
 		obtenerLibro()
 	}, [])
 
-    
-
     const [link, setLink] = useState("")
-    const [genero, setGenero] = useState("")
+    const [genre, setGenero] = useState("")
     
     const [error, setError] = useState(false)
     const [id, setId] = useState(NaN)
-    const [titulo, setTitulo] = useState("")
-    const [autor, setAutor] = useState("")
-    const [pais, setPais] = useState("")
-    const [imagen, setPortada] = useState("")
+    const [title, setTitulo] = useState("")
+    const [author, setAutor] = useState("")
+    const [country, setPais] = useState("")
+    const [image, setPortada] = useState("")
     const [links, setLinks] = useState([])
-    const [fechaDePublicacion, setFecha] = useState("")
-    const [generos, setGeneros] = useState([])
-    const [descripcion, setDescripcion] = useState("")
-
-    
-    
+    const [publicationDate, setFecha] = useState("")
+    const [genres, setGeneros] = useState([])
+    const [description, setDescripcion] = useState("")
 
     const [data, setData] = useState({
         id:id,
-        titulo: titulo,
-        autor:autor,
-        pais:pais,
-        imagen:imagen,
+        title: title,
+        author:author,
+        country:country,
+        image:image,
         links: links,
-        fechaDePublicacion:fechaDePublicacion,
-        generos: generos,
-        descripcion: descripcion
+        publicationDate:publicationDate,
+        genres: genres,
+        description: description
     })
     
-
     const obtenerLibro = async () => {
         console.log("query: ", query.toString().replace('q=', ''))
             axios.get(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')))
@@ -53,26 +47,21 @@ function EditBook(){
                 const libro = response.data
                 console.log("LIBRO: ", libro)
                   
-                setTitulo(libro.titulo)
+                setTitulo(libro.title)
                 setId(libro.id)
-                setAutor(libro.autor)
-                setFecha(libro.fechaDePublicacion)
+                setAutor(libro.author)
+                setFecha(libro.publicationDate)
                 setLinks(libro.links)
-                setPortada(libro.imagen)
-                setPais(libro.pais)
-                setDescripcion(libro.descripcion)
-                setGeneros(libro.generos) 
+                setPortada(libro.image)
+                setPais(libro.country)
+                setDescripcion(libro.description)
+                setGeneros(libro.genres) 
                 setData(libro)
                   
             })
-            .catch((error) => setError(true))
-            
-            
+            .catch((error) => setError(true))            
     }
 
-
-    
-    
     const handleImputChange = (event,) => {
         setData({...data,
             [event.target.name]: event.target.value
@@ -110,8 +99,13 @@ function EditBook(){
     }
 
     const handleSubmitGenero = (event) =>{
-        setGeneros(data.generos.push(genero))
+        setGeneros(data.genres.push(genre))
         setGenero("")
+    }
+
+    const handleDeleteGenre = (e,toDelete) =>{
+        data.genres= data.genres.filter(genre => genre!== toDelete);
+        setGeneros([]);
     }
 
     return(  
@@ -126,7 +120,7 @@ function EditBook(){
                 <label htmlFor="titulo">
                 <p class="text-light">Titulo:</p>
                     <input type="text"
-                    value = {data.titulo}
+                    value = {data.title}
                     name="titulo"
                     onChange={handleImputChange}
                     className="form-control"
@@ -137,7 +131,7 @@ function EditBook(){
                 <label htmlFor="autor">
                 <p className="text-light">Autor:</p>
                     <input type="text"
-                    value = {data.autor}
+                    value = {data.author}
                     name="autor"
                     onChange={handleImputChange}
                     className="form-control"
@@ -148,7 +142,7 @@ function EditBook(){
                 <label htmlFor="pais">
                 <p class="text-light">Pais:</p>
                     <input type="text"
-                    value = {data.pais}
+                    value = {data.country}
                     name="pais"
                     onChange={handleImputChange}
                     className="form-control"
@@ -183,9 +177,20 @@ function EditBook(){
             <div class="form-group" >
                 <label htmlFor="genero">
                 <p class="text-light">Generos: </p>
-                <i class="text-light">{data.generos.toString()}</i>
+                    <div className="genres-container">
+                            
+                            {
+                            data.genres.map(genre =>
+                            <>
+                                <i class="text-light">{genre}</i>
+                                <a className="close" onClick={e=> handleDeleteGenre(e,genre)}>x</a>
+                                <br></br>
+                            </>   
+                            )}
+                            
+                    </div>
                     <input type="text"
-                    value = {genero}
+                    value = {genre}
                     name="genero"
                     onChange={handleImputGenero}
                     className="form-control"
@@ -197,7 +202,7 @@ function EditBook(){
                 <label htmlFor="descripcion">
                 <p class="text-light">Descripcion:</p>
                     <input type="text"
-                    value = {data.descripcion}
+                    value = {data.description}
                     name="descripcion"
                     onChange={handleImputChange}
                     className="form-control"
@@ -212,7 +217,7 @@ function EditBook(){
                 <label htmlFor="fechaDePublicacion">
                 <p class="text-light">Fecha:</p>
                     <input type="date"
-                        value = {data.fechaDePublicacion}
+                        value = {data.publicationDate}
                         name="fechaDePublicacion"
                         onChange={handleImputChange}
                         className="form-control"
@@ -223,13 +228,13 @@ function EditBook(){
                 <label htmlFor="imagen">
                 <p class="text-light">Imagen:</p>
                     <input type="text"
-                        value = {data.imagen}
+                        value = {data.image}
                         name="imagen"
                         onChange={handleImputChange}
                         className="form-control"
                     required>
                     </input>
-                    <img src={data.imagen} className="imagePreview" alt=""></img>
+                    <img src={data.image} className="imagePreview" alt=""></img>
                 </label>
                 </div>
             </div>

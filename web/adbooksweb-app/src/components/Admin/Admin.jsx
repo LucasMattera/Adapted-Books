@@ -1,10 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
-import '../styles/Admin.css';
-import EditBook from './EditBook';
-import AdminLogOutButtom from './AdminLogOutButton';
-import AdminNavbar from './AdminNavbar';
+import '../../styles/Admin.css';
 
 function Admin(){
     
@@ -78,10 +75,10 @@ function Admin(){
                                 <tr>
                                     <th scope="row">{libro.id}</th>
                                     <td>
-                                        {libro.titulo}
+                                        {libro.title}
                                     </td>
                                     <td>
-                                        {libro.autor}
+                                        {libro.author}
                                     </td>
                                     <td>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">

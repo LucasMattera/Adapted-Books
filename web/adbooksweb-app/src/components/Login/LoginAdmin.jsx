@@ -12,27 +12,16 @@ export default function LoginAdmin() {
         password: "admin123",
     }
 
-<<<<<<< HEAD
-    const history = useHistory();
-=======
-
     const [error,setError] = useState("");
     const history = useHistory()
->>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
 
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
     const Login = (emailYPassword) => {
         console.log(emailYPassword);
 
         if (emailYPassword.email == adminUser.email && emailYPassword.password == adminUser.password) {
-<<<<<<< HEAD
-            localStorage.setItem('token', adminUser.token);
-            console.log("Logged in");
-            history.push("/admin");
-=======
             localStorage.setItem('token', adminUser.token)
             history.push("/admin")
->>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
         }
         else {
             setError("email or Password do not match!")
@@ -82,14 +71,6 @@ export default function LoginAdmin() {
                             onChange={handleInputChange}
                             value={emailYPassword.password}
                         />
-<<<<<<< HEAD
-                        <button 
-                            type="submit" 
-                            className="Form__submit"
-                        >
-                            Login
-                        </button>
-=======
                         <div class="error" role="alert">
                             {error}
                         </div>
@@ -97,12 +78,10 @@ export default function LoginAdmin() {
                             Login
                         </button>
                         
->>>>>>> 593fba59b31aee64a4f73ed80712281b290764ff
                         <p className="FormContainer__info">
                             <h1 className="hForm">Don't have an account? 
-                                <br>
-                                    You are not admin.
-                                </br> 
+                                <br></br> 
+                                You are not admin.
                             </h1>
                         </p>
                     </form>

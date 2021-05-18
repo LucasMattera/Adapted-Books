@@ -13,21 +13,21 @@ function ArticleMiniature ({libro, id}){
     <div class="article-card">
         <div class="article-card-inner">
             <div class="article-card-front">
-                <img className="imagen" src={imagen} alt={titulo}/>
+                <img className="imagen" src={image} alt={title}/>
             </div>
             <div class="article-card-back">
                 <div class="title">
                     <strong>
                         <a className="link-title" onClick={handleClick}>
-                            {libro.titulo}
+                            {libro.title}
                         </a>
                     </strong>
                 </div>
                 <div class="autor">
-                    {libro.autor}
+                    {libro.author}
                 </div>
                 <div className= "description">
-                    {libro.descripcion}
+                    {libro.description}
                 </div>
             </div>
             
