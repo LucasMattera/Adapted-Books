@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 import '../styles/Libro.css';
 import UseQuery from './Search/UseQuery';
 function Libro(){
-    
+
     const [titulo, setTitulo] = useState("")
     const [id, setId] = useState("")
     const [autor, setAutor] = useState("")
@@ -37,9 +36,9 @@ function Libro(){
 
 
         return  (  
-          
+         
           <div key = {id} className="articulo-view">
-            
+
             <div  className="one">
               <img className="portada" src={portada} alt={titulo}/>
               <p className="detalle">Fecha de publicación: {fecha}</p>
