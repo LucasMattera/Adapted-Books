@@ -14,7 +14,7 @@ const Navbar = () => {
         <div>
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand">Navbar</a>
+                    <a class="navbar-brand">Adapted Books</a>
                     <button type="submit" className="btn btn-outline-success" onClick={goHome}>Home</button>
                     <form class="d-flex">
                     <BookSearch />
