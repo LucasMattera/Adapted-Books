@@ -5,7 +5,6 @@ import BookSearch from './Search/BookSearch';
 
 const Navbar = () => {
     const history = useHistory();
-    //const [search,setSearch] = useState(" ")
 
     const goHome = () => {
         history.push("/");
@@ -13,23 +12,17 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-md navbar-dark  bg-dark">
-                <a className="navbar-brand">Adapted Books</a>
-                <BookSearch />
-
-                <button type="submit" className="buttonHome btn btn-outline-success" onClick={goHome}>Home</button>
-            </nav>
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Navbar</a>
+                    <button type="submit" className="btn btn-outline-success" onClick={goHome}>Home</button>
+                    <form class="d-flex">
+                    <BookSearch />
+                    </form>
+                </div>
+            </nav>     
         </div>
     )
 }
 
 export default Navbar;
-
-/*
-<nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand">Navbar</a>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-*/

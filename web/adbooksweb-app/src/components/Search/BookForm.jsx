@@ -28,12 +28,6 @@ const BookForm = ({ handleSearch }) => {
                     onChange={handleChange} 
                     value={search}
                 />
-                <br/>
-                <input 
-                    type="submit"
-                    value="Buscar" 
-                />
-                <br />
                 <button class="btn btn-outline-success buttom-search"  type="submit">
                    Search</button>
             </form>

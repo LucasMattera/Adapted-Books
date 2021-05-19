@@ -12,7 +12,6 @@ const BookSearch = () => {
 
    return (
         <div>
-            <h2>Buscador De Libros</h2>
             <BookForm handleSearch={handleSearch} />
         </div>
     );

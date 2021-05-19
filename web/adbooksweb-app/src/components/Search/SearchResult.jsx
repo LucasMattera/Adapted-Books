@@ -21,6 +21,7 @@ function SearchResult()  {
         const [bookRes] = await Promise.all([
             helpHttp().get(bookUrl),
         ]);
+        console.log(bookRes);
         setBooks(bookRes);
         setThereAreBooks(true)
     };

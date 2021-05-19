@@ -16,7 +16,7 @@ interface LibroRepository:JpaRepository<Libro,Long>{
 
      fun findByCountryContaining(country: String) : Optional<List<Libro>>
 
-     @Query("SELECT * FROM libro r JOIN (SELECT * FROM libro_generos l WHERE l.generos LIKE %?1%) j ON r.id = j.libro_id",nativeQuery = true)
+     @Query("SELECT * FROM libro r JOIN (SELECT * FROM libro_genres l WHERE l.genres LIKE %?1%) j ON r.id = j.libro_id",nativeQuery = true)
      fun findByGenresContaining(genre : String) : Optional<List<Libro>>
 
 }
