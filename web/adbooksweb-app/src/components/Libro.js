@@ -13,12 +13,12 @@ function Libro(){
     const [coverPage, setCoverPage] = useState("");
     const [description, setDescription] = useState("");
     const [genres, setGenres] = useState([]);
-
-	useEffect(() => {	getLibro()},[]);
     const query = UseQuery();
+
+	useEffect(() => {getLibro()},[]);
+    
 	
 	const getLibro = async () => {
-    console.log("query: ", query.toString().replace('q=', ''))
 		const data = await fetch(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')));
 		const book = await data.json();
 		setTitle(book.titile);
@@ -30,7 +30,6 @@ function Libro(){
         setCountry(book.country);
         setDescription(book.description);
         setGenres(book.genres);
-        console.log("titulo:", title);
     }
 
     return ( 

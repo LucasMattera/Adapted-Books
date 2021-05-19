@@ -121,7 +121,7 @@ function EditBook(){
                 <p class="text-light">Titulo:</p>
                     <input type="text"
                     value = {data.title}
-                    name="titulo"
+                    name="title"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -132,7 +132,7 @@ function EditBook(){
                 <p className="text-light">Autor:</p>
                     <input type="text"
                     value = {data.author}
-                    name="autor"
+                    name="author"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -143,7 +143,7 @@ function EditBook(){
                 <p class="text-light">Pais:</p>
                     <input type="text"
                     value = {data.country}
-                    name="pais"
+                    name="country"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -191,7 +191,7 @@ function EditBook(){
                     </div>
                     <input type="text"
                     value = {genre}
-                    name="genero"
+                    name="genre"
                     onChange={handleImputGenero}
                     className="form-control"
                     ></input>
@@ -203,7 +203,7 @@ function EditBook(){
                 <p class="text-light">Descripcion:</p>
                     <input type="text"
                     value = {data.description}
-                    name="descripcion"
+                    name="description"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -218,7 +218,7 @@ function EditBook(){
                 <p class="text-light">Fecha:</p>
                     <input type="date"
                         value = {data.publicationDate}
-                        name="fechaDePublicacion"
+                        name="publicationDate"
                         onChange={handleImputChange}
                         className="form-control"
                         required>
@@ -229,7 +229,7 @@ function EditBook(){
                 <p class="text-light">Imagen:</p>
                     <input type="text"
                         value = {data.image}
-                        name="imagen"
+                        name="image"
                         onChange={handleImputChange}
                         className="form-control"
                     required>

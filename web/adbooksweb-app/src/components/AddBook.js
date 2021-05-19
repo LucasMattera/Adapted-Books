@@ -6,7 +6,7 @@ import axios from "axios";
 function AddBook() {
     const history = useHistory();
     const [link, setLink] = useState("");
-    const [genero, setGenero] = useState("");
+    const [genre, setGenero] = useState("");
 
     const [error,setError] = useState(false)
     const [agregado,setAgregado] = useState(false)
@@ -22,14 +22,14 @@ function AddBook() {
         decription:""
     });
 
-    const [title, setTitulo] = useState("");
+    const [title, setTitle] = useState("");
     const [author, setAutor] = useState("");
     const [country, setPais] = useState("");
     const [image, setImagen] = useState("");
     const [links, setLinks] = useState([]);
     const [publicationDate, setFechaDePublicacion] = useState("");
     const [genres, setGeneros] = useState([]);
-    const [decription, setDescripcion] = useState("");
+    const [description, setDescription] = useState("");
 
     
     const handleImputChange = (event) => {
@@ -65,7 +65,7 @@ function AddBook() {
     }
 
     const handleSubmitGenero = (event) =>{
-        setGeneros(data.generos.push(genero));
+        setGeneros(data.genres.push(genre));
         setGenero("");
     }
     
@@ -87,8 +87,8 @@ function AddBook() {
                 <label htmlFor="titulo">
                 <p class="text-light">Titulo:</p>
                     <input type="text"
-                    value = {data.titulo}
-                    name="titulo"
+                    value = {data.title}
+                    name="title"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -98,8 +98,8 @@ function AddBook() {
                 <label htmlFor="autor">
                 <p className="text-light">Autor:</p>
                     <input type="text"
-                    value = {data.autor}
-                    name="autor"
+                    value = {data.author}
+                    name="author"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -109,8 +109,8 @@ function AddBook() {
                 <label htmlFor="pais">
                 <p class="text-light">Pais:</p>
                     <input type="text"
-                    value = {data.pais}
-                    name="pais"
+                    value = {data.country}
+                    name="country"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -134,21 +134,21 @@ function AddBook() {
                 <label htmlFor="genero">
                 <p class="text-light">Generos: </p>
                     <input type="text"
-                    value = {genero}
-                    name="genero"
+                    value = {genre}
+                    name="genre"
                     onChange={handleImputGenero}
                     className="form-control"
                     ></input>
                 </label>
                 <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
             </div>
-            <i class="text-light">{data.generos.toString()}</i>
+            <i class="text-light">{data.genres.toString()}</i>
             <div class="form-group" >
                 <label htmlFor="descripcion">
                 <p class="text-light">Descripcion:</p>
                     <input type="text"
-                    value = {data.descripcion}
-                    name="descripcion"
+                    value = {data.description}
+                    name="description"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -162,8 +162,8 @@ function AddBook() {
                 <label htmlFor="fechaDePublicacion">
                 <p class="text-light">Fecha:</p>
                     <input type="date"
-                    value = {data.fechaDePublicacion}
-                    name="fechaDePublicacion"
+                    value = {data.publicationDate}
+                    name="publicationDate"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
@@ -172,12 +172,12 @@ function AddBook() {
                 <label htmlFor="imagen">
                 <p class="text-light">Imagen:</p>
                     <input type="text"
-                    value = {data.imagen}
-                    name="imagen"
+                    value = {data.image}
+                    name="image"
                     onChange={handleImputChange}
                     className="form-control"
                     required></input>
-                    <img src={data.imagen} className="imagePreview" alt=""></img>
+                    <img src={data.image} className="imagePreview" alt=""></img>
                 </label>
                 </div>
             </div>
