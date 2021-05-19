@@ -35,18 +35,21 @@ function Libro(){
 
     return ( 
         <div key = {id} className="articulo-view">
+
             <div  className="one">
-                <img 
-                    className="portada" 
-                    src={coverPage} 
-                    alt={title}
-                />
+                    <img 
+                        className="portada" 
+                        src={coverPage} 
+                        alt={title}
+                    />
+
                 <p className="detalle">Fecha de publicación: {date}</p>
                 <p className="detalle">País: {country}</p>
                 <p className="detalle">
                     Géneros: {genres.toString()}
                 </p>
             </div>
+            
             <div className="two">
                 <h1 >{title}</h1>
                 <h2>{author}</h2>
@@ -57,8 +60,10 @@ function Libro(){
                 <ul>
                     {links.map(link =>{
                         return <li>
-                                    <a href={link}>
-                                        {link}
+                                    <a className="a-link" href={link}>
+                                        <p className= "link-text">
+                                            Mira la adaptación en Prime Video
+                                        </p>
                                     </a>
                                 </li>
                     })}

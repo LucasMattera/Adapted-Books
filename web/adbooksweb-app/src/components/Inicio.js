@@ -4,7 +4,6 @@ import '../styles/Inicio.css';
 import ArticleMiniature from './ArticleMiniature'
 
 
-
 function Inicio() {
 
 	//proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
