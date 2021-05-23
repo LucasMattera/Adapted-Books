@@ -48,7 +48,7 @@ function Admin(){
         <div className= "admin">
             <h1 className="mb">Administrador de Libros</h1>
             <div className="filterTab">
-                <input 
+                 <input 
                     className="form-control filter filter-container" 
                     onChange={e => setSearch(e.target.value)} 
                     id="myInput" 
@@ -59,7 +59,7 @@ function Admin(){
                     type="button" 
                     className="btn btn-secondary add" 
                     onClick={e => toAdd(e)}
-                ><h1 className="btn-work">+</h1></button>
+                ><h1 className="btn-work">+</h1></button> 
                 <table className="table table-hover table-dark margin">
                     <thead>
                         <tr>

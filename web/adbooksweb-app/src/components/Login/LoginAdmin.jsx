@@ -14,6 +14,10 @@ export default function LoginAdmin() {
 
     const [error,setError] = useState("");
     const history = useHistory()
+    const [emailYPassword, setEmailYPassword] = useState({
+        email: "",
+        password: ""
+    });
 
     //esta funcion imprime en consola si se logro ingresar a la aplicacion o no.
     const Login = (emailYPassword) => {
@@ -27,11 +31,6 @@ export default function LoginAdmin() {
             setError("email or Password do not match!")
         }
     }
-
-    const [emailYPassword, setEmailYPassword] = useState({
-        email: "",
-        password: ""
-    });
 
     function handleInputChange(e) {
         setEmailYPassword({

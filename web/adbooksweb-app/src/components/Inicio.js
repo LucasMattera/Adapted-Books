@@ -13,6 +13,7 @@ function Inicio() {
 	useEffect(() => {
 		obtenerLibros()
 	}, []);
+	
 
 	//proposito: en esta funcion le pego a la api por medio de un fetch y me traigo todos los libros.
 	const obtenerLibros = async () => {

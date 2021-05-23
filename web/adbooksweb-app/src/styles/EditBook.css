@@ -15,3 +15,25 @@
 	background-color:bisque;
 }
 
+.bookUpdated{
+    font-size: 25px;
+    margin-right: 40px;
+    border-radius: 20px;
+    width: 24em;
+    margin-left: 45px;
+    margin-bottom: 40px;
+    color: black;
+    background-color: rgb(189, 236, 189);
+}
+
+.btn-goHome{
+    font-size: 15px;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+    background-color: rgb(0, 0, 0);
+    color: #198754;
+    border-color: #147548;
+}
+
