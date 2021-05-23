@@ -54,6 +54,8 @@ function AddBook() {
                 })
                 .catch((error) => setError(true)) 
         } else{
+            data.image=''
+            event.preventDefault()
             setInvalidImage(true)
         }
     }
