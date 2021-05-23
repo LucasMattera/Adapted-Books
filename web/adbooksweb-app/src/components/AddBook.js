@@ -21,7 +21,7 @@ function AddBook() {
         genres: [],
         decription:""
     });
-
+    const [invalidLink, setInvalidLink] = useState(false)
     const [title, setTitle] = useState("");
     const [author, setAutor] = useState("");
     const [country, setPais] = useState("");
@@ -60,9 +60,11 @@ function AddBook() {
         if(esLink.test(link)) {
             setLinks(data.links.push(link));
             setLink("");
+        } else {
+            setInvalidLink(true)
         }
     }
-    
+
     const handleImputGenero= (event) =>{
         setGenero(event.target.value);
     }
@@ -122,6 +124,12 @@ function AddBook() {
             <div class="form-group" >
                 <label htmlFor="link">
                 <p className="text-light" >Links: </p>
+                { invalidLink && (
+                    <p className="invalid-link">
+                        Ingrese un link valido
+                    </p>
+                   
+                )}
                     <input type="text"
                             value = {link}
                             name="link"
@@ -156,9 +164,7 @@ function AddBook() {
                     className="form-control"
                     required></input>
                 </label>
-                <div>
-               
-            </div>
+            
             
                 </div>
             <div class="form-group">

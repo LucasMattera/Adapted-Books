@@ -14,6 +14,9 @@ border: 1px solid #ddd; /* Gray border */
   padding: 5px; /* Some padding */
   width: 150px; /* Set a small width */
 }
+.invalid-link{
+  color: rgb(75, 13, 13);
+}
 
 .addBookContainer{
 	padding-top: 50px;
