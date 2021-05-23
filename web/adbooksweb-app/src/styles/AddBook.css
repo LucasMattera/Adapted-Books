@@ -31,3 +31,13 @@ border: 1px solid #ddd; /* Gray border */
   border-radius: 20px;
 }
 
+.genero{
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  
+}
+
+.link{
+  padding-top: 20px;
+}

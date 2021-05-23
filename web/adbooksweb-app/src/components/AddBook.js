@@ -4,9 +4,10 @@ import "../styles/AddBook.css";
 import axios from "axios";
 
 function AddBook() {
+    const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Accion" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
+
     const history = useHistory();
     const [link, setLink] = useState("");
-    const [genre, setGenero] = useState("");
 
     const [error,setError] = useState(false)
     const [agregado,setAgregado] = useState(false)
@@ -19,7 +20,7 @@ function AddBook() {
         links: [],
         publicationDate: "",
         genres: [],
-        decription:""
+        description:""
     });
     const [invalidLink, setInvalidLink] = useState(false);
     const [invalidImage,setInvalidImage] = useState(false);
@@ -70,14 +71,24 @@ function AddBook() {
         }
     }
 
-    const handleImputGenero= (event) =>{
-        setGenero(event.target.value);
+    const handleImputGenero = (event) =>{
+        
+        var checkbox = document.getElementById(event.target.id)
+        if(checkbox.checked == true){
+            setGeneros(data.genres.push(event.target.value))
+        }else{
+            var index = data.genres.indexOf(event.target.value)
+            if (index > -1) {
+            setGeneros(data.genres.splice(index,1))
+            }
+        }
     }
 
-    const handleSubmitGenero = (event) =>{
-        setGeneros(data.genres.push(genre));
-        setGenero("");
+    const handleDeleteLink = (event, toDelete) => {
+        data.links = data.links.filter(link => link !== toDelete)
+        setLinks([])
     }
+
     
     return(
     <>
@@ -106,7 +117,7 @@ function AddBook() {
             </div>
             <div class="form-group" >
                 <label htmlFor="autor">
-                <p className="text-light">Autor:</p>
+                <p className="text-light genero">Autor:</p>
                     <input type="text"
                     value = {data.author}
                     name="author"
@@ -117,7 +128,7 @@ function AddBook() {
             </div>
             <div class="form-group" >
                 <label htmlFor="pais">
-                <p class="text-light">Pais:</p>
+                <p class="text-light genero">Pais:</p>
                     <input type="text"
                     value = {data.country}
                     name="country"
@@ -126,9 +137,10 @@ function AddBook() {
                     required></input>
                 </label>
             </div>
+            <p className="text-light genero" >Links: </p>
             <div class="form-group" >
                 <label htmlFor="link">
-                <p className="text-light" >Links: </p>
+                
                 { invalidLink && (
                     <p className="invalid">
                         Ingrese un link valido
@@ -144,26 +156,27 @@ function AddBook() {
                     ></input>
                 </label>
                 <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
-                
             </div>
-            {data.links.map (link => <i class="text-light">{link}<br></br></i>)}
-            <div class="form-group" >
-                <label htmlFor="genero">
-                <p class="text-light">Generos: </p>
-                
-                    <input type="text"
-                    value = {genre}
-                    name="genre"
-                    onChange={handleImputGenero}
-                    className="form-control"
-                    ></input>
-                </label>
-                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitGenero}>Agregar</button>
+            {data.links.map (link => <i class="text-light">{link}
+            <a className="close" onClick={e => handleDeleteLink(e, link)}>x</a>
+                                                <br></br><br></br></i>)}
+            
+            
+
+            <div class= "form-group">
+              <p className="text-light genero" >Generos: </p>
             </div>
-            <i class="text-light">{data.genres.toString()}</i>
+            {genresDefault.map (genero => 
+            <div class="form-check form-check-inline margenBajo">
+            <input class="form-check-input" type="checkbox" id={genero} value={genero} onClick={handleImputGenero}></input>
+            <label class="text-light" for="inlineCheckbox1">{genero}</label>
+            </div>)}
+
+        
+            
             <div class="form-group" >
                 <label htmlFor="descripcion">
-                <p class="text-light">Descripcion:</p>
+                <p class="text-light genero">Descripcion:</p>
                     <input type="text"
                     value = {data.description}
                     name="description"
@@ -176,7 +189,7 @@ function AddBook() {
                 </div>
             <div class="form-group">
                 <label htmlFor="fechaDePublicacion">
-                <p class="text-light">Fecha:</p>
+                <p class="text-light genero">Fecha:</p>
                     <input type="date"
                     value = {data.publicationDate}
                     name="publicationDate"
