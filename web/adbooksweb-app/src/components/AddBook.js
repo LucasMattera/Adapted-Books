@@ -21,7 +21,8 @@ function AddBook() {
         genres: [],
         decription:""
     });
-    const [invalidLink, setInvalidLink] = useState(false)
+    const [invalidLink, setInvalidLink] = useState(false);
+    const [invalidImage,setInvalidImage] = useState(false);
     const [title, setTitle] = useState("");
     const [author, setAutor] = useState("");
     const [country, setPais] = useState("");
@@ -39,29 +40,33 @@ function AddBook() {
     }
 
     const handleSubmit = (event) =>{
-        event.preventDefault();
-        window.scrollTo(0, 0)
-        setAgregado(false)
-        setError(false)
-        axios
-            .post("http://localhost:8080/api/v1/libros/add",data)
-            .then((response) => {
-                setAgregado(true)
-            })
-            .catch((error) => setError(true)) 
+        var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
+        if(isImage.test(data.image)){
+            event.preventDefault();
+            window.scrollTo(0, 0)
+            setAgregado(false)
+            setError(false)
+            axios
+                .post("http://localhost:8080/api/v1/libros/add",data)
+                .then((response) => {
+                    setAgregado(true)
+                })
+                .catch((error) => setError(true)) 
+        } else{
+            setInvalidImage(true)
+        }
     }
-
     const handleImputLink = (event) =>{
         setLink(event.target.value);
     }
 
     const handleSubmitLink = (event) =>{
-        var esLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
-        if(esLink.test(link)) {
+        var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
+        if(isLink.test(link)) {
             setLinks(data.links.push(link));
             setLink("");
         } else {
-            setInvalidLink(true)
+            setInvalidLink(true);
         }
     }
 
@@ -125,7 +130,7 @@ function AddBook() {
                 <label htmlFor="link">
                 <p className="text-light" >Links: </p>
                 { invalidLink && (
-                    <p className="invalid-link">
+                    <p className="invalid">
                         Ingrese un link valido
                     </p>
                    
@@ -135,6 +140,7 @@ function AddBook() {
                             name="link"
                             onChange={handleImputLink}
                             className="form-control"
+                            placeholder="Ingrese una url.."
                     ></input>
                 </label>
                 <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
@@ -144,6 +150,7 @@ function AddBook() {
             <div class="form-group" >
                 <label htmlFor="genero">
                 <p class="text-light">Generos: </p>
+                
                     <input type="text"
                     value = {genre}
                     name="genre"
@@ -180,12 +187,18 @@ function AddBook() {
                 <div class="form-group" >
                 <label htmlFor="imagen">
                 <p class="text-light">Imagen:</p>
+                { invalidImage && (
+                    <p className="invalid">
+                        Ingrese una imagen valida
+                    </p>   
+                )}
                     <input type="text"
                     value = {data.image}
                     name="image"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    placeholder="Ingrese una url.."></input>
                     <img src={data.image} className="imagePreview" alt=""></img>
                 </label>
                 </div>
