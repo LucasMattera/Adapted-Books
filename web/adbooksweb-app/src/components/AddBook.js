@@ -56,11 +56,14 @@ function AddBook() {
     }
 
     const handleSubmitLink = (event) =>{
-        setLinks(data.links.push(link));
-        setLink("");
+        var esLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
+        if(esLink.test(link)) {
+            setLinks(data.links.push(link));
+            setLink("");
+        }
     }
-
-    const handleImputGenero = (event) =>{
+    
+    const handleImputGenero= (event) =>{
         setGenero(event.target.value);
     }
 
