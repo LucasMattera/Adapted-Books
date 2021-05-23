@@ -34,14 +34,14 @@ class RestapiApplication: CommandLineRunner {
 		libros.add(abadon)
 
 		val akiraImagen = "https://i.imgur.com/o1n5kD5.jpg"
-		val akiraGeneros = listOf<String>("Cyberpunk", "Accion")
+		val akiraGeneros = listOf<String>("Cyberpunk", "Acción")
 		val akiraLinks = listOf<String>("https://www.netflix.com/ar/title/60021103")
 		val akira = Libro("Akira", "Katsuhiro Otomo" , "Japon", akiraImagen, akiraLinks,LocalDate.parse("20-12-1982",formatter),akiraGeneros)
   		libros.add(akira)
 
 
 		val cdhyf1Imagen = "https://contentv2.tap-commerce.com/cover/large/9789506442279_1.jpg?id_com=1113"
-		val cdhyfGeneros = listOf<String>("Fantasia" , "Alta Fantasia", "Novela")
+		val cdhyfGeneros = listOf<String>("Fantasía" , "Alta Fantasia", "Novela")
 		val cdhyfLinks = listOf<String>("https://www.hbolatam.com/uy/series/detail/game-of-thrones/13673/ttl603252")
 		val cdhyf1 = Libro("Juego de Tronos", "George RR Martin","Estados Unidos", cdhyf1Imagen,cdhyfLinks,LocalDate.parse("06-08-1996",formatter),cdhyfGeneros)
 		libros.add(cdhyf1)
@@ -63,7 +63,7 @@ class RestapiApplication: CommandLineRunner {
 		libros.add(cdhyf5)
 
 		val HPPiedraFilosofalImagen = "https://i.imgur.com/ufyhlaih.jpg"
-		val hpgeneros = listOf<String>("Fantasia", "Juvenil")
+		val hpgeneros = listOf<String>("Fantasía", "Juvenil")
 		val HPPiedraFilosofalLinks = listOf<String>("https://www.youtube.com/watch?v=2BXHcqtFU8k")
 		val HPPiedraFilosofal = Libro("Harry Potter y la piedra filosofal","J. K. Rowling","Reino Unido",HPPiedraFilosofalImagen,HPPiedraFilosofalLinks, LocalDate.parse("30-06-1997",formatter),hpgeneros)
 		libros.add(HPPiedraFilosofal)
@@ -120,7 +120,7 @@ class RestapiApplication: CommandLineRunner {
 		libros.add(Resplandor)
 
 		val NarutoImagen = "https://cdn.myanimelist.net/images/manga/1/193438l.webp"
-		val narutogeneros = listOf<String>("Acción", "aventura", "comedia", "fantasía","Manga")
+		val narutogeneros = listOf<String>("Acción", "Aventura", "Comedia", "Fantasía","Manga")
 		val NarutoLinks= listOf("https://www.netflix.com/ar/title/70205012", "https://www.crunchyroll.com/es/naruto")
 		val Naruto = Libro("Naruto","Kishimoto Masashi","Japon", NarutoImagen, NarutoLinks,LocalDate.parse("21-09-1999",formatter),narutogeneros)
 		libros.add(Naruto)
@@ -131,13 +131,13 @@ class RestapiApplication: CommandLineRunner {
 		libros.add(Gintama)
 
 		val SNKImagen = "https://cdn.myanimelist.net/images/manga/2/37846l.webp"
-		val snkgeneros = listOf<String>("Acción", "fantasía oscura", "drama apocalíptico","Manga")
+		val snkgeneros = listOf<String>("Acción", "Fantasía Oscura", "Drama Apocalíptico","Manga")
 		val SNKLinks = listOf("https://www.crunchyroll.com/es/attack-on-titan")
 		val SNK = Libro("Shingeki no Kyojin","Isayama Hajime","Japon", SNKImagen,SNKLinks,LocalDate.parse("09-09-2009",formatter),snkgeneros)
 		libros.add(SNK)
 
 		val MobImagen = "https://cdn.myanimelist.net/images/manga/2/204842l.webp"
-		val mobGeneros = listOf<String>("Manga","Acción","comedia", "sobrenatural","superpoderes")
+		val mobGeneros = listOf<String>("Manga","Acción","Comedia", "Sobrenatural","Superpoderes")
 		val MobLinks = listOf("https://www.crunchyroll.com/es/mob-psycho-100", "https://www.netflix.com/title/80213536")
 		val MOB = Libro("Mob Psycho 100","ONE","Japon", MobImagen,MobLinks,LocalDate.parse("18-04-2012",formatter),mobGeneros)
 		libros.add(MOB)
@@ -152,7 +152,7 @@ class RestapiApplication: CommandLineRunner {
 		val HxH = Libro("Hunter x Hunter","Togashi Yoshihiro","Japon", HxHImagen,HxHLinks,LocalDate.parse("03-03-1998",formatter),narutogeneros)
 		libros.add(HxH)
 
-		val dnGeneros = listOf<String>(	"Manga","Misterio", "sobrenatural", "thriller")
+		val dnGeneros = listOf<String>(	"Manga","Misterio", "Sobrenatural", "Thriller")
 		val DNImagen = "https://cdn.myanimelist.net/images/manga/2/54453l.webp"
 
 		val DNLinks = listOf("https://www.netflix.com/ar/title/70204970","https://www.crunchyroll.com/es/death-note")
