@@ -11,7 +11,7 @@ on:
   
 defaults:
       run:
-        working-directory: web/adbooksweb-app
+        working-directory: web/adbooksweb-ap
 jobs:
   build:
 
@@ -45,7 +45,7 @@ jobs:
         title: ':green_circle: Entrega existosa'
         color: 3258062
         includeCommits: true
-        args: ':green_circle: The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+        args: ':green_circle: El push fue exitoso!'
         
         
     - name: Success notification
@@ -56,8 +56,8 @@ jobs:
         DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/red/github-10-xxl.png
       uses: Ilshidur/action-discord@master
       with:
-        title: ':red_circle: Entrega existosa'
+        title: ':red_circle: Entrega fallida'
         color: 3258062
         includeCommits: true
-        args: ':red_circle: The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+        args: ':red_circle: Hubo un error con el push'
 
