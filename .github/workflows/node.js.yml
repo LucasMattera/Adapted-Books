@@ -7,7 +7,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'adbooksweb-app/**'
+      - 'web/adbooksweb-app/**'
   pull_request:
     branches: [ master ]
   
