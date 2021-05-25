@@ -33,4 +33,14 @@ jobs:
       env:
         CI: false
     - run: npm test
+    
+    - name: Success notification
+      if: success()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        title: ':green_circle: Entrega existosa'
+        color: 3258062
+        args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
