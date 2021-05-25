@@ -6,9 +6,11 @@ name: Node.js CI
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'adbooksweb-app/**'
   pull_request:
     branches: [ master ]
-
+  
 jobs:
   build:
 
