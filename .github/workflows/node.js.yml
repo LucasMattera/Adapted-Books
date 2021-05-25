@@ -38,7 +38,7 @@ jobs:
       if: success()
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        DISCORD_USERNAME: ${{ github.repository }}
+        DISCORD_USERNAME: AdaptedBooks-EIS
         DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/green/github-9-xxl.png
       uses: Ilshidur/action-discord@master
       with:
@@ -46,4 +46,18 @@ jobs:
         color: 3258062
         includeCommits: true
         args: ':green_circle: The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+        
+        
+    - name: Success notification
+      if: failure()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        DISCORD_USERNAME: AdaptedBooks-EIS
+        DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/red/github-10-xxl.png
+      uses: Ilshidur/action-discord@master
+      with:
+        title: ':red_circle: Entrega existosa'
+        color: 3258062
+        includeCommits: true
+        args: ':red_circle: The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
