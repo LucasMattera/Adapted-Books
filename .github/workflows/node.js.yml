@@ -48,7 +48,7 @@ jobs:
         title: ':green_circle: Entrega existosa'
         color: 3258062
         includeCommits: true
-        args: ':green_circle: El push fue exitoso!  ${{ github.actor }}-${{ steps.date.outputs.date }'
+        args: ':green_circle: El push fue exitoso!  ${{ github.actor }}-${{ steps.date.outputs.date }}'
         
         
     - name: Success notification
@@ -62,5 +62,5 @@ jobs:
         title: ':red_circle: Entrega fallida'
         color: 3258062
         includeCommits: true
-        args: ':red_circle: Hubo un error con el push ${{ github.actor }}-${{ steps.date.outputs.date }'
+        args: ':red_circle: Hubo un error con el push ${{ github.actor }}-${{ steps.date.outputs.date }}'
 
