@@ -7,7 +7,7 @@ import ArticleMiniature from './ArticleMiniature'
 function Inicio() {
 
 	//proposito: asigna un estado inicial a los libros de la app. Su estado inicial es una lista vacia.
-	const [libros, setLibros] = useState([])
+	const [libros, setLibros] = useState([)
 
 	//proposito: obtiene los libros por medio de una funcion una vez que la vista renderiza.
 	useEffect(() => {
