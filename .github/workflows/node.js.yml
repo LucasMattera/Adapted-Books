@@ -38,9 +38,12 @@ jobs:
       if: success()
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      uses: Ilshidur/action-discord@master
+        DISCORD_USERNAME: ${{ github.repository }}
+        DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/green/github-9-xxl.png
+      uses: EPERS-UNQ/action-discord@master
       with:
         title: ':green_circle: Entrega existosa'
         color: 3258062
+        includeCommits: true
         args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
