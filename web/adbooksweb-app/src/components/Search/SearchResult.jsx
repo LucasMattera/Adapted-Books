@@ -21,15 +21,14 @@ function SearchResult()  {
         const [bookRes] = await Promise.all([
             helpHttp().get(bookUrl),
         ]);
-        console.log(bookRes);
         setBooks(bookRes);
-        setThereAreBooks(true)
+        setThereAreBooks(bookRes.length > 0)
     };
 
     return(
         <> 
             <div div className="contenido">
-                {!thereAreBooks && 'no hay libros con ese criterio'}
+                {!thereAreBooks && <div class="alert alert-warning noBooks" role="alert"> no hay libros con ese criterio</div>}
             </div>
             <div className="contenido">
                 {books.map(libro =>
