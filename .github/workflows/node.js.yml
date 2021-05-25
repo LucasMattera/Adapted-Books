@@ -33,3 +33,7 @@ jobs:
       env:
         CI: false
     - run: npm test
+    
+    - name: Actions for Discord
+      uses: Ilshidur/action-discord@0.0.2
+
