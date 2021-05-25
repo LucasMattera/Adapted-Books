@@ -41,3 +41,9 @@ border: 1px solid #ddd; /* Gray border */
 .link{
   padding-top: 20px;
 }
+
+.btn-danger{
+  margin-left: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}

@@ -219,7 +219,7 @@ function EditBook() {
                             <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
                         </div>
                         {data.links.map (link => <i class="text-light">{link}
-                                                <a className="close" onClick={e => handleDeleteLink(e, link)}>x</a>
+                                                <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>x</a>
                                                 <br></br><br></br></i>)}
                         <div class="form-group" >
                                 <p class="text-light genero">Generos: </p>
