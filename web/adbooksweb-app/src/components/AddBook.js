@@ -129,7 +129,8 @@ function AddBook() {
                     name="author"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="author"></input>
                 </label>
             </div>
             <div class="form-group" >
@@ -140,7 +141,8 @@ function AddBook() {
                     name="country"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="country"></input>
                 </label>
             </div>
             <p className="text-light genero" >Links: </p>
@@ -148,7 +150,7 @@ function AddBook() {
                 <label htmlFor="link">
                 
                 { invalidLink && (
-                    <p className="invalid">
+                    <p className="invalid" data-test="fail-link">
                         Ingrese un link valido
                     </p>
                    
@@ -159,9 +161,10 @@ function AddBook() {
                             onChange={handleImputLink}
                             className="form-control"
                             placeholder="Ingrese una url.."
+                            data-test="link"
                     ></input>
                 </label>
-                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink} data-test="add-link">Agregar</button>
             </div>
             {data.links.map (link => <i className="text-light">{link}
             <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>X</a>
@@ -188,7 +191,8 @@ function AddBook() {
                     name="description"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="description"></input>
                 </label>
             
             
@@ -201,7 +205,8 @@ function AddBook() {
                     name="publicationDate"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    
+                    data-test="publicationDate"></input>
                 </label>
                 <div class="form-group" >
                 <label htmlFor="imagen">
