@@ -43,6 +43,7 @@ function AddBook() {
     const handleSubmit = (event) =>{
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
         if(isImage.test(data.image)){
+            setInvalidImage(false);
             event.preventDefault();
             window.scrollTo(0, 0)
             setAgregado(false)
@@ -68,6 +69,7 @@ function AddBook() {
         if(isLink.test(link)) {
             setLinks(data.links.push(link));
             setLink("");
+            setInvalidLink(false);
         } else {
             setInvalidLink(true);
         }
@@ -94,7 +96,7 @@ function AddBook() {
     
     return(
     <>
-        <div className="addBookContainer">
+        <div className="addBookContainer" data-test="add-book">
         <div className="centro">
         {agregado && (<div class="alert alert-success" role="alert">
             Libro agregado Correctamente!
@@ -110,11 +112,13 @@ function AddBook() {
                 <label htmlFor="titulo">
                 <p class="text-light">Titulo:</p>
                     <input type="text"
-                    value = {data.title}
-                    name="title"
-                    onChange={handleImputChange}
-                    className="form-control"
-                    required></input>
+                        value = {data.title}
+                        name="title"
+                        onChange={handleImputChange}
+                        className="form-control"
+                        required
+                        data-test="title">
+                    </input>
                 </label>
             </div>
             <div class="form-group" >
@@ -125,7 +129,8 @@ function AddBook() {
                     name="author"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="author"></input>
                 </label>
             </div>
             <div class="form-group" >
@@ -136,7 +141,8 @@ function AddBook() {
                     name="country"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="country"></input>
                 </label>
             </div>
             <p className="text-light genero" >Links: </p>
@@ -144,7 +150,7 @@ function AddBook() {
                 <label htmlFor="link">
                 
                 { invalidLink && (
-                    <p className="invalid">
+                    <p className="invalid" data-test="fail-link">
                         Ingrese un link valido
                     </p>
                    
@@ -155,9 +161,10 @@ function AddBook() {
                             onChange={handleImputLink}
                             className="form-control"
                             placeholder="Ingrese una url.."
+                            data-test="link"
                     ></input>
                 </label>
-                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink} data-test="add-link">Agregar</button>
             </div>
             {data.links.map (link => <i className="text-light">{link}
             <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>X</a>
@@ -184,7 +191,8 @@ function AddBook() {
                     name="description"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    required
+                    data-test="description"></input>
                 </label>
             
             
@@ -197,28 +205,34 @@ function AddBook() {
                     name="publicationDate"
                     onChange={handleImputChange}
                     className="form-control"
-                    required></input>
+                    
+                    data-test="publicationDate"></input>
                 </label>
                 <div class="form-group" >
                 <label htmlFor="imagen">
                 <p class="text-light">Imagen:</p>
                 { invalidImage && (
-                    <p className="invalid">
+                    <p className="invalid" data-test="fail-image">
                         Ingrese una imagen valida
                     </p>   
                 )}
                     <input type="text"
-                    value = {data.image}
-                    name="image"
-                    onChange={handleImputChange}
-                    className="form-control"
-                    required
-                    placeholder="Ingrese una url.."></input>
+                        value = {data.image}
+                        name="image"
+                        onChange={handleImputChange}
+                        className="form-control"
+                        required
+                        placeholder="Ingrese una url.."
+                        data-test="image-field">
+                    </input>
                     <img src={data.image} className="imagePreview" alt=""></img>
                 </label>
                 </div>
             </div>
-               <button type="submit" className="btn btn-dark">Agregar Libro</button>
+               <button 
+                type="submit" 
+                className="btn btn-dark"
+                data-test="add-book-btn">Agregar Libro</button>
             </form>
             </div>
             </div>

@@ -60,6 +60,7 @@ export default function LoginAdmin() {
                             required
                             onChange={handleInputChange}
                             value={emailYPassword.email}
+                            data-test="email"
                         />
                         <input
                             type="password"
@@ -69,11 +70,12 @@ export default function LoginAdmin() {
                             required
                             onChange={handleInputChange}
                             value={emailYPassword.password}
+                            data-test="password"
                         />
                         <div class="error" role="alert">
                             {error}
                         </div>
-                        <button type="submit" className="Form__submit">
+                        <button type="submit" className="Form__submit" data-test="login">
                             Login
                         </button>
                         
