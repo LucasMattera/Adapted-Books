@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 
 function EditBook() {
 
-    const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thriller", "Aventura","Acción" , "Manga","Suspenso","Misterio","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
+    const genresDefault = ["Cyberpunk", "Space Opera", "Terror", "Ciencia Ficcion", "Thriller", "Aventura", "Acción", "Manga", "Suspenso", "Misterio", "Comedia", "Sobrenatural", "Superpoderes", "Fantasía", "Fantasía Oscura", "Alta Fantasia", "Novela", "Drama Apocalíptico", "Juvenil"]
 
 
     const query = UseQuery()
@@ -39,8 +39,7 @@ function EditBook() {
     const [numberOfClicksAddOrDelete, setNumberOfClicksAddOrDelete] = useState(0)
     const [descriptionSaved, setDescriptionSaved] = useState("")
     const [publicationDateSaved, setPublicatioDateSaved] = useState("")
-    // const [linksSaved, setLinksSaved] = useState([])
-    const [fragmento,setFragmento] = useState()
+    const [fragmento, setFragmento] = useState()
 
     const [data, setData] = useState({
         id: id,
@@ -102,15 +101,12 @@ function EditBook() {
             || numberOfClicksAddOrDelete > 0
             || data.description != descriptionSaved
             || data.publicationDate != publicationDateSaved
-            // || linksSaved.length < data.links.length
         ) {
             setBookUpdated("Updated book!")
-            setFragmento(<button className= "btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>go home?</button>)
+            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>go home?</button>)
         }
         else {
             setBookUpdated("Book not updated...")
-            //    console.log(linksSaved.length)
-            //    console.log(data.links.length) 
         }
     }
 
@@ -142,15 +138,15 @@ function EditBook() {
         setNumberOfClicksAddOrDelete(1)
     }
 
-    const handleImputGenero = (event) =>{
-        
+    const handleImputGenero = (event) => {
+
         var checkbox = document.getElementById(event.target.id)
-        if(checkbox.checked == true){
+        if (checkbox.checked == true) {
             setGeneros(data.genres.push(event.target.value))
-        }else{
+        } else {
             var index = data.genres.indexOf(event.target.value)
             if (index > -1) {
-            setGeneros(data.genres.splice(index,1))
+                setGeneros(data.genres.splice(index, 1))
             }
         }
         setNumberOfClicksAddOrDelete(1)
@@ -218,23 +214,22 @@ function EditBook() {
                             </label>
                             <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
                         </div>
-                        {data.links.map (link => <i class="text-light">{link}
-                                                <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>x</a>
-                                                <br></br><br></br></i>)}
+                        {data.links.map(link => <i class="text-light">{link}
+                            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>x</a>
+                            <br></br><br></br></i>)}
                         <div class="form-group" >
-                                <p class="text-light genero">Generos: </p>
-                                <div className="genres-container">
-                                    
-                                </div>
-                                {genresDefault.map (genero => 
+                            <p class="text-light genero">Generos: </p>
+                            <div className="genres-container">
+
+                            </div>
+                            {genresDefault.map(genero =>
                                 <div class="form-check form-check-inline margenBajo">
-                                <input class="form-check-input" type="checkbox" id={genero} value={genero} onClick={handleImputGenero}></input>
-                                <label class="text-light" for="inlineCheckbox1">{genero}</label>
+                                    <input class="form-check-input" type="checkbox" id={genero} value={genero} onClick={handleImputGenero}></input>
+                                    <label class="text-light" for="inlineCheckbox1">{genero}</label>
                                 </div>)}
-                                {
-                                        data.genres.map(genre =>
-                                            {checkGenre(genre)}
-                                        )}
+                            {
+                                data.genres.map(genre => { checkGenre(genre) }
+                                )}
                         </div>
                         <div class="form-group" >
                             <label htmlFor="descripcion">
@@ -274,15 +269,14 @@ function EditBook() {
                                 </label>
                             </div>
                         </div>
-                        <button className="btn btn-primary" onClick={e => handleSubmit(e)} >Guardar</button>
+                        <button className="btn btn-primary" alt="guardar" onClick={e => handleSubmit(e)} >Guardar</button>
                     </form>
                 </div>
             </div>)
             <center><div className="bookUpdated">
-                {bookUpdated} 
+                {bookUpdated}
                 {fragmento}
             </div></center>
-                
         </>
     )
 };
