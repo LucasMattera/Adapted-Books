@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,4 +33,31 @@ jobs:
       env:
         CI: false
     - run: npm test
+    
+    - name: Success notification
+      if: success()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        DISCORD_USERNAME: AdaptedBooks-EIS
+        DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/green/github-9-xxl.png
+      uses: Ilshidur/action-discord@master
+      with:
+        title: ':green_circle: Entrega existosa'
+        color: 3258062
+        includeCommits: true
+        args: ':green_circle: El push fue exitoso! ${{ github.actor }}: ${{ github.event.head_commit.message }}'
+        
+        
+    - name: Success notification
+      if: failure()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        DISCORD_USERNAME: AdaptedBooks-EIS
+        DISCORD_AVATAR: https://www.iconsdb.com/icons/preview/red/github-10-xxl.png
+      uses: Ilshidur/action-discord@master
+      with:
+        title: ':red_circle: Entrega fallida'
+        color: 3258062
+        includeCommits: true
+        args: ':red_circle: Hubo un error con el push ${{ github.actor }}: ${{ github.event.head_commit.message}}'
 
