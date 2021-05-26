@@ -14,7 +14,7 @@ test("test del componente EditBook (render)", async () => {
             <Route path="/admin/edit/" component={EditBook} />
         </Router>
     );
-    screen.debug()
+   
 })
 
 
