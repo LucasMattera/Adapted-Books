@@ -1,12 +1,12 @@
 import React from 'react'
 import { createMemoryHistory } from "history"
-import { Route, Router } from 'react-router-dom'
+
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import EditBook from './EditBook'
 
-//TEST 01
-test("test del componente EditBook (RENDER)", async () => {
+//test01
+test("test del componente EditBook (render)", async () => {
     const history = createMemoryHistory("/admin/edit/");
     history.push("/admin/edit/");
     render(
@@ -18,7 +18,7 @@ test("test del componente EditBook (RENDER)", async () => {
 })
 
 
-//TEST 02
+//test02
 test("test del componente EditBook con boton Guardar", async () => {
     const history = createMemoryHistory("/admin/edit/");
     history.push("/admin/edit/");
@@ -34,7 +34,7 @@ test("test del componente EditBook con boton Guardar", async () => {
 
 
 
-//TEST 03
+//test03
 test("test del componente EditBook con click en el boton guardar, (Book not updated...)", async () => {
     const history = createMemoryHistory("/admin/edit/");
     history.push("/admin/edit/");

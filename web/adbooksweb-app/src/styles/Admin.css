@@ -10,7 +10,7 @@
     color: snow;
     border: black;
     font-size: 300%;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
 .filterTab{
@@ -52,3 +52,14 @@
 
 .btn-work{ text-align: center; }
 
+.bookDeleted{
+    font-size: 25px;
+    margin-right: 40px;
+    border-radius: 20px;
+    width: 24em;
+    margin-left: 45px;
+    margin-bottom: 40px;
+    color: black;
+    background-color: rgb(167, 223, 167);
+    margin-left: 43em;
+}
