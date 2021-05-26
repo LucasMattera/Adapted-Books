@@ -45,8 +45,8 @@ test("test del componente EditBook con click en el boton guardar, (Book not upda
     );
     fireEvent.click(screen.getByRole('button', { name: /Guardar/ }))
     screen.debug()
-    const boton = await screen.findByText(/Book not/)
-    expect(boton).toHaveTextContent("Book not updated...")
+    const boton = await screen.findByText(/Libro no/)
+    expect(boton).toHaveTextContent("Libro no actualizado...")
 })
 
 
