@@ -33,7 +33,9 @@ jobs:
 
       env:
         CI: false
+    - run: npm start    
     - run: npm test
+    - run: npx cucumber-js
     
     - name: Success notification
       if: success()
