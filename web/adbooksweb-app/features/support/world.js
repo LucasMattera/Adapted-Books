@@ -1,6 +1,6 @@
 const {Before, After, setDefaultTimeout} = require("@cucumber/cucumber");
 const puppeteer = require("puppeteer");
-setDefaultTimeout(10000)
+setDefaultTimeout(50000)
 
 Before(async function(){
 
