@@ -102,11 +102,11 @@ function EditBook() {
             || data.description != descriptionSaved
             || data.publicationDate != publicationDateSaved
         ) {
-            setBookUpdated("Updated book!")
+            setBookUpdated("Libro actualizado!")
             setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>go home?</button>)
         }
         else {
-            setBookUpdated("Book not updated...")
+            setBookUpdated("Libro no actualizado...")
         }
     }
 
