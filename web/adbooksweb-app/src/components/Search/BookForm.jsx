@@ -30,7 +30,7 @@ const BookForm = ({ handleSearch }) => {
                     value={search}
                 />
                 <button class="btn btn-outline-success buttom-search" onClick={handleSubmit}>
-                   Search</button>
+                   Buscar</button>
             </form>
         </div>
     );

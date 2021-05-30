@@ -28,7 +28,7 @@ export default function LoginAdmin() {
             history.push("/admin")
         }
         else {
-            setError("email or Password do not match!")
+            setError("Datos incorrectos")
         }
     }
 
@@ -55,7 +55,7 @@ export default function LoginAdmin() {
                         <input
                             type="email"
                             name="email"
-                            placeholder="Email"
+                            placeholder="Correo"
                             className="Form__field"
                             required
                             onChange={handleInputChange}
@@ -65,7 +65,7 @@ export default function LoginAdmin() {
                         <input
                             type="password"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             className="Form__field"
                             required
                             onChange={handleInputChange}
@@ -76,13 +76,13 @@ export default function LoginAdmin() {
                             {error}
                         </div>
                         <button type="submit" className="Form__submit" data-test="login">
-                            Login
+                            Entrar
                         </button>
                         
                         <p className="FormContainer__info">
-                            <h1 className="hForm">Don't have an account? 
+                            <h1 className="hForm">¿No tienes una cuenta de administrador? 
                                 <br></br> 
-                                You are not admin.
+                                Contacte al soporte tecnico.
                             </h1>
                         </p>
                     </form>
