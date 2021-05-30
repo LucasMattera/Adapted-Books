@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import './styles/App.css';
 import UserRoutes from './components/UserRoutes';
 import AdminRoutes from './components/Admin/AdminRoutes';
+import Navbar from './components/Navbar';
 
 class App extends React.Component {
     render(){
@@ -12,14 +13,8 @@ class App extends React.Component {
                 <div className="content-wrap">
                     <BrowserRouter>
                         <Switch>
-                            <Route 
-                                exact path="/" 
-                                component={UserRoutes} 
-                            /> 
-                            <Route 
-                                path="/admin" 
-                                component={AdminRoutes}
-                            /> 
+                            <Route path="/admin" component={AdminRoutes}/> 
+                            <Route path="/" component={UserRoutes}/> 
                         </Switch>
                     </BrowserRouter>
                 </div>

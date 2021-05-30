@@ -92,6 +92,12 @@ function EditBook() {
 
     }
 
+    const cleanFinalSpaces = (event) => {
+        setData({...data,
+            [event.target.name]: event.target.value.trimEnd().trimStart()
+        })
+    }
+
     const Edit = (data) => {
         if
             (data.title != titleSaved
@@ -123,7 +129,7 @@ function EditBook() {
     }
 
     const handleImputLink = (event) => {
-        setLink(event.target.value)
+        setLink(event.target.value.trim())
     }
 
     const handleSubmitLink = (event) => {
@@ -177,7 +183,8 @@ function EditBook() {
                                     name="title"
                                     onChange={handleImputChange}
                                     className="form-control"
-                                    required></input>
+                                    required
+                                    onBlur={cleanFinalSpaces}></input>
                             </label>
                         </div>
                         <div class="form-group" >
@@ -188,7 +195,8 @@ function EditBook() {
                                     name="author"
                                     onChange={handleImputChange}
                                     className="form-control"
-                                    required></input>
+                                    required
+                                    onBlur={cleanFinalSpaces}></input>
                             </label>
                         </div>
                         <div class="form-group" >
@@ -199,7 +207,8 @@ function EditBook() {
                                     name="country"
                                     onChange={handleImputChange}
                                     className="form-control"
-                                    required></input>
+                                    required
+                                    onBlur={cleanFinalSpaces}></input>
                             </label>
                         </div>
                         <p className="text-light genero" >Links: </p>
@@ -239,7 +248,8 @@ function EditBook() {
                                     name="description"
                                     onChange={handleImputChange}
                                     className="form-control"
-                                    required></input>
+                                    required
+                                    onBlur={cleanFinalSpaces}></input>
                             </label>
                             <div>
                             </div>
@@ -263,7 +273,8 @@ function EditBook() {
                                         name="image"
                                         onChange={handleImputChange}
                                         className="form-control"
-                                        required>
+                                        required
+                                        onBlur={cleanFinalSpaces}>
                                     </input>
                                     <img src={data.image} className="imagePreview" alt=""></img>
                                 </label>

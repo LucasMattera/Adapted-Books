@@ -36,8 +36,14 @@ function AddBook() {
     
     const handleImputChange = (event) => {
         setData({...data,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value.trimStart()
         });
+    }
+
+    const cleanFinalSpaces = (event) => {
+        setData({...data,
+            [event.target.name]: event.target.value.trimEnd()
+        })
     }
 
     const handleSubmit = (event) =>{
@@ -61,8 +67,10 @@ function AddBook() {
         }
     }
     const handleImputLink = (event) =>{
-        setLink(event.target.value);
+        setLink(event.target.value.trim());
     }
+
+   
 
     const handleSubmitLink = (event) =>{
         var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -117,7 +125,8 @@ function AddBook() {
                         onChange={handleImputChange}
                         className="form-control"
                         required
-                        data-test="title">
+                        data-test="title"
+                        onBlur={cleanFinalSpaces}>
                     </input>
                 </label>
             </div>
@@ -130,7 +139,8 @@ function AddBook() {
                     onChange={handleImputChange}
                     className="form-control"
                     required
-                    data-test="author"></input>
+                    data-test="author"
+                    onBlur={cleanFinalSpaces}></input>
                 </label>
             </div>
             <div class="form-group" >
@@ -142,7 +152,8 @@ function AddBook() {
                     onChange={handleImputChange}
                     className="form-control"
                     required
-                    data-test="country"></input>
+                    data-test="country"
+                    onBlur={cleanFinalSpaces}></input>
                 </label>
             </div>
             <p className="text-light genero" >Links: </p>
@@ -192,7 +203,8 @@ function AddBook() {
                     onChange={handleImputChange}
                     className="form-control"
                     required
-                    data-test="description"></input>
+                    data-test="description"
+                    onBlur={cleanFinalSpaces}></input>
                 </label>
             
             
@@ -205,7 +217,7 @@ function AddBook() {
                     name="publicationDate"
                     onChange={handleImputChange}
                     className="form-control"
-                    
+                    onBlur={cleanFinalSpaces}
                     data-test="publicationDate"></input>
                 </label>
                 <div class="form-group" >
@@ -223,7 +235,8 @@ function AddBook() {
                         className="form-control"
                         required
                         placeholder="Ingrese una url.."
-                        data-test="image-field">
+                        data-test="image-field"
+                        onBlur={cleanFinalSpaces}>
                     </input>
                     <img src={data.image} className="imagePreview" alt=""></img>
                 </label>
