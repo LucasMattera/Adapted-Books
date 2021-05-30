@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Main from '../Main';
-import '../../styles/LoginAdmin.css';
+import Main from '../../Main';
+import '../../../styles/LoginAdmin.css';
 import { useHistory } from 'react-router';
 
 export default function LoginAdmin() {

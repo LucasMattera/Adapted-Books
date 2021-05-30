@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../styles/AddBook.css";
-import "../styles/EditBook.css"
+import "../../styles/AddBook.css";
+import "../../styles/EditBook.css"
 import axios from "axios";
-import UseQuery from "./Search/UseQuery";
+import UseQuery from "../Search/UseQuery";
 import { useHistory } from "react-router";
 
 function EditBook() {
@@ -103,7 +103,7 @@ function EditBook() {
             || data.publicationDate != publicationDateSaved
         ) {
             setBookUpdated("Libro actualizado!")
-            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>go home?</button>)
+            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
         }
         else {
             setBookUpdated("Libro no actualizado...")

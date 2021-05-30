@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Libro.css';
+import '../styles/Book.css';
 import UseQuery from './Search/UseQuery';
 
 function Libro(){
