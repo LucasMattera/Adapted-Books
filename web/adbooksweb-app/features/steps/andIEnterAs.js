@@ -7,7 +7,5 @@ Then("I enter {string} as my {string}", async function(string, string2){
     await elem.type(string);
     return elem;
 
-        throw new e
-
     
 });

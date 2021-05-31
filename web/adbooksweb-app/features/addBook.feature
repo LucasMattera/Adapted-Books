@@ -17,3 +17,16 @@ Scenario: As a user I will see an alert when I put an invalid link in Link field
     And I enter "asd" as my "link"
     When I click the "add-link" button
     Then I should see a "fail-link" message
+
+Scenario: As a user I can check the genres of a book in AddBook
+    Given I am on the "add-book" page
+    When I check the "Terror" checkbox
+    And I check the "Acción" checkbox
+    Then I should see a "check" in "Terror" checkbox
+    Then I should see a "check" in "Acción" checkbox
+
+Scenario: As a user I can check and uncheck the genres of a book in AddBook
+    Given I am on the "add-book" page
+    When I check the "Terror" checkbox
+    And I check the "Terror" checkbox
+    Then I should see a "uncheck" in "Terror" checkbox
