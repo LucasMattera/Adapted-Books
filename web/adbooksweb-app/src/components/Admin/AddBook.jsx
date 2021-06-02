@@ -177,8 +177,8 @@ function AddBook() {
                 </label>
                 <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink} data-test="add-link">Agregar</button>
             </div>
-            {data.links.map (link => <i className="text-light">{link}
-            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>X</a>
+            {data.links.map (link => <i className="text-light" data-test="added-link">{link}
+            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)} data-test="remove-link">X</a>
                                                 <br></br><br></br></i>)}
             
             
