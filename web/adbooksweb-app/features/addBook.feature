@@ -30,3 +30,11 @@ Scenario: As a user I can check and uncheck the genres of a book in AddBook
     When I check the "Terror" checkbox
     And I check the "Terror" checkbox
     Then I should see a "uncheck" in "Terror" checkbox
+
+Scenario: As a user I will see a delete link button when I enter a valid link in Link field
+    Given I am on the "add-book" page
+    And I enter "https://www.netflix.com/us-es/title/70300472" as my "link"
+    When I click the "add-link" button
+    Then I should see a "added-link" element
+    When I click the "remove-link" button
+    Then I shouldnt see a "added-link" element
