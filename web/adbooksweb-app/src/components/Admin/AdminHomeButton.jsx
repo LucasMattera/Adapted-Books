@@ -17,7 +17,7 @@ function AdminHomeButton(){
                 aria-current="page" 
                 onClick={e=> goAdminHome(e)}
             >
-                Home
+                Inicio
             </a>
         </div>
     );

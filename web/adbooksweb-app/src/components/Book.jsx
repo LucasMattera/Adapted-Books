@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Libro.css';
+import '../styles/Book.css';
 import UseQuery from './Search/UseQuery';
 
 function Libro(){
@@ -20,6 +20,7 @@ function Libro(){
 	
 	const getLibro = async () => {
 		const data = await fetch(`http://localhost:8080/api/v1/libros/`+ (query.toString().replace('q=', '')));
+        console.log(query);
 		const book = await data.json();
 		setTitle(book.titile);
         setId(book.id);

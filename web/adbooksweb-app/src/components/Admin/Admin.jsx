@@ -57,7 +57,7 @@ function Admin() {
                     onChange={e => setSearch(e.target.value)}
                     id="myInput"
                     type="text"
-                    placeholder="Search by title.."
+                    placeholder="Buscar por titulo.."
                 />
                 <button
                     type="button"

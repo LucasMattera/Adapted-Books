@@ -18,7 +18,7 @@ function AdminLogOutButtom(){
                 type="submit" 
                 onClick={logout}
             >
-                Log out
+                Salir
             </button>
         </div>
     );

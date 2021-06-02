@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import AddBook from '../AddBook';
+import AddBook from './AddBook';
 import Admin from './Admin';
-import LoginAdmin from '../Login/LoginAdmin';
+import LoginAdmin from './Login/LoginAdmin.jsx';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import AdminPublicRoute from './AdminPublicRoute';
-import EditBook from '../EditBook';
+import EditBook from './EditBook';
 
 class AdminRoutes extends React.Component {
     render(){

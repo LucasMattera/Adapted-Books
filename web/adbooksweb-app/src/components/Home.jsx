@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import React, { useEffect, useState, } from 'react';
-import '../styles/Inicio.css';
+import '../styles/Home.css';
 import ArticleMiniature from './ArticleMiniature'
 
 
