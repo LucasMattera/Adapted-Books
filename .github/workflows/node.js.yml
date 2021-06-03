@@ -18,8 +18,10 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          sudo ls
+     - uses: actions/checkout@v2.1.0
+     - name: Set env var
+     - run: |
+          sudo /etc/init.d/mysql start
   job2:
     runs-on: ubuntu-latest
     needs: job1
