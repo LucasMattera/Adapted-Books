@@ -13,10 +13,31 @@ defaults:
       run:
         working-directory: web/adbooksweb-app
 jobs:
-  build:
+
+  job1:
+  
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sudo /etc/init.d/mysql start
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    defaults:
+          run:
+            working-directory: api
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: mvn spring-boot:run
+        
+  job3:
 
     runs-on: ubuntu-latest
-
+    needs: job2
     strategy:
       matrix:
         node-version: [14.x]
