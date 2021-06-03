@@ -15,7 +15,9 @@ defaults:
 jobs:
 
   job1:
-  
+    defaults:
+      run:
+        working-directory: $HOME
     runs-on: ubuntu-latest
     steps:
       - run: |
