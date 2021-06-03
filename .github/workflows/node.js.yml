@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          cd $HOME
+          sudo ls
           sudo /etc/init.d/mysql start
   job2:
     runs-on: ubuntu-latest
