@@ -17,6 +17,10 @@ jobs:
   job1:
 
     runs-on: ubuntu-latest
+    env:
+      DB_DATABASE: adaptedBooksDB
+      DB_USER: root
+      DB_PASSWORD: root
     steps:
      - uses: actions/checkout@v2.1.0
      - run: |
