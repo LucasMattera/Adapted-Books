@@ -4,7 +4,7 @@ import "../../styles/AddBook.css";
 import axios from "axios";
 
 function AddBook() {
-    const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Accion" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
+    const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
 
     const history = useHistory();
     const [link, setLink] = useState("");
@@ -177,8 +177,8 @@ function AddBook() {
                 </label>
                 <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink} data-test="add-link">Agregar</button>
             </div>
-            {data.links.map (link => <i className="text-light">{link}
-            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>X</a>
+            {data.links.map (link => <i className="text-light" data-test="added-link">{link}
+            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)} data-test="remove-link">X</a>
                                                 <br></br><br></br></i>)}
             
             
@@ -188,7 +188,7 @@ function AddBook() {
             </div>
             {genresDefault.map (genero => 
             <div class="form-check form-check-inline margenBajo">
-            <input class="form-check-input" type="checkbox" id={genero} value={genero} onClick={handleImputGenero}></input>
+            <input class="form-check-input" type="checkbox" data-test ={genero} id={genero} value={genero} onClick={handleImputGenero}></input>
             <label class="text-light" for="inlineCheckbox1">{genero}</label>
             </div>)}
 

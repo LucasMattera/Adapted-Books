@@ -211,7 +211,7 @@ function EditBook() {
                             </div>
                             {genresDefault.map(genero =>
                                 <div class="form-check form-check-inline margenBajo">
-                                    <input class="form-check-input" type="checkbox" id={genero} value={genero} onClick={handleImputGenero}></input>
+                                    <input class="form-check-input" type="checkbox" id={genero} data-test ={genero} value={genero} onClick={handleImputGenero}></input>
                                     <label class="text-light" for="inlineCheckbox1">{genero}</label>
                                 </div>)}
                             {

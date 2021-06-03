@@ -62,4 +62,3 @@ jobs:
         color: 3258062
         includeCommits: true
         args: ':red_circle: Hubo un error con el push ${{ github.actor }}: ${{ github.event.head_commit.message}}'
-
