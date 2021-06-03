@@ -15,12 +15,11 @@ defaults:
 jobs:
 
   job1:
-    defaults:
-      run:
-        working-directory: $HOME
+
     runs-on: ubuntu-latest
     steps:
       - run: |
+          cd $HOME
           sudo /etc/init.d/mysql start
   job2:
     runs-on: ubuntu-latest
