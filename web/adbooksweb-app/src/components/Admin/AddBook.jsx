@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import "../../styles/AddBook.css";
 import axios from "axios";
+import { required } from "yargs";
 
 function AddBook() {
     const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
@@ -22,18 +23,31 @@ function AddBook() {
         genres: [],
         description:""
     });
-    const [invalidLink, setInvalidLink] = useState(false);
-    const [invalidImage,setInvalidImage] = useState(false);
-    const [title, setTitle] = useState("");
-    const [author, setAutor] = useState("");
-    const [country, setPais] = useState("");
-    const [image, setImagen] = useState("");
-    const [links, setLinks] = useState([]);
-    const [publicationDate, setFechaDePublicacion] = useState("");
-    const [genres, setGeneros] = useState([]);
-    const [description, setDescription] = useState("");
 
+    const [title, setTitle] = useState("");
+    const [emptyTitle, setEmptyTitle] = useState("");
     
+    const [author, setAutor] = useState("");
+    const [emptyAuthor, setEmptyAutor] = useState("");
+    
+    const [country, setPais] = useState("");
+    const [emptyCountry, setEmptyPais] = useState("");
+    
+    const [image, setImagen] = useState("");
+    const [invalidImage,setInvalidImage] = useState(false);
+    
+    const [links, setLinks] = useState([]);
+    const [invalidLink, setInvalidLink] = useState(false);
+    
+    const [publicationDate, setFechaDePublicacion] = useState("");
+    const [emptyPublicationDate, setEmptyFechaDePublicacion] = useState("");
+    
+    const [genres, setGeneros] = useState([]);
+    const [emptyGenres, setEmptyGeneros] = useState([]);
+    
+    const [description, setDescription] = useState("");
+    const [emptyDescription, setEmptyDescription] = useState("");
+
     const handleImputChange = (event) => {
         setData({...data,
             [event.target.name]: event.target.value.trimStart()
@@ -66,11 +80,25 @@ function AddBook() {
             setInvalidImage(true)
         }
     }
+
+    const handleInputTitle = (event) => {}
+    const handleSubmitTitle = (event) => {}
+
+    const handleInputAuthor = (event) => {}
+    const handleSubmitAuthor = (event) => {}
+
+    const handleInputCountry = (event) => {}
+    const handleSubmitCountry = (event) => {}
+
+    const handleInputPubDate = (event) => {}
+    const handleSubmitPubDate = (event) => {}
+
+    const handleInputDescription = (event) => {}
+    const handleSubmitDescription = (event) => {}
+
     const handleImputLink = (event) =>{
         setLink(event.target.value.trim());
     }
-
-   
 
     const handleSubmitLink = (event) =>{
         var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
@@ -84,7 +112,6 @@ function AddBook() {
     }
 
     const handleImputGenero = (event) =>{
-        
         var checkbox = document.getElementById(event.target.id)
         if(checkbox.checked == true){
             setGeneros(data.genres.push(event.target.value))
@@ -95,13 +122,13 @@ function AddBook() {
             }
         }
     }
+    const handleSubmitGenre = (event) => {}
 
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
         setLinks([])
     }
 
-    
     return(
     <>
         <div className="addBookContainer" data-test="add-book">
@@ -109,27 +136,37 @@ function AddBook() {
         {agregado && (<div class="alert alert-success" role="alert">
             Libro agregado Correctamente!
         </div>)}
-        {error && (
-        <div class="alert alert-danger" role="alert">
-            El Libro no fue Agregado!
-        </div>)}
-            <form  className="login "onSubmit={handleSubmit}>
+        {   
+            error && (
+                <div class="alert alert-danger" role="alert">
+                    El Libro no fue Agregado!
+                </div>)
+        }
             
-            
-            <div class="form-group" >
+        <form  className="login "onSubmit={handleSubmit}>
+            <div className="title" >
                 <label htmlFor="titulo">
                 <p class="text-light">Titulo:</p>
-                    <input type="text"
+                    <input 
+                        type="text"
                         value = {data.title}
                         name="title"
                         onChange={handleImputChange}
                         className="form-control"
                         required
                         data-test="title"
-                        onBlur={cleanFinalSpaces}>
-                    </input>
+                        onBlur={cleanFinalSpaces}
+                        ref={
+                            register({
+                                value: true,
+                                message: 'Este campo no puede estar vacio'
+                            })
+                        }
+                    />
+                    { error.title && error.title.message }
                 </label>
             </div>
+
             <div class="form-group" >
                 <label htmlFor="autor">
                 <p className="text-light genero">Autor:</p>
@@ -156,16 +193,15 @@ function AddBook() {
                     onBlur={cleanFinalSpaces}></input>
                 </label>
             </div>
+
             <p className="text-light genero" >Links: </p>
             <div class="form-group" >
                 <label htmlFor="link">
-                
-                { invalidLink && (
-                    <p className="invalid" data-test="fail-link">
-                        Ingrese un link valido
-                    </p>
-                   
-                )}
+                    { invalidLink && (
+                        <p className="invalid" data-test="fail-link">
+                            Ingrese un link valido
+                        </p>
+                    )}
                     <input type="text"
                             value = {link}
                             name="link"
@@ -175,77 +211,114 @@ function AddBook() {
                             data-test="link"
                     ></input>
                 </label>
-                <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink} data-test="add-link">Agregar</button>
+                <button 
+                    class="btn btn-dark" 
+                    type="button" 
+                    id="button-addon2" 
+                    onClick={handleSubmitLink} 
+                    data-test="add-link"
+                >
+                        Agregar
+                </button>
             </div>
-            {data.links.map (link => <i className="text-light" data-test="added-link">{link}
-            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)} data-test="remove-link">X</a>
-                                                <br></br><br></br></i>)}
-            
-            
+            {
+                data.links.map(link => 
+                    <i 
+                        className="text-light" 
+                        data-test="added-link"
+                    >
+                        {link}
+                        <a 
+                            className="btn btn-danger" 
+                            onClick={e => handleDeleteLink(e, link)} 
+                            data-test="remove-link">
+                                X
+                        </a>
+                        <br/><br/>
+                    </i>
+                )
+            }
 
             <div class= "form-group">
               <p className="text-light genero" >Generos: </p>
             </div>
-            {genresDefault.map (genero => 
-            <div class="form-check form-check-inline margenBajo">
-            <input class="form-check-input" type="checkbox" data-test ={genero} id={genero} value={genero} onClick={handleImputGenero}></input>
-            <label class="text-light" for="inlineCheckbox1">{genero}</label>
-            </div>)}
-
-        
+            {
+                genresDefault.map (genero => 
+                    <div class="form-check form-check-inline margenBajo">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            data-test ={genero} 
+                            id={genero} 
+                            value={genero} 
+                            onClick={handleImputGenero}
+                        />
+                        <label 
+                            class="text-light" 
+                            for="inlineCheckbox1">{genero}</label>
+                    </div>
+                )
+            }
             
             <div class="form-group" >
                 <label htmlFor="descripcion">
-                <p class="text-light genero">Descripcion:</p>
-                    <input type="text"
-                    value = {data.description}
-                    name="description"
-                    onChange={handleImputChange}
-                    className="form-control"
-                    required
-                    data-test="description"
-                    onBlur={cleanFinalSpaces}></input>
+                    <p class="text-light genero">Descripcion:</p>
+                        <input 
+                            type="text"
+                            value = {data.description}
+                            name="description"
+                            onChange={handleImputChange}
+                            className="form-control"
+                            required
+                            data-test="description"
+                            onBlur={cleanFinalSpaces}
+                        />
                 </label>
+            </div>
             
-            
-                </div>
             <div class="form-group">
                 <label htmlFor="fechaDePublicacion">
-                <p class="text-light genero">Fecha:</p>
-                    <input type="date"
-                    value = {data.publicationDate}
-                    name="publicationDate"
-                    onChange={handleImputChange}
-                    className="form-control"
-                    onBlur={cleanFinalSpaces}
-                    data-test="publicationDate"></input>
+                    <p class="text-light genero">Fecha:</p>
+                        <input 
+                            type="date"
+                            value = {data.publicationDate}
+                            name="publicationDate"
+                            onChange={handleImputChange}
+                            className="form-control"
+                            onBlur={cleanFinalSpaces}
+                            data-test="publicationDate"
+                        />
                 </label>
+
                 <div class="form-group" >
-                <label htmlFor="imagen">
-                <p class="text-light">Imagen:</p>
-                { invalidImage && (
-                    <p className="invalid" data-test="fail-image">
-                        Ingrese una imagen valida
-                    </p>   
-                )}
-                    <input type="text"
-                        value = {data.image}
-                        name="image"
-                        onChange={handleImputChange}
-                        className="form-control"
-                        required
-                        placeholder="Ingrese una url.."
-                        data-test="image-field"
-                        onBlur={cleanFinalSpaces}>
-                    </input>
-                    <img src={data.image} className="imagePreview" alt=""></img>
-                </label>
+                    <label htmlFor="imagen">
+                        <p class="text-light">Imagen:</p>
+                        { 
+                            invalidImage && (
+                            <p className="invalid" data-test="fail-image">
+                                Ingrese una imagen valida
+                            </p>)
+                        }
+                        <input type="text"
+                            value = {data.image}
+                            name="image"
+                            onChange={handleImputChange}
+                            className="form-control"
+                            required
+                            placeholder="Ingrese una url.."
+                            data-test="image-field"
+                            onBlur={cleanFinalSpaces}/>
+                        <img 
+                            src={data.image} 
+                            className="imagePreview" 
+                            alt=""/>
+                    </label>
                 </div>
             </div>
                <button 
-                type="submit" 
-                className="btn btn-dark"
-                data-test="add-book-btn">Agregar Libro</button>
+                    type="submit" 
+                    className="btn btn-dark"
+                    data-test="add-book-btn">Agregar Libro</button>
             </form>
             </div>
             </div>
