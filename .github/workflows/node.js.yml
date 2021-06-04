@@ -13,10 +13,37 @@ defaults:
       run:
         working-directory: web/adbooksweb-app
 jobs:
-  build:
+
+  job1:
 
     runs-on: ubuntu-latest
+    env:
+      DB_DATABASE: adaptedBooksDB
+      DB_USER: root
+      DB_PASSWORD: root
+    steps:
+     - uses: actions/checkout@v2.1.0
+     - run: |
+          sudo /etc/init.d/mysql start
+          sudo ss -tulwn
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    defaults:
+          run:
+            working-directory: api
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: mvn spring-boot:run
+        
+  job3:
 
+    runs-on: ubuntu-latest
+    needs: job2
     strategy:
       matrix:
         node-version: [14.x]
@@ -62,4 +89,3 @@ jobs:
         color: 3258062
         includeCommits: true
         args: ':red_circle: Hubo un error con el push ${{ github.actor }}: ${{ github.event.head_commit.message}}'
-

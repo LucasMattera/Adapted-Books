@@ -18,8 +18,9 @@ function EditBook() {
     }, [])
 
     const [link, setLink] = useState("")
-    const [genre, setGenero] = useState("")
     const [error, setError] = useState(false)
+    
+    //estos datos son los anteriores
     const [id, setId] = useState(NaN)
     const [title, setTitulo] = useState("")
     const [author, setAutor] = useState("")
@@ -31,16 +32,9 @@ function EditBook() {
     const [description, setDescripcion] = useState("")
 
     const [bookUpdated, setBookUpdated] = useState()
-
-    const [titleSaved, setTitleSaved] = useState("")
-    const [authorSaved, setAuthorSaved] = useState("")
-    const [countrySaved, setCountrySaved] = useState("")
-    const [imageSaved, setImageSaved] = useState("")
-    const [numberOfClicksAddOrDelete, setNumberOfClicksAddOrDelete] = useState(0)
-    const [descriptionSaved, setDescriptionSaved] = useState("")
-    const [publicationDateSaved, setPublicatioDateSaved] = useState("")
     const [fragmento, setFragmento] = useState()
 
+    //esto es lo que se actualiza
     const [data, setData] = useState({
         id: id,
         title: title,
@@ -53,32 +47,25 @@ function EditBook() {
         description: description,
     })
 
+    const setStaticsFieldData = (libro) =>{
+        setTitulo(libro.title)
+        setId(libro.id)
+        setAutor(libro.author)
+        setFecha(libro.publicationDate)
+        setLinks(libro.links)
+        setPortada(libro.image)
+        setPais(libro.country)
+        setDescripcion(libro.description)
+        setGeneros(libro.genres)
+    }
+
     const obtenerLibro = async () => {
         console.log("query: ", query.toString().replace('q=', ''))
         axios.get(`http://localhost:8080/api/v1/libros/` + (query.toString().replace('q=', '')))
             .then((response) => {
                 const libro = response.data
-                console.log("LIBRO: ", libro)
-
-                setTitulo(libro.title)
-                setId(libro.id)
-                setAutor(libro.author)
-                setFecha(libro.publicationDate)
-                setLinks(libro.links)
-                setPortada(libro.image)
-                setPais(libro.country)
-                setDescripcion(libro.description)
-                setGeneros(libro.genres)
+                setStaticsFieldData(libro)
                 setData(libro)
-
-
-                setTitleSaved(libro.title)
-                setAuthorSaved(libro.author)
-                setCountrySaved(libro.country)
-                setImageSaved(libro.image)
-                setDescriptionSaved(libro.description)
-                setPublicatioDateSaved(libro.publicationDate)
-                // setLinksSaved(libro.links)
             })
             .catch((error) => setError(true))
 
@@ -98,34 +85,27 @@ function EditBook() {
         })
     }
 
-    const Edit = (data) => {
-        if
-            (data.title != titleSaved
-            || data.author != authorSaved
-            || data.country != countrySaved
-            || data.image != imageSaved
-            || numberOfClicksAddOrDelete > 0
-            || data.description != descriptionSaved
-            || data.publicationDate != publicationDateSaved
-        ) {
-            setBookUpdated("Libro actualizado!")
-            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
-        }
-        else {
-            setBookUpdated("Libro no actualizado...")
-        }
+    function seActualizoLibro(){
+         return (data.title != title || data.author != author || data.country != country || data.image != image || data.description != description || data.publicationDate != publicationDate || data.links != links || data.genres != genres)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios
+        if(seActualizoLibro()){
+            axios
             .put("http://localhost:8080/api/v1/libros/", data)
             .then((response) => {
                 console.log(data)
                 console.log(response)
                 console.log(data.title)
             })
-        Edit(data)
+            setStaticsFieldData(data)
+            setBookUpdated("Libro actualizado!")
+            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
+        }else{
+            setBookUpdated("Libro no actualizado...") 
+        }
+
     }
 
     const handleImputLink = (event) => {
@@ -135,13 +115,12 @@ function EditBook() {
     const handleSubmitLink = (event) => {
         setLinks(data.links.push(link))
         setLink("")
-        setNumberOfClicksAddOrDelete(1)
     }
 
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
         setLinks([])
-        setNumberOfClicksAddOrDelete(1)
+        
     }
 
     const handleImputGenero = (event) => {
@@ -155,7 +134,6 @@ function EditBook() {
                 setGeneros(data.genres.splice(index, 1))
             }
         }
-        setNumberOfClicksAddOrDelete(1)
     }
 
 
@@ -237,7 +215,7 @@ function EditBook() {
                                     <label class="text-light" for="inlineCheckbox1">{genero}</label>
                                 </div>)}
                             {
-                                data.genres.map(genre => { checkGenre(genre) }
+                                data.genres.map(genre => {checkGenre(genre) }
                                 )}
                         </div>
                         <div class="form-group" >
