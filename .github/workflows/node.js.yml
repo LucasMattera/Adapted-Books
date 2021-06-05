@@ -23,7 +23,6 @@ jobs:
       DB_PASSWORD: root
     steps:
      - uses: actions/checkout@v2.1.0
-     - uses: shogo82148/actions-setup-mysql@v1
      - run: |
           docker run --name adaptedbooksdb -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
           
