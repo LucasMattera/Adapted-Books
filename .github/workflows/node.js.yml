@@ -18,7 +18,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: adaptedBooksdb
+      DB_DATABASE: adaptedbooksdb
       DB_USER: root
       DB_PASSWORD: root
     steps:
