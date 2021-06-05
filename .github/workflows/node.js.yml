@@ -23,10 +23,11 @@ jobs:
       DB_PASSWORD: root
     steps:
      - uses: actions/checkout@v2.1.0
+     - uses: shogo82148/actions-setup-mysql@v1
      - run: |
+          mysql -uroot -h127.0.0.1 -e 'SELECT version()'
           sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-          -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 3000 -j ACCEPT
   job2:
     runs-on: ubuntu-latest
     needs: job1
@@ -40,6 +41,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: mvn spring-boot:run
+          netstat -ln | grep 3306
         
   job3:
 
