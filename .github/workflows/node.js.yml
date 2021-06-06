@@ -18,14 +18,14 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: adaptedBooksDB
+      DB_DATABASE: adaptedbooksdb
       DB_USER: root
       DB_PASSWORD: root
     steps:
      - uses: actions/checkout@v2.1.0
      - run: |
-          sudo /etc/init.d/mysql start
-          sudo ss -tulwn
+          docker run --name adaptedbooksdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=adaptedbooksdb -e MYSQL_USER=root -e MYSQL_PASSWORD=root  -d mysql:latest
+          
   job2:
     runs-on: ubuntu-latest
     needs: job1
@@ -39,6 +39,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: mvn spring-boot:run
+ 
         
   job3:
 
