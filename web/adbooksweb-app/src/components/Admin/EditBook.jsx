@@ -45,7 +45,7 @@ function EditBook() {
         publicationDate: publicationDate,
         genres: genres,
         description: description,
-    })
+    });
 
     const setStaticsFieldData = (libro) =>{
         setTitulo(libro.title)
