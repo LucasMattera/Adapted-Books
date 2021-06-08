@@ -34,6 +34,7 @@ function AddBook() {
     const [genres, setGenres] = useState([]);
     const [emptyGenres, setEmpty_genres] = useState(false);
     const [emptyDescription, setEmpty_description] = useState(false);
+    const [intentoGuardar,setIntentoGuardar] = useState(false)
 
     const handleInputChange = (event) => {
         setData({...data,
@@ -45,6 +46,7 @@ function AddBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd()
         })
+        setIntentoGuardar(false)
     }
 
     const handleSubmit = (event) =>{ 
@@ -76,64 +78,18 @@ function AddBook() {
             setInvalidImage(true);
         }
     }
-/*
-    const handleSubmitField = (event) => { 
-        var constructedFunction_empty = new Function(`setEmpty_${event.target.name}`);
-        var constructedFunction_set = new Function(`set_${event.target.name}`);
-        
-        if(event.target.value != ''){
-            constructedFunction_empty(false);
-            event.preventDefault();
-            constructedFunction_set(event.target.name.push(event.target.value));
-        } 
-        else{
-            event.target.name = '';
-            event.preventDefault();
-            constructedFunction_empty(true);
-        }
-    }
-*/
-    const handleSubmitTitle = (event) => { 
+
+    const handleSubmitTitle = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
             if(data[val] == ''){
-                var constructedFunction_empty = new Function(`setEmpty_${val}`);
-                setEmpty_${val}(true);
-                console.log(constructedFunction_empty);
-                constructedFunction_empty(true);
+                setIntentoGuardar(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
+            
         });
     }
 
-/*
-    const handleSubmitAuthor = (event) => { 
-        if(data.author != ''){
-            event.preventDefault();
-            setTitle(data.author.push(author));
-        }
-    }
 
-    const handleSubmitCountry = (event) => { 
-        if(data.country != ''){
-            event.preventDefault();
-            setTitle(data.country.push(country));
-        }
-    }
-
-    const handleSubmitPubDate = (event) => { 
-        if(data.publicationDate != ''){
-            event.preventDefault();
-            setTitle(data.publicationDate.push(publicationDate));
-        }
-    }
-
-    const handleSubmitDescription = (event) => { 
-        if(data.description != ''){
-            event.preventDefault();
-            setTitle(data.description.push(description));
-        }
-    }
-*/
     
     const handleInputLink = (event) =>{ setLink(event.target.value.trim()); }
     const handleSubmitLink = (event) =>{
@@ -195,8 +151,8 @@ function AddBook() {
                         onChange={handleInputChange}
                         onBlur={cleanFinalSpaces}
                     />
-                    { emptyTitle && (
-                        <p className="invalid" data-test="fail-title">
+                    { intentoGuardar && (!data.title) && (
+                        <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
                     )}
@@ -214,6 +170,11 @@ function AddBook() {
                         data-test="author"
                         onBlur={cleanFinalSpaces}
                     />
+                    { intentoGuardar && (!data.author) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
                 </label>
             </div>
             <div class="form-group" >
@@ -226,6 +187,11 @@ function AddBook() {
                     className="form-control"
                     data-test="country"
                     onBlur={cleanFinalSpaces}></input>
+                     { intentoGuardar && (!data.country) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
                 </label>
             </div>
 
@@ -245,6 +211,11 @@ function AddBook() {
                             placeholder="Ingrese una url.."
                             data-test="link"
                     ></input>
+                     { intentoGuardar && (data.links.length === 0) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
                 </label>
                 <button 
                     class="btn btn-dark" 
@@ -307,6 +278,11 @@ function AddBook() {
                             data-test="description"
                             onBlur={cleanFinalSpaces}
                         />
+                    { intentoGuardar && (!data.description) && (
+                            <p className="alert alert-warning" data-test="fail-title">
+                                Este campo no puede estar vacio
+                            </p>
+                        )}
                 </label>
             </div>
             
@@ -322,6 +298,11 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                             data-test="publicationDate"
                         />
+                        { intentoGuardar && (!data.publicationDate) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
                 </label>
 
                 <div class="form-group" >
@@ -345,6 +326,11 @@ function AddBook() {
                             src={data.image} 
                             className="imagePreview" 
                             alt=""/>
+                        { intentoGuardar && (!data.image) && (
+                            <p className="alert alert-warning" data-test="fail-title">
+                                Este campo no puede estar vacio
+                            </p>
+                    )}
                     </label>
                 </div>
             </div>
