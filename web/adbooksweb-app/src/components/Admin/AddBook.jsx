@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
+import { useForm } from 'react-hook-form';
 import "../../styles/AddBook.css";
 import axios from "axios";
 //import { required } from "yargs";
@@ -31,8 +32,10 @@ function AddBook() {
     const [links, setLinks] = useState([]);
     const [invalidLink, setInvalidLink] = useState(false);
     const [emptyPublicationDate, setEmpty_publicationDate] = useState(false);
+    
     const [genres, setGenres] = useState([]);
     const [emptyGenres, setEmpty_genres] = useState(false);
+    
     const [emptyDescription, setEmpty_description] = useState(false);
 
     const handleInputChange = (event) => {
@@ -48,10 +51,8 @@ function AddBook() {
     }
 
     const handleSubmit = (event) =>{ 
-        // llamar a los submit aca
         event.preventDefault();
         try{
-            handleSubmitTitle();
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
@@ -60,7 +61,7 @@ function AddBook() {
                 .catch((error) => setError(true));
         }
         catch{}
-     }
+    };
     
     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
@@ -94,46 +95,53 @@ function AddBook() {
     }
 */
     const handleSubmitTitle = (event) => { 
-        Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == ''){
-                var constructedFunction_empty = new Function(`setEmpty_${val}`);
-                setEmpty_${val}(true);
-                console.log(constructedFunction_empty);
-                constructedFunction_empty(true);
-                throw new Error(`error de campo vacio ${val}`);
-            }
-        });
+        if(data.title == ''){
+            setEmpty_title(true);
+            throw new Error(`error de campo vacio title`);
+        }
+        else{
+            setEmpty_title(false);
+        }
     }
 
-/*
     const handleSubmitAuthor = (event) => { 
-        if(data.author != ''){
-            event.preventDefault();
-            setTitle(data.author.push(author));
+        if(data.author == ''){
+            setEmpty_author(true);
+            throw new Error(`error de campo vacio autor`);
+        }
+        else{
+            setEmpty_author(false);
         }
     }
 
     const handleSubmitCountry = (event) => { 
-        if(data.country != ''){
-            event.preventDefault();
-            setTitle(data.country.push(country));
+        if(data.country == ''){
+            setEmpty_country(true);
+            throw new Error(`error de campo vacio pais`);
+        }else{
+            setEmpty_country(false);
         }
     }
 
     const handleSubmitPubDate = (event) => { 
-        if(data.publicationDate != ''){
-            event.preventDefault();
-            setTitle(data.publicationDate.push(publicationDate));
+        if(data.publicationDate == ''){
+            setEmpty_publicationDate(true);
+            throw new Error(`error de campo vacio fecha de publicacion`);
+        }
+        else{
+            setEmpty_publicationDate(false);
         }
     }
 
     const handleSubmitDescription = (event) => { 
-        if(data.description != ''){
-            event.preventDefault();
-            setTitle(data.description.push(description));
+        if(data.description == ''){
+            setEmpty_description(true);
+            throw new Error(`error de campo vacio descripcion`);
+        }
+        else{
+            setEmpty_description(false);
         }
     }
-*/
     
     const handleInputLink = (event) =>{ setLink(event.target.value.trim()); }
     const handleSubmitLink = (event) =>{
@@ -159,7 +167,15 @@ function AddBook() {
             }
         }
     }
-    const handleSubmitGenre = (event) => {}
+    const handleSubmitGenres = (event) => {
+        if(data.genre == ''){
+            setEmpty_genres(true);
+            throw new Error(`error de campo vacio generos`);
+        }
+        else{
+            setEmpty_genres(false);
+        }
+    }
 
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
@@ -185,7 +201,7 @@ function AddBook() {
             
             <div className="title" >
                 <label htmlFor="titulo">
-                <p class="text-light">Titulo:</p>
+                    <p class="text-light">Titulo:</p>
                     <input 
                         type="text"
                         value = {data.title}
@@ -194,10 +210,11 @@ function AddBook() {
                         data-test="title"
                         onChange={handleInputChange}
                         onBlur={cleanFinalSpaces}
+                        onSubmit={handleSubmitTitle}
                     />
                     { emptyTitle && (
                         <p className="invalid" data-test="fail-title">
-                            Este campo no puede estar vacio
+                            Por favor, complete este campo
                         </p>
                     )}
                 </label>
@@ -206,26 +223,40 @@ function AddBook() {
             <div class="form-group" >
                 <label htmlFor="autor">
                 <p className="text-light genero">Autor:</p>
-                    <input type="text"
-                        value = {data.author}
+                    <input 
+                        type="text"
+                        value = {data.author} 
                         name="author"
                         onChange={handleInputChange}
                         className="form-control"
                         data-test="author"
                         onBlur={cleanFinalSpaces}
-                    />
+                />
+                { emptyAuthor && (
+                        <p className="invalid" data-test="fail-author">
+                            Por favor, complete este campo
+                        </p>
+                )}
                 </label>
             </div>
+
             <div class="form-group" >
                 <label htmlFor="pais">
                 <p class="text-light genero">Pais:</p>
-                    <input type="text"
-                    value = {data.country}
-                    name="country"
-                    onChange={handleInputChange}
-                    className="form-control"
-                    data-test="country"
-                    onBlur={cleanFinalSpaces}></input>
+                    <input 
+                        type="text"
+                        value = {data.country}
+                        name="country"
+                        onChange={handleInputChange}
+                        className="form-control"
+                        data-test="country"
+                        onBlur={cleanFinalSpaces}
+                />
+                { emptyCountry && (
+                    <p className="invalid" data-test="fail-country">
+                        Por favor, complete este campo 
+                    </p>
+                )}
                 </label>
             </div>
 
@@ -237,14 +268,20 @@ function AddBook() {
                             Ingrese un link valido
                         </p>
                     )}
-                    <input type="text"
-                            value = {link}
-                            name="link"
-                            onChange={handleInputLink}
-                            className="form-control"
-                            placeholder="Ingrese una url.."
-                            data-test="link"
-                    ></input>
+                    <input 
+                        type="text"
+                        value = {link}
+                        name="link"
+                        onChange={handleInputLink}
+                        className="form-control"
+                        placeholder="Ingrese una url.."
+                        data-test="link"
+                    />
+                    { emptyCountry && (
+                        <p className="invalid" data-test="fail-link">
+                            Por favor, complete este campo 
+                        </p>
+                    )}
                 </label>
                 <button 
                     class="btn btn-dark" 
@@ -295,6 +332,7 @@ function AddBook() {
                 )
             }
             
+            
             <div class="form-group" >
                 <label htmlFor="descripcion">
                     <p class="text-light genero">Descripcion:</p>
@@ -302,11 +340,16 @@ function AddBook() {
                             type="text"
                             value = {data.description}
                             name="description"
-                            onChange={handleInputChange}
                             className="form-control"
                             data-test="description"
+                            onChange={handleInputChange}
                             onBlur={cleanFinalSpaces}
                         />
+                        { emptyDescription && (
+                            <p className="invalid" data-test="fail-description">
+                                Por favor, complete este campo 
+                            </p>
+                        )}
                 </label>
             </div>
             
@@ -322,6 +365,11 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                             data-test="publicationDate"
                         />
+                        { emptyPublicationDate && (
+                        <p className="invalid" data-test="fail-pub-date">
+                            Por favor, complete este campo 
+                        </p>
+                    )}
                 </label>
 
                 <div class="form-group" >

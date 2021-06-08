@@ -15,7 +15,7 @@ border: 1px solid #ddd; /* Gray border */
   width: 150px; /* Set a small width */
 }
 .invalid{
-  color: rgb(75, 13, 13);
+  color: rgb(231, 28, 28);
 }
 
 .addBookContainer{
