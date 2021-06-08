@@ -53,6 +53,7 @@ function AddBook() {
         // llamar a los submit aca
         event.preventDefault();
         try{
+            handleSubmitImage();
             handleSubmitTitle();
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
@@ -67,17 +68,12 @@ function AddBook() {
     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
         if(isImage.test(data.image)){
-            setInvalidImage(false);
-            event.preventDefault();
-            window.scrollTo(0, 0);
-            setAgregado(false);
-            setError(false); 
-            } else{
-            data.image='';
-            event.preventDefault();
-            setInvalidImage(true);
-        }
+            setInvalidImage(false); 
+            }else if(data.image != ""){
+               setInvalidImage(true);
+            }
     }
+    
 
     const handleSubmitTitle = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
@@ -85,7 +81,6 @@ function AddBook() {
                 setIntentoGuardar(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
-            
         });
     }
 
@@ -211,11 +206,6 @@ function AddBook() {
                             placeholder="Ingrese una url.."
                             data-test="link"
                     ></input>
-                     { intentoGuardar && (data.links.length === 0) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
-                    )}
                 </label>
                 <button 
                     class="btn btn-dark" 
