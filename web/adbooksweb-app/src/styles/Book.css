@@ -9,8 +9,8 @@
 }
 
 .one {
-    border-radius: 25px;
-    border: 2px solid #73AD21;
+    border-radius: 15px;
+    border: 2px solid #294207;
 
     grid-row: 1 / 2;
     grid-column: 1 / 2;
@@ -18,9 +18,12 @@
 
     margin:auto;
     width: 400px;
-    height: 550px;
+    height: 700px;
 }
 .two {
+    border-radius: 15px;
+    border: 2px solid #294207;
+    background-color: rgb(96, 100, 100);
     grid-row: 1;
     grid-column: 2 / 4;
     padding-left: 3%;
@@ -49,30 +52,6 @@
     margin-right: 1%;;
 }
 
-.link-text{
-    font-family:"Lucida Handwriting";
-    font-size: 20px;
-    font-weight: 900;
-}
 
-/* unvisited link */
-.a-link:link{
-    color: rgb(206, 98, 98);
-}
-
-/* visited link */
-.a-link:visited {
-    color: rgb(111, 232, 111);
-  }
-  
-/* mouse over link */
-.a-link:hover {
-color: hotpink;
-}
-
-/* selected link */
-.a-link:active {
-color: rgb(112, 112, 230);
-}
 
 

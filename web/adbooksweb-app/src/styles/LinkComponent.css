@@ -1,0 +1,31 @@
+.iconPage{
+    width: 5%;
+    height: 5%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.link{
+    padding-left: 15px;
+}
+
+
+/* unvisited link */
+.a-link:link{
+    color: rgb(206, 98, 98);
+}
+
+/* visited link */
+.a-link:visited {
+    color: rgb(111, 232, 111);
+  }
+  
+/* mouse over link */
+.a-link:hover {
+color: hotpink;
+}
+
+/* selected link */
+.a-link:active {
+color: rgb(112, 112, 230);
+}

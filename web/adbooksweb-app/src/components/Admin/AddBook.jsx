@@ -37,8 +37,10 @@ function AddBook() {
     const [emptyGenres, setEmpty_genres] = useState(false);
     
     const [emptyDescription, setEmpty_description] = useState(false);
+    const [intentoGuardar,setIntentoGuardar] = useState(false)
 
     const handleInputChange = (event) => {
+        
         setData({...data,
             [event.target.name]: event.target.value.trimStart()
         });
@@ -48,11 +50,16 @@ function AddBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd()
         })
+        setIntentoGuardar(false)
     }
 
     const handleSubmit = (event) =>{ 
         event.preventDefault();
         try{
+            handleSubmitImage();
+            handleSubmitTitle();
+            
+           
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
@@ -63,85 +70,26 @@ function AddBook() {
         catch{}
     };
     
-    const handleSubmitImage = (event) => {
+     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
-        if(isImage.test(data.image)){
-            setInvalidImage(false);
-            event.preventDefault();
-            window.scrollTo(0, 0);
-            setAgregado(false);
-            setError(false); 
+        if(isImage.test(data.image) && data.image != ""){
+            setInvalidImage(false); 
             } else{
-            data.image='';
-            event.preventDefault();
             setInvalidImage(true);
         }
     }
-/*
-    const handleSubmitField = (event) => { 
-        var constructedFunction_empty = new Function(`setEmpty_${event.target.name}`);
-        var constructedFunction_set = new Function(`set_${event.target.name}`);
-        
-        if(event.target.value != ''){
-            constructedFunction_empty(false);
-            event.preventDefault();
-            constructedFunction_set(event.target.name.push(event.target.value));
-        } 
-        else{
-            event.target.name = '';
-            event.preventDefault();
-            constructedFunction_empty(true);
-        }
-    }
-*/
-    const handleSubmitTitle = (event) => { 
-        if(data.title == ''){
-            setEmpty_title(true);
-            throw new Error(`error de campo vacio title`);
-        }
-        else{
-            setEmpty_title(false);
-        }
+
+    const handleSubmitTitle = (event) => {
+        Object.getOwnPropertyNames(data).forEach(function(val, index, array){
+            if(data[val] == ''){
+                setIntentoGuardar(true)
+                throw new Error(`error de campo vacio ${val}`);
+            }
+            
+        });
     }
 
-    const handleSubmitAuthor = (event) => { 
-        if(data.author == ''){
-            setEmpty_author(true);
-            throw new Error(`error de campo vacio autor`);
-        }
-        else{
-            setEmpty_author(false);
-        }
-    }
 
-    const handleSubmitCountry = (event) => { 
-        if(data.country == ''){
-            setEmpty_country(true);
-            throw new Error(`error de campo vacio pais`);
-        }else{
-            setEmpty_country(false);
-        }
-    }
-
-    const handleSubmitPubDate = (event) => { 
-        if(data.publicationDate == ''){
-            setEmpty_publicationDate(true);
-            throw new Error(`error de campo vacio fecha de publicacion`);
-        }
-        else{
-            setEmpty_publicationDate(false);
-        }
-    }
-
-    const handleSubmitDescription = (event) => { 
-        if(data.description == ''){
-            setEmpty_description(true);
-            throw new Error(`error de campo vacio descripcion`);
-        }
-        else{
-            setEmpty_description(false);
-        }
-    }
     
     const handleInputLink = (event) =>{ setLink(event.target.value.trim()); }
     const handleSubmitLink = (event) =>{
@@ -197,7 +145,7 @@ function AddBook() {
                 </div>)
         }
             
-        <form  className="login "onSubmit={handleSubmit}>
+        <form  className="login " onSubmit={handleSubmit}>
             
             <div className="title" >
                 <label htmlFor="titulo">
@@ -212,9 +160,9 @@ function AddBook() {
                         onBlur={cleanFinalSpaces}
                         onSubmit={handleSubmitTitle}
                     />
-                    { emptyTitle && (
-                        <p className="invalid" data-test="fail-title">
-                            Por favor, complete este campo
+                    { intentoGuardar && (!data.title) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
                         </p>
                     )}
                 </label>
@@ -231,32 +179,30 @@ function AddBook() {
                         className="form-control"
                         data-test="author"
                         onBlur={cleanFinalSpaces}
-                />
-                { emptyAuthor && (
-                        <p className="invalid" data-test="fail-author">
-                            Por favor, complete este campo
+                    />
+                    { intentoGuardar && (!data.author) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
                         </p>
-                )}
+                    )}
                 </label>
             </div>
 
             <div class="form-group" >
                 <label htmlFor="pais">
                 <p class="text-light genero">Pais:</p>
-                    <input 
-                        type="text"
-                        value = {data.country}
-                        name="country"
-                        onChange={handleInputChange}
-                        className="form-control"
-                        data-test="country"
-                        onBlur={cleanFinalSpaces}
-                />
-                { emptyCountry && (
-                    <p className="invalid" data-test="fail-country">
-                        Por favor, complete este campo 
-                    </p>
-                )}
+                    <input type="text"
+                    value = {data.country}
+                    name="country"
+                    onChange={handleInputChange}
+                    className="form-control"
+                    data-test="country"
+                    onBlur={cleanFinalSpaces}></input>
+                     { intentoGuardar && (!data.country) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
                 </label>
             </div>
 
@@ -268,18 +214,17 @@ function AddBook() {
                             Ingrese un link valido
                         </p>
                     )}
-                    <input 
-                        type="text"
-                        value = {link}
-                        name="link"
-                        onChange={handleInputLink}
-                        className="form-control"
-                        placeholder="Ingrese una url.."
-                        data-test="link"
-                    />
-                    { emptyCountry && (
-                        <p className="invalid" data-test="fail-link">
-                            Por favor, complete este campo 
+                    <input type="text"
+                            value = {link}
+                            name="link"
+                            onChange={handleInputLink}
+                            className="form-control"
+                            placeholder="Ingrese una url.."
+                            data-test="link"
+                    ></input>
+                     { intentoGuardar && (data.links.length === 0) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
                         </p>
                     )}
                 </label>
@@ -345,9 +290,9 @@ function AddBook() {
                             onChange={handleInputChange}
                             onBlur={cleanFinalSpaces}
                         />
-                        { emptyDescription && (
-                            <p className="invalid" data-test="fail-description">
-                                Por favor, complete este campo 
+                    { intentoGuardar && (!data.description) && (
+                            <p className="alert alert-warning" data-test="fail-title">
+                                Este campo no puede estar vacio
                             </p>
                         )}
                 </label>
@@ -365,9 +310,9 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                             data-test="publicationDate"
                         />
-                        { emptyPublicationDate && (
-                        <p className="invalid" data-test="fail-pub-date">
-                            Por favor, complete este campo 
+                        { intentoGuardar && (!data.publicationDate) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
                         </p>
                     )}
                 </label>
@@ -393,6 +338,11 @@ function AddBook() {
                             src={data.image} 
                             className="imagePreview" 
                             alt=""/>
+                        { intentoGuardar && (!data.image) && (
+                            <p className="alert alert-warning" data-test="fail-title">
+                                Este campo no puede estar vacio
+                            </p>
+                    )}
                     </label>
                 </div>
             </div>
