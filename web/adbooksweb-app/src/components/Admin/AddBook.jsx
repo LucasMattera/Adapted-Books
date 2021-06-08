@@ -5,13 +5,16 @@ import axios from "axios";
 //import { required } from "yargs";
 
 function AddBook() {
+    const [agregado,setAgregado] = useState(false)
     const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
 
     const history = useHistory();
+    
+    
     const [link, setLink] = useState("");
-
     const [error,setError] = useState(false)
-    const [agregado,setAgregado] = useState(false)
+    
+    
 
     const [data,setData] = useState({
         title: "",
@@ -24,16 +27,9 @@ function AddBook() {
         description:""
     });
 
-    const [emptyTitle, setEmpty_title] = useState(false);
-    const [emptyAuthor, setEmpty_author] = useState(false);
-    const [emptyCountry, setEmpty_country] = useState(false);
+
     const [invalidImage,setInvalidImage] = useState(false);
-    const [links, setLinks] = useState([]);
     const [invalidLink, setInvalidLink] = useState(false);
-    const [emptyPublicationDate, setEmpty_publicationDate] = useState(false);
-    const [genres, setGenres] = useState([]);
-    const [emptyGenres, setEmpty_genres] = useState(false);
-    const [emptyDescription, setEmpty_description] = useState(false);
     const [intentoGuardar,setIntentoGuardar] = useState(false)
 
     const handleInputChange = (event) => {
@@ -54,7 +50,7 @@ function AddBook() {
         event.preventDefault();
         try{
             handleSubmitImage();
-            handleSubmitTitle();
+            handleSubmitField();
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
@@ -75,7 +71,7 @@ function AddBook() {
     }
     
 
-    const handleSubmitTitle = (event) => {
+    const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
             if(data[val] == ''){
                 setIntentoGuardar(true)
