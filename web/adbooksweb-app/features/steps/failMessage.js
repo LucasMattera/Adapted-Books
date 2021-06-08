@@ -8,5 +8,5 @@ Then("I should see a {string} message", async function(string){
         await this.page.screenshot({path: 'failImage.jpg'});
     }
     const elem = await this.page.waitForSelector(`[data-test="${string}"]`);
-    return !!elem;
+    return elem;
 })
