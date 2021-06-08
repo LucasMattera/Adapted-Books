@@ -31,7 +31,8 @@ function AddBook() {
     const [invalidImage,setInvalidImage] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
     const [intentoGuardar,setIntentoGuardar] = useState(false)
-
+    const [links, setLinks] = useState([])
+    const [genres, setGenres] = useState([])
     const handleInputChange = (event) => {
         setData({...data,
             [event.target.name]: event.target.value.trimStart()
@@ -73,7 +74,7 @@ function AddBook() {
 
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == ''){
+            if(data[val] == '' && val != "link"){
                 setIntentoGuardar(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
@@ -82,7 +83,9 @@ function AddBook() {
 
 
     
-    const handleInputLink = (event) =>{ setLink(event.target.value.trim()); }
+    const handleInputLink = (event) => {
+        setLink(event.target.value.trim())
+    }
     const handleSubmitLink = (event) =>{
         var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
         
@@ -212,6 +215,7 @@ function AddBook() {
                 >
                         Agregar
                 </button>
+
             </div>
             {
                 data.links.map(link => 
