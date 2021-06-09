@@ -188,7 +188,7 @@ function EditBook() {
                                     value={data.title}
                                     name="title"
                                     className="form-control"
-                                    data-test="title"
+                                    data-test ="edit-title"
                                     onChange={handleInputChange}
                                     onBlur={cleanFinalSpaces}
                                 />
@@ -207,10 +207,10 @@ function EditBook() {
                                     name="author"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    data-test="author"
+                                    data-test ="edit-author"
                                     onBlur={cleanFinalSpaces}/>
                                 { intentoGuardar && (!data.author) && (
-                                    <p className="alert alert-warning" data-test="fail-title">
+                                    <p className="alert alert-warning" data-test="fail-author">
                                         Este campo no puede estar vacio
                                     </p>
                                 )}
@@ -224,10 +224,10 @@ function EditBook() {
                                     name="country"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    data-test="country"
+                                    data-test ="edit-country"
                                     onBlur={cleanFinalSpaces}></input>
                                     { intentoGuardar && (!data.country) && (
-                                    <p className="alert alert-warning" data-test="fail-title">
+                                    <p className="alert alert-warning" data-test="fail-country">
                                         Este campo no puede estar vacio
                                     </p>
                                     )}
@@ -307,11 +307,11 @@ function EditBook() {
                                         name="description"
                                         onChange={handleInputChange}
                                         className="form-control"
-                                        data-test="description"
+                                        data-test ="edit-description"
                                         onBlur={cleanFinalSpaces}
                             />
                             { intentoGuardar && (!data.description) && (
-                            <p className="alert alert-warning" data-test="fail-title">
+                            <p className="alert alert-warning" data-test="fail-description">
                                 Este campo no puede estar vacio
                             </p>
                         )}
@@ -325,10 +325,11 @@ function EditBook() {
                                     name="publicationDate"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    required>
+                                    data-test ="edit-date"
+                                    >
                                 </input>
                                 { intentoGuardar && (!data.publicationDate) && (
-                                    <p className="alert alert-warning" data-test="fail-title">
+                                    <p className="alert alert-warning" data-test="fail-date">
                                         Este campo no puede estar vacio
                                     </p>
                                 )}
@@ -348,14 +349,14 @@ function EditBook() {
                                         onChange={handleInputChange}
                                         className="form-control"
                                         placeholder="Ingrese una url.."
-                                        data-test="image-field"
+                                        data-test="edit-image"
                                         onBlur={cleanFinalSpaces}>
                                     </input>
                                     <img src={data.image} 
                                         className="imagePreview" 
                                         alt=""></img>
                                     { intentoGuardar && (!data.image) && (
-                                        <p className="alert alert-warning" data-test="fail-title">
+                                        <p className="alert alert-warning" data-test="fail-image">
                                             Este campo no puede estar vacio
                                         </p>
                                     )}    
@@ -366,7 +367,7 @@ function EditBook() {
                                 type="submit"
                                 alt="guardar" 
                                 onClick={e => handleSubmit(e)} 
-                                data-class="save-book-btn">Guardar</button>
+                                data-test="save-book-btn">Guardar</button>
                     </form>
                 </div>
             </div>)
