@@ -2,10 +2,9 @@ import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import "../../styles/AddBook.css";
 import axios from "axios";
-//import { required } from "yargs";
 
 function AddBook() {
-    const [agregado,setAgregado] = useState(false)
+    const [added,setAdded] = useState(false)
     const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
 
     const history = useHistory();
@@ -36,7 +35,7 @@ function AddBook() {
     const [emptyGenres, setEmpty_genres] = useState(false);
     
     const [emptyDescription, setEmpty_description] = useState(false);
-    const [intentoGuardar,setIntentoGuardar] = useState(false)
+    const [trySave,setTrySave] = useState(false)
     const [links, setLinks] = useState([])
     const handleInputChange = (event) => {
         
@@ -49,7 +48,7 @@ function AddBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd()
         })
-        setIntentoGuardar(false)
+        setTrySave(false)
     }
 
     const handleSubmit = (event) =>{ 
@@ -57,10 +56,11 @@ function AddBook() {
         try{
             handleSubmitImage();
             handleSubmitField();
+            console.log("llego")
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
-                    setAgregado(true);
+                    setAdded(true);
                 })
                 .catch((error) => setError(true));
         }
@@ -74,16 +74,17 @@ function AddBook() {
             }else if(data.image != ""){
                setInvalidImage(true);
             }
+            
     }
     
 
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == '' && val != "link"){
-                setIntentoGuardar(true)
+            if(data[val] == '' && val != "links"){
+                setTrySave(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
-        });
+        })
     }
 
 
@@ -133,7 +134,7 @@ function AddBook() {
     <>
         <div className="addBookContainer" data-test="add-book">
         <div className="centro">
-        {agregado && (
+        {added && (
             <div class="alert alert-success" role="alert">
             Libro agregado Correctamente!
         </div>)}
@@ -159,7 +160,7 @@ function AddBook() {
                         onBlur={cleanFinalSpaces}
                         onSubmit={handleSubmitField}
                     />
-                    { intentoGuardar && (!data.title) && (
+                    { trySave && (!data.title) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -179,7 +180,7 @@ function AddBook() {
                         data-test="author"
                         onBlur={cleanFinalSpaces}
                     />
-                    { intentoGuardar && (!data.author) && (
+                    { trySave && (!data.author) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -197,7 +198,7 @@ function AddBook() {
                     className="form-control"
                     data-test="country"
                     onBlur={cleanFinalSpaces}></input>
-                     { intentoGuardar && (!data.country) && (
+                     { trySave && (!data.country) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -285,7 +286,7 @@ function AddBook() {
                             onChange={handleInputChange}
                             onBlur={cleanFinalSpaces}
                         />
-                    { intentoGuardar && (!data.description) && (
+                    { trySave&& (!data.description) && (
                             <p className="alert alert-warning" data-test="fail-title">
                                 Este campo no puede estar vacio
                             </p>
@@ -305,7 +306,7 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                             data-test="publicationDate"
                         />
-                        { intentoGuardar && (!data.publicationDate) && (
+                        { trySave && (!data.publicationDate) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -333,7 +334,7 @@ function AddBook() {
                             src={data.image} 
                             className="imagePreview" 
                             alt=""/>
-                        { intentoGuardar && (!data.image) && (
+                        { trySave && (!data.image) && (
                             <p className="alert alert-warning" data-test="fail-title">
                                 Este campo no puede estar vacio
                             </p>
