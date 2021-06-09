@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
-import { useForm } from 'react-hook-form';
 import "../../styles/AddBook.css";
 import axios from "axios";
-//import { required } from "yargs";
 
 function AddBook() {
     const [agregado,setAgregado] = useState(false)
@@ -58,6 +56,7 @@ function AddBook() {
         try{
             handleSubmitImage();
             handleSubmitField();
+            console.log("llego")
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
@@ -75,16 +74,17 @@ function AddBook() {
             }else if(data.image != ""){
                setInvalidImage(true);
             }
+            
     }
     
 
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == '' && val != "link"){
+            if(data[val] == '' && val != "links"){
                 setIntentoGuardar(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
-        });
+        })
     }
 
 
