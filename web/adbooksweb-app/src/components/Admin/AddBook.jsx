@@ -34,6 +34,7 @@ function AddBook() {
     const [links, setLinks] = useState([])
     const [genres, setGenres] = useState([])
     const handleInputChange = (event) => {
+        
         setData({...data,
             [event.target.name]: event.target.value.trimStart()
         });
@@ -62,7 +63,7 @@ function AddBook() {
         catch{}
      }
     
-    const handleSubmitImage = (event) => {
+     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
         if(isImage.test(data.image)){
             setInvalidImage(false); 
@@ -109,7 +110,6 @@ function AddBook() {
             }
         }
     }
-    const handleSubmitGenre = (event) => {}
 
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
@@ -131,7 +131,7 @@ function AddBook() {
                 </div>)
         }
             
-        <form  className="login "onSubmit={handleSubmit}>
+        <form  className="login " onSubmit={handleSubmit}>
             
             <div className="title" >
                 <label htmlFor="titulo">
