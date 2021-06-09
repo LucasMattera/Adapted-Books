@@ -39,7 +39,6 @@ function AddBook() {
     const [emptyDescription, setEmpty_description] = useState(false);
     const [intentoGuardar,setIntentoGuardar] = useState(false)
     const [links, setLinks] = useState([])
-    const [genres, setGenres] = useState([])
     const handleInputChange = (event) => {
         
         setData({...data,
