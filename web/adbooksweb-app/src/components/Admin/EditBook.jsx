@@ -14,29 +14,26 @@ function EditBook() {
     const history = useHistory()
 
     useEffect(() => {
-        obtenerLibro()
+        getBook()
     }, [])
 
     const [link, setLink] = useState("")
     const [error, setError] = useState(false)
-    
-    //estos datos son los anteriores
+
     const [id, setId] = useState(NaN)
-    const [title, setTitulo] = useState("")
-    const [author, setAutor] = useState("")
-    const [country, setPais] = useState("")
-    const [image, setPortada] = useState("")
+    const [title, setTitle] = useState("")
+    const [author, setAuthor] = useState("")
+    const [country, setCountry] = useState("")
+    const [image, setImage] = useState("")
     const [links, setLinks] = useState([])
-    const [publicationDate, setFecha] = useState("")
-    const [genres, setGeneros] = useState([])
-    const [description, setDescripcion] = useState("")
-    const [invalidImage,setInvalidImage] = useState(false);
+    const [publicationDate, setPublicationDate] = useState("")
+    const [genres, setGenres] = useState([])
+    const [description, setDescription] = useState("")
+    const [invalidImage, setInvalidImage] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
     const [bookUpdated, setBookUpdated] = useState()
-    const [fragmento, setFragmento] = useState()
-    const [intentoGuardar,setIntentoGuardar] = useState(false)
+    const [trySave, setTrySave] = useState(false)
 
-    //esto es lo que se actualiza
     const [data, setData] = useState({
         id: id,
         title: title,
@@ -49,19 +46,19 @@ function EditBook() {
         description: description,
     });
 
-    const setStaticsFieldData = (libro) =>{
-        setTitulo(libro.title)
-        setId(libro.id)
-        setAutor(libro.author)
-        setFecha(libro.publicationDate)
-        setLinks(libro.links)
-        setPortada(libro.image)
-        setPais(libro.country)
-        setDescripcion(libro.description)
-        setGeneros(libro.genres)
+    const setStaticsFieldData = (book) => {
+        setTitle(book.title)
+        setId(book.id)
+        setAuthor(book.author)
+        setPublicationDate(book.publicationDate)
+        setLinks(book.links)
+        setImage(book.image)
+        setCountry(book.country)
+        setDescription(book.description)
+        setGenres(book.genres)
     }
 
-    const obtenerLibro = async () => {
+    const getBook = async () => {
         console.log("query: ", query.toString().replace('q=', ''))
         axios.get(`http://localhost:8080/api/v1/libros/` + (query.toString().replace('q=', '')))
             .then((response) => {
@@ -82,52 +79,52 @@ function EditBook() {
     }
 
     const cleanFinalSpaces = (event) => {
-        setData({...data,
+        setData({
+            ...data,
             [event.target.name]: event.target.value.trimEnd().trimStart()
         })
-        setIntentoGuardar(false)
+        setTrySave(false)
     }
 
-    function seActualizoLibro(){
-         return (data.title != title || data.author != author || data.country != country || data.image != image || data.description != description || data.publicationDate != publicationDate || data.links != links || data.genres != genres)
+    function bookWasUpdated() {
+        return (data.title != title || data.author != author || data.country != country || data.image != image || data.description != description || data.publicationDate != publicationDate || data.links != links || data.genres != genres)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(seActualizoLibro()){
-            try{
+        if (bookWasUpdated()) {
+            try {
                 handleSubmitImage();
                 handleSubmitField();
                 axios
-                .put("http://localhost:8080/api/v1/libros/", data)
-                .then((response) => {
-                    console.log(data)
-                    console.log(response)
-                    console.log(data.title)
-                }).catch((error) => setError(true));
+                    .put("http://localhost:8080/api/v1/libros/", data)
+                    .then((response) => {
+                        console.log(data)
+                        console.log(response)
+                        console.log(data.title)
+                    }).catch((error) => setError(true));
                 setStaticsFieldData(data)
-                setBookUpdated("Libro actualizado!")
-                setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
-            } catch{}
-        }else{
-            setBookUpdated("Libro no actualizado...") 
+                setBookUpdated(<p className="alert alert-warning" role="alert">Libro actualizado!</p>)
+            } catch { }
+        } else {
+            setBookUpdated(<p className="alert alert-danger" role="alert">Libro no actualizado...!</p>)
         }
 
     }
 
     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
-        if(isImage.test(data.image)){
-            setInvalidImage(false); 
-            }else if(data.image != ""){
-               setInvalidImage(true);
-            }
+        if (isImage.test(data.image)) {
+            setInvalidImage(false);
+        } else if (data.image != "") {
+            setInvalidImage(true);
+        }
     }
 
     const handleSubmitField = (event) => {
-        Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == ''){
-                setIntentoGuardar(true)
+        Object.getOwnPropertyNames(data).forEach(function (val, index, array) {
+            if (data[val] == '' && val != "links") {
+                setTrySave(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
         });
@@ -137,10 +134,10 @@ function EditBook() {
         setLink(event.target.value.trim())
     }
 
-    const handleSubmitLink = (event) =>{
+    const handleSubmitLink = (event) => {
         var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
-        
-        if(isLink.test(link)) {
+
+        if (isLink.test(link)) {
             setLinks(data.links.push(link));
             setLink("");
             setInvalidLink(false);
@@ -152,27 +149,21 @@ function EditBook() {
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
         setLinks([])
-        
+
     }
 
     const handleInputGenero = (event) => {
 
         var checkbox = document.getElementById(event.target.id)
         if (checkbox.checked == true) {
-            setGeneros(data.genres.push(event.target.value))
+            setGenres(data.genres.push(event.target.value))
         } else {
             var index = data.genres.indexOf(event.target.value)
             if (index > -1) {
-                setGeneros(data.genres.splice(index, 1))
+                setGenres(data.genres.splice(index, 1))
             }
         }
     }
-
-
-    const handleSubmitGoHome = () => {
-        history.push("/admin")
-    }
-
 
     return (
         <>
@@ -183,16 +174,16 @@ function EditBook() {
                         <div class="title" >
                             <label htmlFor="titulo">
                                 <p class="text-light">Titulo:</p>
-                                <input 
+                                <input
                                     type="text"
                                     value={data.title}
                                     name="title"
                                     className="form-control"
-                                    data-test ="edit-title"
+                                    data-test="edit-title"
                                     onChange={handleInputChange}
                                     onBlur={cleanFinalSpaces}
                                 />
-                                { intentoGuardar && (!data.title) && (
+                                {trySave && (!data.title) && (
                                     <p className="alert alert-warning" data-test="fail-title">
                                         Este campo no puede estar vacio
                                     </p>
@@ -207,9 +198,9 @@ function EditBook() {
                                     name="author"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    data-test ="edit-author"
-                                    onBlur={cleanFinalSpaces}/>
-                                { intentoGuardar && (!data.author) && (
+                                    data-test="edit-author"
+                                    onBlur={cleanFinalSpaces} />
+                                {trySave && (!data.author) && (
                                     <p className="alert alert-warning" data-test="fail-author">
                                         Este campo no puede estar vacio
                                     </p>
@@ -224,19 +215,19 @@ function EditBook() {
                                     name="country"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    data-test ="edit-country"
+                                    data-test="edit-country"
                                     onBlur={cleanFinalSpaces}></input>
-                                    { intentoGuardar && (!data.country) && (
+                                {trySave && (!data.country) && (
                                     <p className="alert alert-warning" data-test="fail-country">
                                         Este campo no puede estar vacio
                                     </p>
-                                    )}
+                                )}
                             </label>
                         </div>
                         <p className="text-light genero" >Links: </p>
                         <div class="form-group" >
                             <label htmlFor="link">
-                                { invalidLink && (
+                                {invalidLink && (
                                     <p className="invalid" data-test="fail-link">
                                         Ingrese un link valido
                                     </p>
@@ -251,72 +242,72 @@ function EditBook() {
                                 ></input>
                             </label>
                             <button class="btn btn-dark"
-                                    type="button" 
-                                    id="button-addon2" 
-                                    onClick={handleSubmitLink}>
-                                        Agregar
+                                type="button"
+                                id="button-addon2"
+                                onClick={handleSubmitLink}>
+                                Agregar
                             </button>
                         </div>
-                        {data.links.map(link => 
+                        {data.links.map(link =>
                             <i class="text-light">{link}
-                                <a className="btn btn-danger" 
-                                   onClick={e => handleDeleteLink(e, link)}>
-                                       x
+                                <a className="btn btn-danger"
+                                    onClick={e => handleDeleteLink(e, link)}>
+                                    x
                                 </a>
                                 <br></br>
                             </i>)}
                         <div class="form-group" >
                             <p class="text-light genero">Generos: </p>
-                        </div>    
+                        </div>
                         {
                             genresDefault.map(genero =>
                                 <div class="form-check form-check-inline margenBajo">
                                     <input class="form-check-input"
-                                           type="checkbox" 
-                                           data-test ={genero} 
-                                           id={genero} 
-                                           value={genero} 
-                                           onClick={handleInputGenero}/>
-                                    <label class="text-light" 
-                                           for="inlineCheckbox1">{genero}</label>
+                                        type="checkbox"
+                                        data-test={genero}
+                                        id={genero}
+                                        value={genero}
+                                        onClick={handleInputGenero} />
+                                    <label class="text-light"
+                                        for="inlineCheckbox1">{genero}</label>
                                 </div>
                             )
                         }
                         {
-                        data.genres.map(genre =>
-                            <div class="form-check form-check-inline margenBajo">
-                            <input 
-                                class="form-check-input" 
-                                type="checkbox" 
-                                data-test ={genre} 
-                                id={genre} 
-                                value={genre} 
-                                onClick={handleInputGenero}
-                            />
-                            <label 
-                                class="text-light" 
-                                for="inlineCheckbox1">{genre}</label>
-                        </div>
-                        )}
+                            data.genres.map(genre =>
+                                <div class="form-check form-check-inline margenBajo">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        data-test={genre}
+                                        id={genre}
+                                        value={genre}
+                                        onClick={handleInputGenero}
+                                    />
+                                    <label
+                                        class="text-light"
+                                        for="inlineCheckbox1">{genre}</label>
+                                </div>
+                            )}
                         <div class="form-group" >
                             <label htmlFor="descripcion">
                                 <p class="text-light genero">Descripcion:</p>
-                                    <input 
-                                        type="text"
-                                        value = {data.description}
-                                        name="description"
-                                        onChange={handleInputChange}
-                                        className="form-control"
-                                        data-test ="edit-description"
-                                        onBlur={cleanFinalSpaces}
-                            />
-                            { intentoGuardar && (!data.description) && (
-                            <p className="alert alert-warning" data-test="fail-description">
-                                Este campo no puede estar vacio
-                            </p>
-                        )}
-                </label>
-            </div>
+                                <input
+                                    type="text"
+                                    value={data.description}
+                                    name="description"
+                                    onChange={handleInputChange}
+                                    className="form-control"
+                                    data-test="edit-description"
+                                    onBlur={cleanFinalSpaces}
+                                />
+                                {trySave && (!data.description) && (
+                                    <p className="alert alert-warning" data-test="fail-description">
+                                        Este campo no puede estar vacio
+                                    </p>
+                                )}
+                            </label>
+                        </div>
                         <div class="form-group">
                             <label htmlFor="fechaDePublicacion">
                                 <p class="text-light genero">Fecha:</p>
@@ -325,10 +316,10 @@ function EditBook() {
                                     name="publicationDate"
                                     onChange={handleInputChange}
                                     className="form-control"
-                                    data-test ="edit-date"
-                                    >
+                                    data-test="edit-date"
+                                >
                                 </input>
-                                { intentoGuardar && (!data.publicationDate) && (
+                                {trySave && (!data.publicationDate) && (
                                     <p className="alert alert-warning" data-test="fail-date">
                                         Este campo no puede estar vacio
                                     </p>
@@ -337,11 +328,11 @@ function EditBook() {
                             <div class="form-group" >
                                 <label htmlFor="imagen">
                                     <p class="text-light">Imagen:</p>
-                                    { 
+                                    {
                                         invalidImage && (
-                                        <p className="invalid" data-test="fail-image">
-                                            Ingrese una imagen valida
-                                        </p>)
+                                            <p className="invalid" data-test="fail-image">
+                                                Ingrese una imagen valida
+                                            </p>)
                                     }
                                     <input type="text"
                                         value={data.image}
@@ -352,29 +343,28 @@ function EditBook() {
                                         data-test="edit-image"
                                         onBlur={cleanFinalSpaces}>
                                     </input>
-                                    <img src={data.image} 
-                                        className="imagePreview" 
+                                    <img src={data.image}
+                                        className="imagePreview"
                                         alt=""></img>
-                                    { intentoGuardar && (!data.image) && (
+                                    {trySave && (!data.image) && (
                                         <p className="alert alert-warning" data-test="fail-image">
                                             Este campo no puede estar vacio
                                         </p>
-                                    )}    
+                                    )}
                                 </label>
                             </div>
                         </div>
                         <button className="btn btn-primary"
-                                type="submit"
-                                alt="guardar" 
-                                onClick={e => handleSubmit(e)} 
-                                data-test="save-book-btn">Guardar</button>
+                            type="submit"
+                            alt="guardar"
+                            onClick={e => handleSubmit(e)}
+                            data-test="save-book-btn">Guardar</button>
                     </form>
                 </div>
             </div>)
-            <center><div className="bookUpdated">
+            <center>
                 {bookUpdated}
-                {fragmento}
-            </div></center>
+            </center>
         </>
     )
 };
