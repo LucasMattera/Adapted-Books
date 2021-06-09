@@ -7,6 +7,10 @@ Then("I should see a {string} message", async function(string){
     if(string=="fail-image"){
         await this.page.screenshot({path: 'failImage.jpg'});
     }
+    if(string=="fail-title"){
+        await this.page.screenshot({path: "failTitle.jpg"});
+    }
+    
     const elem = await this.page.waitForSelector(`[data-test="${string}"]`);
     return elem;
 })

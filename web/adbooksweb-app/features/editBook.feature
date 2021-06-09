@@ -15,9 +15,6 @@ Scenario: As a user I can check and uncheck the genres of a book in EditBook
 
 Scenario: As a user I will see an alert when Title field is empty
     Given I navigate to the "edit-book" page
-    And I enter "" as my "title"
-    And I enter "autor" as my "author"
-    And I enter "pais" as my "country"
-    And I enter "" as my "title"
+    And I empty my "edit-title" field
     When I click the "save-book-btn" button
     Then I should see a "fail-title" message
