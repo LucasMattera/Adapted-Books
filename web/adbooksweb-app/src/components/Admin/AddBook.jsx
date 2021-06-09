@@ -158,7 +158,7 @@ function AddBook() {
                         data-test="title"
                         onChange={handleInputChange}
                         onBlur={cleanFinalSpaces}
-                        onSubmit={handleSubmitTitle}
+                        onSubmit={handleSubmitField}
                     />
                     { intentoGuardar && (!data.title) && (
                         <p className="alert alert-warning" data-test="fail-title">
