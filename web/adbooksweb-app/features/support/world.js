@@ -23,9 +23,10 @@ Before(async function(){
     await email.type("admin@123.com")
     await password.type("admin123")
     await login.click()
+    
     await page.goto('http://localhost:3000/admin/add')
     const title= await page.$(`[data-test="title"]`);
-    const author= await page.$(`[data-test="author"]`);
+    const author= await page.$(`[data-test="author"]`); //BORRAR ESTO
     const country= await page.$(`[data-test="country"]`);
     const description= await page.$(`[data-test="description"]`);
     const publicationDate= await page.$(`[data-test="publicationDate"]`);
@@ -33,7 +34,7 @@ Before(async function(){
     await elem.type("asd");
     
     await title.type("a")
-    await author.type("a")
+    await author.type("a") // BORRAR ESTO
     await country.type("a")
     await description.type("a")
     await publicationDate.type("552010")

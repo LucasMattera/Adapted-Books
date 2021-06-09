@@ -6,13 +6,16 @@ import axios from "axios";
 //import { required } from "yargs";
 
 function AddBook() {
+    const [agregado,setAgregado] = useState(false)
     const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
 
     const history = useHistory();
+    
+    
     const [link, setLink] = useState("");
-
     const [error,setError] = useState(false)
-    const [agregado,setAgregado] = useState(false)
+    
+    
 
     const [data,setData] = useState({
         title: "",
@@ -25,11 +28,8 @@ function AddBook() {
         description:""
     });
 
-    const [emptyTitle, setEmpty_title] = useState(false);
-    const [emptyAuthor, setEmpty_author] = useState(false);
-    const [emptyCountry, setEmpty_country] = useState(false);
+
     const [invalidImage,setInvalidImage] = useState(false);
-    const [links, setLinks] = useState([]);
     const [invalidLink, setInvalidLink] = useState(false);
     const [emptyPublicationDate, setEmpty_publicationDate] = useState(false);
     
@@ -38,7 +38,8 @@ function AddBook() {
     
     const [emptyDescription, setEmpty_description] = useState(false);
     const [intentoGuardar,setIntentoGuardar] = useState(false)
-
+    const [links, setLinks] = useState([])
+    const [genres, setGenres] = useState([])
     const handleInputChange = (event) => {
         
         setData({...data,
@@ -57,9 +58,7 @@ function AddBook() {
         event.preventDefault();
         try{
             handleSubmitImage();
-            handleSubmitTitle();
-            
-           
+            handleSubmitField();
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
@@ -72,26 +71,28 @@ function AddBook() {
     
      const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
-        if(isImage.test(data.image) && data.image != ""){
+        if(isImage.test(data.image)){
             setInvalidImage(false); 
-            } else{
-            setInvalidImage(true);
-        }
+            }else if(data.image != ""){
+               setInvalidImage(true);
+            }
     }
+    
 
-    const handleSubmitTitle = (event) => {
+    const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == ''){
+            if(data[val] == '' && val != "link"){
                 setIntentoGuardar(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
-            
         });
     }
 
 
     
-    const handleInputLink = (event) =>{ setLink(event.target.value.trim()); }
+    const handleInputLink = (event) => {
+        setLink(event.target.value.trim())
+    }
     const handleSubmitLink = (event) =>{
         var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
         
@@ -222,11 +223,6 @@ function AddBook() {
                             placeholder="Ingrese una url.."
                             data-test="link"
                     ></input>
-                     { intentoGuardar && (data.links.length === 0) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
-                    )}
                 </label>
                 <button 
                     class="btn btn-dark" 
@@ -237,6 +233,7 @@ function AddBook() {
                 >
                         Agregar
                 </button>
+
             </div>
             {
                 data.links.map(link => 

@@ -30,9 +30,11 @@ function EditBook() {
     const [publicationDate, setFecha] = useState("")
     const [genres, setGeneros] = useState([])
     const [description, setDescripcion] = useState("")
-
+    const [invalidImage,setInvalidImage] = useState(false);
+    const [invalidLink, setInvalidLink] = useState(false);
     const [bookUpdated, setBookUpdated] = useState()
     const [fragmento, setFragmento] = useState()
+    const [intentoGuardar,setIntentoGuardar] = useState(false)
 
     //esto es lo que se actualiza
     const [data, setData] = useState({
@@ -71,7 +73,7 @@ function EditBook() {
 
     }
 
-    const handleImputChange = (event,) => {
+    const handleInputChange = (event,) => {
         setData({
             ...data,
             [event.target.name]: event.target.value
@@ -83,6 +85,7 @@ function EditBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd().trimStart()
         })
+        setIntentoGuardar(false)
     }
 
     function seActualizoLibro(){
@@ -92,29 +95,58 @@ function EditBook() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if(seActualizoLibro()){
-            axios
-            .put("http://localhost:8080/api/v1/libros/", data)
-            .then((response) => {
-                console.log(data)
-                console.log(response)
-                console.log(data.title)
-            })
-            setStaticsFieldData(data)
-            setBookUpdated("Libro actualizado!")
-            setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
+            try{
+                handleSubmitImage();
+                handleSubmitField();
+                axios
+                .put("http://localhost:8080/api/v1/libros/", data)
+                .then((response) => {
+                    console.log(data)
+                    console.log(response)
+                    console.log(data.title)
+                }).catch((error) => setError(true));
+                setStaticsFieldData(data)
+                setBookUpdated("Libro actualizado!")
+                setFragmento(<button className="btn-goHome btn btn-outline-success" onClick={handleSubmitGoHome}>¿Ir al inicio?</button>)
+            } catch{}
         }else{
             setBookUpdated("Libro no actualizado...") 
         }
 
     }
 
-    const handleImputLink = (event) => {
+    const handleSubmitImage = (event) => {
+        var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
+        if(isImage.test(data.image)){
+            setInvalidImage(false); 
+            }else if(data.image != ""){
+               setInvalidImage(true);
+            }
+    }
+
+    const handleSubmitField = (event) => {
+        Object.getOwnPropertyNames(data).forEach(function(val, index, array){
+            if(data[val] == ''){
+                setIntentoGuardar(true)
+                throw new Error(`error de campo vacio ${val}`);
+            }
+        });
+    }
+
+    const handleInputLink = (event) => {
         setLink(event.target.value.trim())
     }
 
-    const handleSubmitLink = (event) => {
-        setLinks(data.links.push(link))
-        setLink("")
+    const handleSubmitLink = (event) =>{
+        var isLink = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
+        
+        if(isLink.test(link)) {
+            setLinks(data.links.push(link));
+            setLink("");
+            setInvalidLink(false);
+        } else {
+            setInvalidLink(true);
+        }
     }
 
     const handleDeleteLink = (event, toDelete) => {
@@ -123,7 +155,7 @@ function EditBook() {
         
     }
 
-    const handleImputGenero = (event) => {
+    const handleInputGenero = (event) => {
 
         var checkbox = document.getElementById(event.target.id)
         if (checkbox.checked == true) {
@@ -141,28 +173,30 @@ function EditBook() {
         history.push("/admin")
     }
 
-    const checkGenre = (genre) => {
-        var checkbox = document.getElementById(genre)
-        checkbox.checked = true
-
-    }
 
     return (
         <>
 
-            (<div className="addBookContainer">
+            (<div className="addBookContainer" data-test="edit-book">
                 <div className="centro">
-                    <form className="login">
-                        <div class="form-group" >
+                    <form className="login" onSubmit={handleSubmit}>
+                        <div class="title" >
                             <label htmlFor="titulo">
                                 <p class="text-light">Titulo:</p>
-                                <input type="text"
+                                <input 
+                                    type="text"
                                     value={data.title}
                                     name="title"
-                                    onChange={handleImputChange}
                                     className="form-control"
-                                    required
-                                    onBlur={cleanFinalSpaces}></input>
+                                    data-test="title"
+                                    onChange={handleInputChange}
+                                    onBlur={cleanFinalSpaces}
+                                />
+                                { intentoGuardar && (!data.title) && (
+                                    <p className="alert alert-warning" data-test="fail-title">
+                                        Este campo no puede estar vacio
+                                    </p>
+                                )}
                             </label>
                         </div>
                         <div class="form-group" >
@@ -171,10 +205,15 @@ function EditBook() {
                                 <input type="text"
                                     value={data.author}
                                     name="author"
-                                    onChange={handleImputChange}
+                                    onChange={handleInputChange}
                                     className="form-control"
-                                    required
-                                    onBlur={cleanFinalSpaces}></input>
+                                    data-test="author"
+                                    onBlur={cleanFinalSpaces}/>
+                                { intentoGuardar && (!data.author) && (
+                                    <p className="alert alert-warning" data-test="fail-title">
+                                        Este campo no puede estar vacio
+                                    </p>
+                                )}
                             </label>
                         </div>
                         <div class="form-group" >
@@ -183,82 +222,151 @@ function EditBook() {
                                 <input type="text"
                                     value={data.country}
                                     name="country"
-                                    onChange={handleImputChange}
+                                    onChange={handleInputChange}
                                     className="form-control"
-                                    required
+                                    data-test="country"
                                     onBlur={cleanFinalSpaces}></input>
+                                    { intentoGuardar && (!data.country) && (
+                                    <p className="alert alert-warning" data-test="fail-title">
+                                        Este campo no puede estar vacio
+                                    </p>
+                                    )}
                             </label>
                         </div>
                         <p className="text-light genero" >Links: </p>
                         <div class="form-group" >
                             <label htmlFor="link">
+                                { invalidLink && (
+                                    <p className="invalid" data-test="fail-link">
+                                        Ingrese un link valido
+                                    </p>
+                                )}
                                 <input type="text"
                                     value={link}
                                     name="link"
-                                    onChange={handleImputLink}
+                                    onChange={handleInputLink}
                                     className="form-control"
+                                    placeholder="Ingrese una url.."
+                                    data-test="link"
                                 ></input>
                             </label>
-                            <button class="btn btn-dark" type="button" id="button-addon2" onClick={handleSubmitLink}>Agregar</button>
+                            <button class="btn btn-dark"
+                                    type="button" 
+                                    id="button-addon2" 
+                                    onClick={handleSubmitLink}>
+                                        Agregar
+                            </button>
                         </div>
-                        {data.links.map(link => <i class="text-light">{link}
-                            <a className="btn btn-danger" onClick={e => handleDeleteLink(e, link)}>x</a>
-                            <br></br><br></br></i>)}
+                        {data.links.map(link => 
+                            <i class="text-light">{link}
+                                <a className="btn btn-danger" 
+                                   onClick={e => handleDeleteLink(e, link)}>
+                                       x
+                                </a>
+                                <br></br>
+                            </i>)}
                         <div class="form-group" >
                             <p class="text-light genero">Generos: </p>
-                            <div className="genres-container">
-
-                            </div>
-                            {genresDefault.map(genero =>
+                        </div>    
+                        {
+                            genresDefault.map(genero =>
                                 <div class="form-check form-check-inline margenBajo">
-                                    <input class="form-check-input" type="checkbox" id={genero} data-test ={genero} value={genero} onClick={handleImputGenero}></input>
-                                    <label class="text-light" for="inlineCheckbox1">{genero}</label>
-                                </div>)}
-                            {
-                                data.genres.map(genre => {checkGenre(genre) }
-                                )}
+                                    <input class="form-check-input"
+                                           type="checkbox" 
+                                           data-test ={genero} 
+                                           id={genero} 
+                                           value={genero} 
+                                           onClick={handleInputGenero}/>
+                                    <label class="text-light" 
+                                           for="inlineCheckbox1">{genero}</label>
+                                </div>
+                            )
+                        }
+                        {
+                        data.genres.map(genre =>
+                            <div class="form-check form-check-inline margenBajo">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                data-test ={genre} 
+                                id={genre} 
+                                value={genre} 
+                                onClick={handleInputGenero}
+                            />
+                            <label 
+                                class="text-light" 
+                                for="inlineCheckbox1">{genre}</label>
                         </div>
+                        )}
                         <div class="form-group" >
                             <label htmlFor="descripcion">
                                 <p class="text-light genero">Descripcion:</p>
-                                <input type="text"
-                                    value={data.description}
-                                    name="description"
-                                    onChange={handleImputChange}
-                                    className="form-control"
-                                    required
-                                    onBlur={cleanFinalSpaces}></input>
-                            </label>
-                            <div>
-                            </div>
-                        </div>
+                                    <input 
+                                        type="text"
+                                        value = {data.description}
+                                        name="description"
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        data-test="description"
+                                        onBlur={cleanFinalSpaces}
+                            />
+                            { intentoGuardar && (!data.description) && (
+                            <p className="alert alert-warning" data-test="fail-title">
+                                Este campo no puede estar vacio
+                            </p>
+                        )}
+                </label>
+            </div>
                         <div class="form-group">
                             <label htmlFor="fechaDePublicacion">
                                 <p class="text-light genero">Fecha:</p>
                                 <input type="date"
                                     value={data.publicationDate}
                                     name="publicationDate"
-                                    onChange={handleImputChange}
+                                    onChange={handleInputChange}
                                     className="form-control"
                                     required>
                                 </input>
+                                { intentoGuardar && (!data.publicationDate) && (
+                                    <p className="alert alert-warning" data-test="fail-title">
+                                        Este campo no puede estar vacio
+                                    </p>
+                                )}
                             </label>
                             <div class="form-group" >
                                 <label htmlFor="imagen">
-                                    <p class="text-light genero">Imagen:</p>
+                                    <p class="text-light">Imagen:</p>
+                                    { 
+                                        invalidImage && (
+                                        <p className="invalid" data-test="fail-image">
+                                            Ingrese una imagen valida
+                                        </p>)
+                                    }
                                     <input type="text"
                                         value={data.image}
                                         name="image"
-                                        onChange={handleImputChange}
+                                        onChange={handleInputChange}
                                         className="form-control"
-                                        required
+                                        placeholder="Ingrese una url.."
+                                        data-test="image-field"
                                         onBlur={cleanFinalSpaces}>
                                     </input>
-                                    <img src={data.image} className="imagePreview" alt=""></img>
+                                    <img src={data.image} 
+                                        className="imagePreview" 
+                                        alt=""></img>
+                                    { intentoGuardar && (!data.image) && (
+                                        <p className="alert alert-warning" data-test="fail-title">
+                                            Este campo no puede estar vacio
+                                        </p>
+                                    )}    
                                 </label>
                             </div>
                         </div>
-                        <button className="btn btn-primary" alt="guardar" onClick={e => handleSubmit(e)} >Guardar</button>
+                        <button className="btn btn-primary"
+                                type="submit"
+                                alt="guardar" 
+                                onClick={e => handleSubmit(e)} 
+                                data-class="save-book-btn">Guardar</button>
                     </form>
                 </div>
             </div>)
