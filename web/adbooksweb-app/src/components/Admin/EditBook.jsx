@@ -188,7 +188,7 @@ function EditBook() {
                                     value={data.title}
                                     name="title"
                                     className="form-control"
-                                    data-test="title"
+                                    data-test ="edit-title"
                                     onChange={handleInputChange}
                                     onBlur={cleanFinalSpaces}
                                 />
@@ -366,7 +366,7 @@ function EditBook() {
                                 type="submit"
                                 alt="guardar" 
                                 onClick={e => handleSubmit(e)} 
-                                data-class="save-book-btn">Guardar</button>
+                                data-test="save-book-btn">Guardar</button>
                     </form>
                 </div>
             </div>)
