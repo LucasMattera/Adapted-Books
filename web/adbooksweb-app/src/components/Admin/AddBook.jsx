@@ -246,7 +246,7 @@ function AddBook() {
             {
 
                 data.links.map(link => 
-                    <li class="list-group-item list-item">
+                    <li class="list-group-item list-item" data-test="added-link">
                         
                         <a className="link"target="_blank" rel="noopener noreferrer" href={link} className="link">{link}
                         
