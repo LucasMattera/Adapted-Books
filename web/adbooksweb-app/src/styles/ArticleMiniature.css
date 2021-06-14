@@ -1,7 +1,5 @@
 .article-card {
     position: relative;
-    background-color: transparent;
-    
     height: 350px;
     perspective: 1000px;
     margin-top: 50px;
@@ -11,11 +9,13 @@
   .article-card-inner {
 
     width: 100%;
-    height: 400px;
+    height: 450px;
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(26, 26, 26, 0.2);
+    box-shadow: 0px 4px 8px 0px rgb(3, 3, 3);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.281);
   }
   
   .article-card:hover .article-card-inner {
@@ -25,7 +25,7 @@
   .article-card-front, .article-card-back {
     position: absolute;
     width: 100%;
-    height: 400px;
+    height: 450px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -33,17 +33,15 @@
   
   .article-card-back {
     padding-top: 5%;
-    background-color: #292929;
+    background-color: #333333;
     color: white;
     border-radius: 10px;
-    
     transform: rotateY(180deg);
   }
 
   .imagen{
     width: 100%;
-    height: 400px;
-    border: 1px solid #ddd;
+    height: 450px;
     border-radius: 10px;
     padding: 5px;
   }

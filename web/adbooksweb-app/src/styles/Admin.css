@@ -23,6 +23,7 @@
 }
 .form-control{
     margin-top: 5%;
+    margin-right: 5vh;
 }
 .filter-container {
     grid-row: 1 ;

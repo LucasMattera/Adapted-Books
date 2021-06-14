@@ -1,9 +1,9 @@
 .contenido{
   
    display: grid;
-   grid-gap: 20px;
-   grid-template-columns:repeat(auto-fill, 300px);;
-
+   margin-left: 4vw;
+   grid-gap: 100px;
+   grid-template-columns:repeat(auto-fill, 350px);
 
 }
 
