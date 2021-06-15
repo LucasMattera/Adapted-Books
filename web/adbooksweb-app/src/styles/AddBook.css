@@ -71,3 +71,8 @@ border: 1px solid #ddd; /* Gray border */
   overflow:hidden;
   text-overflow: ellipsis;
 }
+
+.form-control2{
+  margin-top: 5%;
+  margin-right: 5vh;
+}
