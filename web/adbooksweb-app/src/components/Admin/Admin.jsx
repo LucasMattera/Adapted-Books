@@ -53,7 +53,7 @@ function Admin() {
             <div className="book-deletion-alert">{alertBookDeleted}</div>
             <div className="filterTab">
                 <input
-                    className="form-control filter filter-container"
+                    className="form-control filter filter-container inputSearch"
                     onChange={e => setSearch(e.target.value)}
                     id="myInput"
                     type="text"

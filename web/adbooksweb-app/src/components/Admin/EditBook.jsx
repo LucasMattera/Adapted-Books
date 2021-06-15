@@ -165,12 +165,24 @@ function EditBook() {
         }
     }
 
+    const checkGenres = () =>{
+        data.genres.map(genre => {
+            var checkbox = document.getElementById(genre)
+            checkbox.checked = true
+        })
+    }
+
     return (
         <>
 
-            (<div className="addBookContainer" data-test="edit-book">
-                <div className="centro">
-                    <form className="login" onSubmit={handleSubmit}>
+            (<div class="container">
+        <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-9">
+        <div className="addBookContainer" data-test="add-book">
+        <div className="centro">
+                    <form className="form-floating" onSubmit={handleSubmit}>
                         <div class="title" >
                             <label htmlFor="titulo">
                                 <p class="text-light">Titulo:</p>
@@ -178,7 +190,7 @@ function EditBook() {
                                     type="text"
                                     value={data.title}
                                     name="title"
-                                    className="form-control"
+                                    className="form-control label-grande"
                                     data-test="edit-title"
                                     onChange={handleInputChange}
                                     onBlur={cleanFinalSpaces}
@@ -197,7 +209,7 @@ function EditBook() {
                                     value={data.author}
                                     name="author"
                                     onChange={handleInputChange}
-                                    className="form-control"
+                                    className="form-control label-grande"
                                     data-test="edit-author"
                                     onBlur={cleanFinalSpaces} />
                                 {trySave && (!data.author) && (
@@ -214,7 +226,7 @@ function EditBook() {
                                     value={data.country}
                                     name="country"
                                     onChange={handleInputChange}
-                                    className="form-control"
+                                    className="form-control label-grande"
                                     data-test="edit-country"
                                     onBlur={cleanFinalSpaces}></input>
                                 {trySave && (!data.country) && (
@@ -236,7 +248,7 @@ function EditBook() {
                                     value={link}
                                     name="link"
                                     onChange={handleInputLink}
-                                    className="form-control"
+                                    className="form-control label-grande"
                                     placeholder="Ingrese una url.."
                                     data-test="link"
                                 ></input>
@@ -248,14 +260,29 @@ function EditBook() {
                                 Agregar
                             </button>
                         </div>
-                        {data.links.map(link =>
-                            <i class="text-light">{link}
-                                <a className="btn btn-danger"
-                                    onClick={e => handleDeleteLink(e, link)}>
-                                    x
-                                </a>
-                                <br></br>
-                            </i>)}
+                        <ul class="list-menu">
+            {
+
+                data.links.map(link => 
+                    <li class="list-group-item list-item">
+                        
+                        <a className="link"target="_blank" rel="noopener noreferrer" href={link} className="link">{link}
+                        
+                        
+                        </a>
+                        <buttom type="buttom" 
+                            className="btn btn-danger" 
+                            onClick={e => handleDeleteLink(e, link)} 
+                            data-test="remove-link">
+                                X
+                        </buttom>
+                        
+                        
+                    </li>
+                )
+            }
+            {checkGenres()}
+            </ul>
                         <div class="form-group" >
                             <p class="text-light genero">Generos: </p>
                         </div>
@@ -272,32 +299,16 @@ function EditBook() {
                                         for="inlineCheckbox1">{genero}</label>
                                 </div>
                             )
-                        }
-                        {
-                            data.genres.map(genre =>
-                                <div class="form-check form-check-inline margenBajo">
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        data-test={genre}
-                                        id={genre}
-                                        value={genre}
-                                        onClick={handleInputGenero}
-                                    />
-                                    <label
-                                        class="text-light"
-                                        for="inlineCheckbox1">{genre}</label>
-                                </div>
-                            )}
+                        }  
                         <div class="form-group" >
-                            <label htmlFor="descripcion">
+                            <label htmlFor="descripcion" class="form-label">
                                 <p class="text-light genero">Descripcion:</p>
-                                <input
+                                <textarea
                                     type="text"
                                     value={data.description}
                                     name="description"
                                     onChange={handleInputChange}
-                                    className="form-control"
+                                    className="form-control label-grande"
                                     data-test="edit-description"
                                     onBlur={cleanFinalSpaces}
                                 />
@@ -338,7 +349,7 @@ function EditBook() {
                                         value={data.image}
                                         name="image"
                                         onChange={handleInputChange}
-                                        className="form-control"
+                                        className="form-control label-grande"
                                         placeholder="Ingrese una url.."
                                         data-test="edit-image"
                                         onBlur={cleanFinalSpaces}>
@@ -360,8 +371,14 @@ function EditBook() {
                             onClick={e => handleSubmit(e)}
                             data-test="save-book-btn">Guardar</button>
                     </form>
-                </div>
-            </div>)
+                    </div>
+            </div>
+            </div>
+            <div class="col">
+            </div>
+            </div>
+            </div>
+            )
             <center>
                 {bookUpdated}
             </center>

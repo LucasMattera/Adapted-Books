@@ -15,7 +15,7 @@ const Navbar = () => {
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand">Adapted Books</a>
-                    <button type="submit" className="btn btn-outline-success" onClick={goHome}>Inicio</button>
+                    <a class="nav-link active homeButtom" aria-current="page" onClick={goHome}>Inicio</a>
                     <form class="d-flex">
                     <BookSearch />
                     </form>

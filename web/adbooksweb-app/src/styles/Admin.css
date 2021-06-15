@@ -23,6 +23,7 @@
 }
 .form-control{
     margin-top: 5%;
+    margin-right: 5vh;
 }
 .filter-container {
     grid-row: 1 ;
@@ -39,6 +40,8 @@
     margin-right: 0%;
     width: 20%;
     font-size:xx-large;
+    height: 70px;
+    margin-top: 5vh;
     
 }
 .table {
@@ -50,7 +53,7 @@
     cursor:pointer;
 }
 
-.btn-work{ text-align: center; }
+.btn-work{ text-align: center;  }
 
 .bookDeleted{
     font-size: 25px;
@@ -66,4 +69,10 @@
 
 .book-deletion-alert{
     margin-left: 95em;
+}
+
+.inputSearch{
+    width: 85vw;
+    height: 70px;
+    margin-top: 5vh;
 }
