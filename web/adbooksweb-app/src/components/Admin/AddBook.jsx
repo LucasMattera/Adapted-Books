@@ -161,7 +161,7 @@ function AddBook() {
                         onSubmit={handleSubmitField}
                     />
                     { trySave && (!data.title) && (
-                        <div class="audun_warn">
+                        <div class="audun_warn" data-test="fail-title">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                             El campo "Título" no puede estar vacío
                         </div>
@@ -182,7 +182,7 @@ function AddBook() {
                         onBlur={cleanFinalSpaces}
                     />
                     { trySave && (!data.author) && (
-                        <div class="audun_warn">
+                        <div class="audun_warn" data-test="fail-author">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                             El campo "Autor" no puede estar vacío
                         </div>
@@ -201,7 +201,7 @@ function AddBook() {
                     data-test="country"
                     onBlur={cleanFinalSpaces}></input>
                      { trySave && (!data.country) && (
-                        <div class="audun_warn">
+                        <div class="audun_warn" data-test="fail-country">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                             El campo "País" no puede estar vacío
                         </div>
@@ -214,7 +214,7 @@ function AddBook() {
             <p className="text-light genero-l" >Links: </p>
                 <label htmlFor="link">
                     { invalidLink && (
-                        <div class="audun_warn">
+                        <div class="audun_warn" data-test="fail-link">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                             Ingrese un link válido
                         </div>
@@ -297,7 +297,7 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                         />
                     { trySave&& (!data.description) && (
-                            <div class="audun_warn">
+                            <div class="audun_warn" data-test="fail-description">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                                 El campo "Descripción" no puede estar vacío
                             </div>
@@ -330,7 +330,7 @@ function AddBook() {
                         <p class="text-light genero">Imagen:</p>
                         { 
                             invalidImage && (
-                            <div class="audun_warn">
+                            <div class="audun_warn" data-test="fail-image">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                                 Ingrese un link válido
                             </div>
@@ -348,7 +348,7 @@ function AddBook() {
                             className="imagePreview" 
                             alt=""/>
                         { trySave && (!data.image) && (
-                            <div class="audun_warn">
+                            <div class="audun_warn" data-test="fail-link">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
                                 El campo "Imagen" no puede estar vacío
                             </div>

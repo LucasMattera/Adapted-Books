@@ -13,7 +13,7 @@ Feature: AddBook
      Given I am on the "add-book" page
      And I enter "" as my "description"
      When I click the "add-book-btn" button
-     Then I should see a "fail-title" message
+     Then I should see a "fail-description" message
 
 Scenario: As a user I will see an alert when I put an invalid link in Image field
     Given I am on the "add-book" page
