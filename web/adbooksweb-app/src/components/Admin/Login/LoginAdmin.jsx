@@ -12,7 +12,7 @@ export default function LoginAdmin() {
         password: "admin123",
     }
 
-    const [error,setError] = useState("");
+    const [error, setError] = useState("");
     const history = useHistory()
     const [emailYPassword, setEmailYPassword] = useState({
         email: "",
@@ -46,12 +46,15 @@ export default function LoginAdmin() {
     }
 
     return (
-        //componente Main sirve para centrar el cuerpo html.
         <Main center>
+
             <div className="FormContainer">
+
                 <h1 className="Form__titulo">AdaptedBooks</h1>
                 <div>
-                    <form onSubmit={e => handleSubmit(e)}>
+                    <form className="txt_field" onSubmit={e => handleSubmit(e)}>
+
+                        <i class='bx bx-mail-send' ></i>
                         <input
                             type="email"
                             name="email"
@@ -62,6 +65,7 @@ export default function LoginAdmin() {
                             value={emailYPassword.email}
                             data-test="email"
                         />
+                        <i class='bx bx-lock' ></i>
                         <input
                             type="password"
                             name="password"
@@ -78,10 +82,10 @@ export default function LoginAdmin() {
                         <button type="submit" className="Form__submit" data-test="login">
                             Entrar
                         </button>
-                        
+
                         <p className="FormContainer__info">
-                            <h1 className="hForm">¿No tienes una cuenta de administrador? 
-                                <br></br> 
+                            <h1 className="hForm">¿No tienes una cuenta de administrador?
+                                <br></br>
                                 Contacte al soporte tecnico.
                             </h1>
                         </p>
