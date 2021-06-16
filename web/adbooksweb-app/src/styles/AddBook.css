@@ -76,3 +76,16 @@ border: 1px solid #ddd; /* Gray border */
   margin-top: 5%;
   margin-right: 5vh;
 }
+
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+.audun_warn {
+    color: #ffffff;
+    background-color: #FF8080;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:12px;
+    width: 400px;
+}
