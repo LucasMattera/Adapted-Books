@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import "../../styles/AddBook.css";
 import axios from "axios";
-//import { required } from "yargs";
 
 function AddBook() {
-    const [agregado,setAgregado] = useState(false)
-    const genresDefault = ["Cyberpunk","Space Opera","Terror", "Ciencia Ficcion" , "Thirller", "Aventura","Acción" , "Manga","Suspenso","Comedia", "Sobrenatural","Superpoderes","Fantasía" ,"Fantasía Oscura","Alta Fantasia", "Novela", "Drama Apocalíptico","Juvenil"]
+    const [added,setAdded] = useState(false)
+    const genresDefault = ["Cyberpunk", "Space Opera", "Terror", "Ciencia Ficcion", "Thriller", "Aventura", "Acción", "Manga", "Suspenso", "Misterio", "Comedia", "Sobrenatural", "Superpoderes", "Fantasía", "Fantasía Oscura", "Alta Fantasia", "Novela", "Drama Apocalíptico", "Juvenil"]
 
     const history = useHistory();
     
@@ -30,9 +29,14 @@ function AddBook() {
 
     const [invalidImage,setInvalidImage] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
-    const [intentoGuardar,setIntentoGuardar] = useState(false)
+    const [emptyPublicationDate, setEmpty_publicationDate] = useState(false);
+    
+    const [genres, setGenres] = useState([]);
+    const [emptyGenres, setEmpty_genres] = useState(false);
+    
+    const [emptyDescription, setEmpty_description] = useState(false);
+    const [trySave,setTrySave] = useState(false)
     const [links, setLinks] = useState([])
-    const [genres, setGenres] = useState([])
     const handleInputChange = (event) => {
         
         setData({...data,
@@ -44,24 +48,25 @@ function AddBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd()
         })
-        setIntentoGuardar(false)
+        setTrySave(false)
     }
 
     const handleSubmit = (event) =>{ 
-        // llamar a los submit aca
         event.preventDefault();
         try{
             handleSubmitImage();
             handleSubmitField();
+            console.log("llego")
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
-                    setAgregado(true);
+                    setAdded(true);
+                    setError(false)
                 })
                 .catch((error) => setError(true));
         }
         catch{}
-     }
+    };
     
      const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
@@ -70,16 +75,17 @@ function AddBook() {
             }else if(data.image != ""){
                setInvalidImage(true);
             }
+            
     }
     
 
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == '' && val != "link"){
-                setIntentoGuardar(true)
+            if(data[val] == '' && val != "links"){
+                setTrySave(true)
                 throw new Error(`error de campo vacio ${val}`);
             }
-        });
+        })
     }
 
 
@@ -110,6 +116,15 @@ function AddBook() {
             }
         }
     }
+    const handleSubmitGenres = (event) => {
+        if(data.genre == ''){
+            setEmpty_genres(true);
+            throw new Error(`error de campo vacio generos`);
+        }
+        else{
+            setEmpty_genres(false);
+        }
+    }
 
     const handleDeleteLink = (event, toDelete) => {
         data.links = data.links.filter(link => link !== toDelete)
@@ -118,9 +133,14 @@ function AddBook() {
 
     return(
     <>
+        <div class="container">
+        <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-9">
         <div className="addBookContainer" data-test="add-book">
         <div className="centro">
-        {agregado && (
+        {added && (
             <div class="alert alert-success" role="alert">
             Libro agregado Correctamente!
         </div>)}
@@ -131,21 +151,23 @@ function AddBook() {
                 </div>)
         }
             
-        <form  className="login " onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
             
             <div className="title" >
                 <label htmlFor="titulo">
-                <p class="text-light">Titulo:</p>
+                    <p class="text-light genero">Titulo:</p>
                     <input 
                         type="text"
                         value = {data.title}
                         name="title"
-                        className="form-control"
+                        className="form-control label-grande"
                         data-test="title"
+                        id="floatingTitle"
                         onChange={handleInputChange}
                         onBlur={cleanFinalSpaces}
+                        onSubmit={handleSubmitField}
                     />
-                    { intentoGuardar && (!data.title) && (
+                    { trySave && (!data.title) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -156,32 +178,16 @@ function AddBook() {
             <div class="form-group" >
                 <label htmlFor="autor">
                 <p className="text-light genero">Autor:</p>
-                    <input type="text"
-                        value = {data.author}
+                    <input 
+                        type="text"
+                        value = {data.author} 
                         name="author"
                         onChange={handleInputChange}
-                        className="form-control"
+                        className="form-control label-grande"
                         data-test="author"
                         onBlur={cleanFinalSpaces}
                     />
-                    { intentoGuardar && (!data.author) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
-                    )}
-                </label>
-            </div>
-            <div class="form-group" >
-                <label htmlFor="pais">
-                <p class="text-light genero">Pais:</p>
-                    <input type="text"
-                    value = {data.country}
-                    name="country"
-                    onChange={handleInputChange}
-                    className="form-control"
-                    data-test="country"
-                    onBlur={cleanFinalSpaces}></input>
-                     { intentoGuardar && (!data.country) && (
+                    { trySave && (!data.author) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -189,8 +195,27 @@ function AddBook() {
                 </label>
             </div>
 
-            <p className="text-light genero" >Links: </p>
             <div class="form-group" >
+                <label htmlFor="pais">
+                <p class="text-light genero">Pais:</p>
+                    <input type="text"
+                    value = {data.country}
+                    name="country"
+                    onChange={handleInputChange}
+                    className="form-control label-grande"
+                    data-test="country"
+                    onBlur={cleanFinalSpaces}></input>
+                     { trySave && (!data.country) && (
+                        <p className="alert alert-warning" data-test="fail-title">
+                            Este campo no puede estar vacio
+                        </p>
+                    )}
+                </label>
+            </div>
+
+            
+            <div class="form-group " >
+            <p className="text-light genero-l" >Links: </p>
                 <label htmlFor="link">
                     { invalidLink && (
                         <p className="invalid" data-test="fail-link">
@@ -201,7 +226,7 @@ function AddBook() {
                             value = {link}
                             name="link"
                             onChange={handleInputLink}
-                            className="form-control"
+                            className="form-control label-grande"
                             placeholder="Ingrese una url.."
                             data-test="link"
                     ></input>
@@ -215,26 +240,31 @@ function AddBook() {
                 >
                         Agregar
                 </button>
-
-            </div>
+                
+            
+            <ul class="list-menu">
             {
+
                 data.links.map(link => 
-                    <i 
-                        className="text-light" 
-                        data-test="added-link"
-                    >
-                        {link}
-                        <a 
+                    <li class="list-group-item list-item" data-test="added-link">
+                        
+                        <a className="link"target="_blank" rel="noopener noreferrer" href={link} className="link">{link}
+                        
+                        
+                        </a>
+                        <buttom type="buttom" 
                             className="btn btn-danger" 
                             onClick={e => handleDeleteLink(e, link)} 
                             data-test="remove-link">
                                 X
-                        </a>
-                        <br/><br/>
-                    </i>
+                        </buttom>
+                        
+                        
+                    </li>
                 )
             }
-
+            </ul>
+            </div>
             <div class= "form-group">
               <p className="text-light genero" >Generos: </p>
             </div>
@@ -256,19 +286,20 @@ function AddBook() {
                 )
             }
             
+            
             <div class="form-group" >
-                <label htmlFor="descripcion">
+                <label htmlFor="descripcion"  class="form-label">
                     <p class="text-light genero">Descripcion:</p>
-                        <input 
+                        <textarea 
                             type="text"
                             value = {data.description}
                             name="description"
-                            onChange={handleInputChange}
-                            className="form-control"
+                            className="form-control label-grande"
                             data-test="description"
+                            onChange={handleInputChange}
                             onBlur={cleanFinalSpaces}
                         />
-                    { intentoGuardar && (!data.description) && (
+                    { trySave&& (!data.description) && (
                             <p className="alert alert-warning" data-test="fail-title">
                                 Este campo no puede estar vacio
                             </p>
@@ -288,7 +319,7 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                             data-test="publicationDate"
                         />
-                        { intentoGuardar && (!data.publicationDate) && (
+                        { trySave && (!data.publicationDate) && (
                         <p className="alert alert-warning" data-test="fail-title">
                             Este campo no puede estar vacio
                         </p>
@@ -297,7 +328,7 @@ function AddBook() {
 
                 <div class="form-group" >
                     <label htmlFor="imagen">
-                        <p class="text-light">Imagen:</p>
+                        <p class="text-light genero">Imagen:</p>
                         { 
                             invalidImage && (
                             <p className="invalid" data-test="fail-image">
@@ -308,7 +339,7 @@ function AddBook() {
                             value = {data.image}
                             name="image"
                             onChange={handleInputChange}
-                            className="form-control"
+                            className="form-control label-grande"
                             placeholder="Ingrese una url.."
                             data-test="image-field"
                             onBlur={cleanFinalSpaces}/>
@@ -316,7 +347,7 @@ function AddBook() {
                             src={data.image} 
                             className="imagePreview" 
                             alt=""/>
-                        { intentoGuardar && (!data.image) && (
+                        { trySave && (!data.image) && (
                             <p className="alert alert-warning" data-test="fail-title">
                                 Este campo no puede estar vacio
                             </p>
@@ -331,7 +362,11 @@ function AddBook() {
             </form>
             </div>
             </div>
-   
+            </div>
+            <div class="col">
+            </div>
+            </div>
+            </div>
         </>
     )
 };

@@ -7,7 +7,7 @@ function Admin() {
 
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState('');
-    const [alertaLibroEliminado, setAlertaLibroEliminado] = useState("");
+    const [alertBookDeleted, setAlertBookDeleted] = useState("");
     const history = useHistory();
 
     useEffect(() => {
@@ -17,8 +17,8 @@ function Admin() {
 
     const getBooks = async () => {
         const data = await fetch('http://localhost:8080/api/v1/libros')
-        const todosLosLibros = await data.json()
-        setBooks(todosLosLibros)
+        const allBooks = await data.json()
+        setBooks(allBooks)
     }
 
     const filteredBooks = books.filter(book => {
@@ -26,7 +26,7 @@ function Admin() {
     });
 
     const handleClickDelete = (idBook, e) => {
-
+        console.log(books)
         e.preventDefault();
         axios
             .delete(`http://localhost:8080/api/v1/libros/${idBook}`)
@@ -34,8 +34,8 @@ function Admin() {
                 console.log(response);
                 getBooks();
             });
-            window.scrollTo(0, 0)
-        setAlertaLibroEliminado(<p>Libro Eliminado!</p>)
+        window.scrollTo(0, 0)
+        setAlertBookDeleted(<p className="alert alert-warning" role="alert">Libro Eliminado!</p>)
     }
 
     const toAdd = (e) => {
@@ -50,10 +50,10 @@ function Admin() {
     return (
         <div className="admin">
             <h1 className="mb">Administrador de Libros</h1>
-            <div className="bookDeleted">{alertaLibroEliminado}</div>
+            <div className="book-deletion-alert">{alertBookDeleted}</div>
             <div className="filterTab">
                 <input
-                    className="form-control filter filter-container"
+                    className="form-control filter filter-container inputSearch"
                     onChange={e => setSearch(e.target.value)}
                     id="myInput"
                     type="text"
@@ -75,20 +75,20 @@ function Admin() {
                     </thead>
                     <tbody>
                         {
-                            filteredBooks.map(libro =>
+                            filteredBooks.map(book =>
                                 <tr>
-                                    <th scope="row">{libro.id}</th>
+                                    <th scope="row">{book.id}</th>
                                     <td>
-                                        {libro.title}
+                                        {book.title}
                                     </td>
                                     <td>
-                                        {libro.author}
+                                        {book.author}
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <button
                                                 type="button"
-                                                onClick={e => handleEdit(e, libro.id)}
+                                                onClick={e => handleEdit(e, book.id)}
                                                 class="btn btn-secondary"
                                             >
                                                 Editar
@@ -96,7 +96,7 @@ function Admin() {
                                             <button
                                                 type="button"
                                                 class="btn btn-secondary"
-                                                onClick={e => handleClickDelete(libro.id, e)}
+                                                onClick={e => handleClickDelete(book.id, e)}
                                             >
                                                 Eliminar
                                         </button>
