@@ -51,10 +51,12 @@
       font-family: helvetica;
       text-decoration: none;
       text-transform: uppercase;
-      color: rgb(151, 189, 151);
+      color: rgb(0, 190, 0);
+      margin-left: 16px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   .link-title:hover {
-      color: darkslategray;
+      color: rgb(4, 71, 4);
       cursor:pointer;
   }
