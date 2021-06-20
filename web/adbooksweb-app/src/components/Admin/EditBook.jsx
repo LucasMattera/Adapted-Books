@@ -9,7 +9,6 @@ function EditBook() {
 
     const genresDefault = ["Cyberpunk", "Space Opera", "Terror", "Ciencia Ficcion", "Thriller", "Aventura", "Acción", "Manga", "Suspenso", "Misterio", "Comedia", "Sobrenatural", "Superpoderes", "Fantasía", "Fantasía Oscura", "Alta Fantasia", "Novela", "Drama Apocalíptico", "Juvenil"]
 
-
     const query = UseQuery()
     const history = useHistory()
 
@@ -196,9 +195,10 @@ function EditBook() {
                                     onBlur={cleanFinalSpaces}
                                 />
                                 {trySave && (!data.title) && (
-                                    <p className="alert alert-warning" data-test="fail-title">
-                                        Este campo no puede estar vacio
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        El campo "Título" no puede estar vacío
+                                    </div>
                                 )}
                             </label>
                         </div>
@@ -213,9 +213,10 @@ function EditBook() {
                                     data-test="edit-author"
                                     onBlur={cleanFinalSpaces} />
                                 {trySave && (!data.author) && (
-                                    <p className="alert alert-warning" data-test="fail-author">
-                                        Este campo no puede estar vacio
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        El campo "Autor" no puede estar vacío
+                                    </div>
                                 )}
                             </label>
                         </div>
@@ -230,9 +231,10 @@ function EditBook() {
                                     data-test="edit-country"
                                     onBlur={cleanFinalSpaces}></input>
                                 {trySave && (!data.country) && (
-                                    <p className="alert alert-warning" data-test="fail-country">
-                                        Este campo no puede estar vacio
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        El campo "País" no puede estar vacío
+                                    </div>
                                 )}
                             </label>
                         </div>
@@ -240,9 +242,10 @@ function EditBook() {
                         <div class="form-group" >
                             <label htmlFor="link">
                                 {invalidLink && (
-                                    <p className="invalid" data-test="fail-link">
-                                        Ingrese un link valido
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        Ingrese un link válido
+                                    </div>
                                 )}
                                 <input type="text"
                                     value={link}
@@ -302,7 +305,7 @@ function EditBook() {
                         }  
                         <div class="form-group" >
                             <label htmlFor="descripcion" class="form-label">
-                                <p class="text-light genero">Descripcion:</p>
+                                <p class="text-light genero">Descripción:</p>
                                 <textarea
                                     type="text"
                                     value={data.description}
@@ -313,9 +316,10 @@ function EditBook() {
                                     onBlur={cleanFinalSpaces}
                                 />
                                 {trySave && (!data.description) && (
-                                    <p className="alert alert-warning" data-test="fail-description">
-                                        Este campo no puede estar vacio
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        El campo "Descripción" no puede estar vacío
+                                    </div>
                                 )}
                             </label>
                         </div>
@@ -331,9 +335,10 @@ function EditBook() {
                                 >
                                 </input>
                                 {trySave && (!data.publicationDate) && (
-                                    <p className="alert alert-warning" data-test="fail-date">
-                                        Este campo no puede estar vacio
-                                    </p>
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        El campo "Fecha de publicación" no puede estar vacío
+                                    </div>
                                 )}
                             </label>
                             <div class="form-group" >
@@ -341,10 +346,11 @@ function EditBook() {
                                     <p class="text-light">Imagen:</p>
                                     {
                                         invalidImage && (
-                                            <p className="invalid" data-test="fail-image">
-                                                Ingrese una imagen valida
-                                            </p>)
-                                    }
+                                            <div class="audun_warn">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                                Ingrese una imagen válida
+                                            </div>
+                                    )}
                                     <input type="text"
                                         value={data.image}
                                         name="image"
@@ -358,9 +364,10 @@ function EditBook() {
                                         className="imagePreview"
                                         alt=""></img>
                                     {trySave && (!data.image) && (
-                                        <p className="alert alert-warning" data-test="fail-image">
-                                            Este campo no puede estar vacio
-                                        </p>
+                                        <div class="audun_warn">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                            El campo "Imagen" no puede estar vacío
+                                        </div>
                                     )}
                                 </label>
                             </div>

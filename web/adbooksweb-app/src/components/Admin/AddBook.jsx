@@ -9,12 +9,9 @@ function AddBook() {
 
     const history = useHistory();
     
-    
     const [link, setLink] = useState("");
     const [error,setError] = useState(false)
     
-    
-
     const [data,setData] = useState({
         title: "",
         author:"",
@@ -25,7 +22,6 @@ function AddBook() {
         genres: [],
         description:""
     });
-
 
     const [invalidImage,setInvalidImage] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
@@ -78,7 +74,6 @@ function AddBook() {
             
     }
     
-
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
             if(data[val] == '' && val != "links"){
@@ -87,8 +82,6 @@ function AddBook() {
             }
         })
     }
-
-
     
     const handleInputLink = (event) => {
         setLink(event.target.value.trim())
@@ -168,9 +161,10 @@ function AddBook() {
                         onSubmit={handleSubmitField}
                     />
                     { trySave && (!data.title) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
+                        <div class="audun_warn" data-test="fail-title">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                            El campo "Título" no puede estar vacío
+                        </div>
                     )}
                 </label>
             </div>
@@ -188,9 +182,10 @@ function AddBook() {
                         onBlur={cleanFinalSpaces}
                     />
                     { trySave && (!data.author) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
+                        <div class="audun_warn" data-test="fail-author">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                            El campo "Autor" no puede estar vacío
+                        </div>
                     )}
                 </label>
             </div>
@@ -206,9 +201,10 @@ function AddBook() {
                     data-test="country"
                     onBlur={cleanFinalSpaces}></input>
                      { trySave && (!data.country) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
+                        <div class="audun_warn" data-test="fail-country">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                            El campo "País" no puede estar vacío
+                        </div>
                     )}
                 </label>
             </div>
@@ -218,9 +214,10 @@ function AddBook() {
             <p className="text-light genero-l" >Links: </p>
                 <label htmlFor="link">
                     { invalidLink && (
-                        <p className="invalid" data-test="fail-link">
-                            Ingrese un link valido
-                        </p>
+                        <div class="audun_warn" data-test="fail-link">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                            Ingrese un link válido
+                        </div>
                     )}
                     <input type="text"
                             value = {link}
@@ -300,9 +297,10 @@ function AddBook() {
                             onBlur={cleanFinalSpaces}
                         />
                     { trySave&& (!data.description) && (
-                            <p className="alert alert-warning" data-test="fail-title">
-                                Este campo no puede estar vacio
-                            </p>
+                            <div class="audun_warn" data-test="fail-description">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                El campo "Descripción" no puede estar vacío
+                            </div>
                         )}
                 </label>
             </div>
@@ -320,10 +318,11 @@ function AddBook() {
                             data-test="publicationDate"
                         />
                         { trySave && (!data.publicationDate) && (
-                        <p className="alert alert-warning" data-test="fail-title">
-                            Este campo no puede estar vacio
-                        </p>
-                    )}
+                            <div class="audun_warn">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                El campo "Fecha de Publicación" no puede estar vacío
+                            </div>
+                        )}
                 </label>
 
                 <div class="form-group" >
@@ -331,10 +330,11 @@ function AddBook() {
                         <p class="text-light genero">Imagen:</p>
                         { 
                             invalidImage && (
-                            <p className="invalid" data-test="fail-image">
-                                Ingrese una imagen valida
-                            </p>)
-                        }
+                            <div class="audun_warn" data-test="fail-image">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                Ingrese un link válido
+                            </div>
+                        )}
                         <input type="text"
                             value = {data.image}
                             name="image"
@@ -348,10 +348,11 @@ function AddBook() {
                             className="imagePreview" 
                             alt=""/>
                         { trySave && (!data.image) && (
-                            <p className="alert alert-warning" data-test="fail-title">
-                                Este campo no puede estar vacio
-                            </p>
-                    )}
+                            <div class="audun_warn" data-test="fail-link">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                El campo "Imagen" no puede estar vacío
+                            </div>
+                        )}
                     </label>
                 </div>
             </div>
