@@ -36,12 +36,11 @@ Scenario: As a user I will see an alert when Description field is empty
     And I empty my "edit-description" field
     When I click the "save-book-btn" button
     Then I should see a "fail-description" message
-# Scenario: As a user I will see an alert when Date field is empty
-#     Given I navigate to the "edit-book" page
-#     And I empty my "edit-date" field
-#     When I click the "save-book-btn" button
-#     Then I should see a "fail-date" message
-#
+Scenario: As a user I will see an alert when Date field is empty
+    Given I navigate to the "edit-book" page
+    And I empty my "edit-date" field
+    When I click the "save-book-btn" button
+    Then I should see a "fail-date" message
 Scenario: As a user I will see an alert when Image field is empty
     Given I navigate to the "edit-book" page
     And I empty my "edit-image" field

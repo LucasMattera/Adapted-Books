@@ -336,42 +336,43 @@ function EditBook() {
                                 </input>
                                 {trySave && (!data.publicationDate) && (
                                     <div class="audun_warn">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-date"/>
                                         El campo "Fecha de publicación" no puede estar vacío
                                     </div>
                                 )}
                             </label>
-                            <div class="form-group" >
-                                <label htmlFor="imagen">
-                                    <p class="text-light">Imagen:</p>
-                                    {
-                                        invalidImage && (
-                                            <div class="audun_warn">
-                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
-                                                Ingrese una imagen válida
-                                            </div>
-                                    )}
-                                    <input type="text"
-                                        value={data.image}
-                                        name="image"
-                                        onChange={handleInputChange}
-                                        className="form-control label-grande"
-                                        placeholder="Ingrese una url.."
-                                        data-test="edit-image"
-                                        onBlur={cleanFinalSpaces}>
-                                    </input>
-                                    <img src={data.image}
-                                        className="imagePreview"
-                                        alt=""></img>
-                                    {trySave && (!data.image) && (
-                                        <div class="audun_warn">
-                                        <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-image"/>
-                                            El campo "Imagen" no puede estar vacío
-                                        </div>
-                                    )}
-                                </label>
-                            </div>
                         </div>
+                        <div class="form-group" >
+                            <label htmlFor="imagen">
+                                <p class="text-light">Imagen:</p>
+                                {
+                                    invalidImage && (
+                                        <div class="audun_warn">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                            Ingrese una imagen válida
+                                        </div>
+                                )}
+                                <input type="text"
+                                    value={data.image}
+                                    name="image"
+                                    onChange={handleInputChange}
+                                    className="form-control label-grande"
+                                    placeholder="Ingrese una url.."
+                                    data-test="edit-image"
+                                    onBlur={cleanFinalSpaces}>
+                                </input>
+                                <img src={data.image}
+                                    className="imagePreview"
+                                    alt=""></img>
+                                {trySave && (!data.image) && (
+                                    <div class="audun_warn">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-image"/>
+                                        El campo "Imagen" no puede estar vacío
+                                    </div>
+                                )}
+                            </label>
+                        </div>    
+
                         <button className="btn btn-primary"
                             type="submit"
                             alt="guardar"
