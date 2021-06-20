@@ -1,11 +1,11 @@
 const {Before, After, setDefaultTimeout} = require("@cucumber/cucumber");
 const puppeteer = require("puppeteer");
-setDefaultTimeout(50000)
+setDefaultTimeout(10000);
 
 Before(async function(){
 
     const world = this;
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({slowMo:25});
     const page = await browser.newPage();
     await page.setViewport({
         width: 1920,
