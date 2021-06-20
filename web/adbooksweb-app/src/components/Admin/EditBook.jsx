@@ -196,7 +196,7 @@ function EditBook() {
                                 />
                                 {trySave && (!data.title) && (
                                     <div class="audun_warn">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-title"/>
                                         El campo "Título" no puede estar vacío
                                     </div>
                                 )}
@@ -214,7 +214,7 @@ function EditBook() {
                                     onBlur={cleanFinalSpaces} />
                                 {trySave && (!data.author) && (
                                     <div class="audun_warn">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-author"/>
                                         El campo "Autor" no puede estar vacío
                                     </div>
                                 )}
@@ -232,7 +232,7 @@ function EditBook() {
                                     onBlur={cleanFinalSpaces}></input>
                                 {trySave && (!data.country) && (
                                     <div class="audun_warn">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-country"/>
                                         El campo "País" no puede estar vacío
                                     </div>
                                 )}
@@ -317,7 +317,7 @@ function EditBook() {
                                 />
                                 {trySave && (!data.description) && (
                                     <div class="audun_warn">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-description"/>
                                         El campo "Descripción" no puede estar vacío
                                     </div>
                                 )}
@@ -365,7 +365,7 @@ function EditBook() {
                                         alt=""></img>
                                     {trySave && (!data.image) && (
                                         <div class="audun_warn">
-                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"/>
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true" data-test="fail-image"/>
                                             El campo "Imagen" no puede estar vacío
                                         </div>
                                     )}
