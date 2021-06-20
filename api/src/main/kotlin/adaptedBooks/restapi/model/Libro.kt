@@ -1,9 +1,5 @@
 package adaptedBooks.restapi.model
-
-import ch.qos.logback.classic.db.names.TableName
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -21,7 +17,7 @@ data class Libro(
                 
                 @ElementCollection()
                 val genres:List<String> = listOf(),
-                
+                @Column(length = 3000)
                 val description:String= "Descripcion de $title"
             ){
 
