@@ -1,0 +1,13 @@
+{
+    "book" : {  "title": "title",
+                "id": 0,
+                "author": "author",
+                "country": "country",
+                "image": "https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg",
+                "links": [],
+                "publicationDate": "13/12/2020",
+                "genres": [],
+                "description": "description"
+    }
+}
+    
