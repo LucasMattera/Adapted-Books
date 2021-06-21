@@ -49,3 +49,25 @@
     padding:12px;
     width: 400px;
 }
+
+.success-edited {
+    color: #ffffff;
+    background-color: #50ba30;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:12px;
+    width: 400px;
+}
+
+.unsuccess-edited {
+    color: #ffffff;
+    background-color: #eb3030;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:12px;
+    width: 400px;
+}

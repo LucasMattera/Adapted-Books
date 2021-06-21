@@ -103,10 +103,20 @@ function EditBook() {
                         console.log(data.title)
                     }).catch((error) => setError(true));
                 setStaticsFieldData(data)
-                setBookUpdated(<p className="alert alert-warning" role="alert">Libro actualizado!</p>)
+                setBookUpdated(
+                    <div className="success-edited" data-test="success-edited">
+                            <i aria-hidden="true"/>
+                            Datos actualizados
+                    </div>
+                )
             } catch { }
         } else {
-            setBookUpdated(<p className="alert alert-danger" role="alert">Libro no actualizado...!</p>)
+            setBookUpdated(
+                <div className="unsuccess-edited" data-test="unsuccess-edited">
+                    <i aria-hidden="true"/>
+                    No se han podido actualizar los datos
+                </div>
+            )
         }
 
     }
