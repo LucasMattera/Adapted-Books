@@ -38,6 +38,7 @@
 .descripcion {
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align:left;
+    width: auto;
 }
 .detalle{
     margin-left: 11%;

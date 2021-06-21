@@ -23,6 +23,8 @@ function AddBook() {
         description:""
     });
 
+    const [bookAdded, setBookAdded] = useState()
+
     const [invalidImage,setInvalidImage] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
     const [emptyPublicationDate, setEmpty_publicationDate] = useState(false);
@@ -44,7 +46,6 @@ function AddBook() {
         setData({...data,
             [event.target.name]: event.target.value.trimEnd()
         })
-        setTrySave(false)
     }
 
     const handleSubmit = (event) =>{ 
@@ -52,17 +53,29 @@ function AddBook() {
         try{
             handleSubmitImage();
             handleSubmitField();
-            console.log("llego")
             axios
                 .post("http://localhost:8080/api/v1/libros/add",data)
                 .then((response) => {
-                    setAdded(true);
-                    setError(false)
+                  bookAddedAlert()
                 })
-                .catch((error) => setError(true));
+                .catch(bookNotAddedAlert());
         }
         catch{}
     };
+
+    const bookAddedAlert = () => {
+        setBookAdded(<div className="success-added" data-test="success-added">
+                        <i aria-hidden="true"/>
+                            Libro agregado 
+                    </div>)
+    }
+
+    const bookNotAddedAlert = () => {
+        setBookAdded(<div className="unsuccess-added" data-test="unsuccess-added">
+                        <i aria-hidden="true"/>
+                        No se ha podido agregar el libro 
+                    </div>)
+    }
     
      const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
@@ -76,8 +89,9 @@ function AddBook() {
     
     const handleSubmitField = (event) => {
         Object.getOwnPropertyNames(data).forEach(function(val, index, array){
-            if(data[val] == '' && val != "links"){
+            if(data[val] == '' && val != "links" && val != "genres"){
                 setTrySave(true)
+                console.log(val)
                 throw new Error(`error de campo vacio ${val}`);
             }
         })
@@ -133,18 +147,6 @@ function AddBook() {
         <div class="col-9">
         <div className="addBookContainer" data-test="add-book">
         <div className="centro">
-        {added && (
-            <div className="success-added" data-test="success-added">
-                <i aria-hidden="true"/>
-                Libro agregado 
-            </div>  
-        )}
-        {error && (
-            <div className="unsuccess-added" data-test="unsuccess-added">
-                <i aria-hidden="true"/>
-                No se ha podido agregar el libro 
-            </div>
-        )}
             
         <form  onSubmit={handleSubmit}>
             
@@ -370,6 +372,9 @@ function AddBook() {
             </div>
             </div>
             </div>
+            <center>
+                {bookAdded}
+            </center>
         </>
     )
 };

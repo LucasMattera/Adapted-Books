@@ -22,21 +22,23 @@ class RestapiApplication: CommandLineRunner {
 		val leviatanImagen = "https://m.media-amazon.com/images/I/51K3p2lbJeL.jpg"
 		val leviatanLinks = listOf<String>("https://www.primevideo.com/detail/0MW6F85MD8486AE43GONNOR5F1/ref=atv_dp_season_select_s1?language=es_ES")
 		val leviatanGeneros = listOf<String>("Ciencia Ficcion" , "Space Opera")
-		val leviatan = Libro("El Despertar del Leviatan","James S. A. Corey", "Estados Unidos", leviatanImagen, leviatanLinks, LocalDate.parse("02-06-2011",formatter),leviatanGeneros)
+		val leviatan = Libro("El Despertar del Leviatan","James S. A. Corey", "Estados Unidos", leviatanImagen, leviatanLinks, LocalDate.parse("02-06-2011",formatter),leviatanGeneros,"La humanidad ha colonizado el Sistema Solar: Marte, la Luna, el cinturón de asteroides y más allá, pero las estrellas aún están fuera de nuestro alcance. Jim Holden es segundo de a bordo de un transportador de hielo que realiza misiones entre los anillos de Saturno y las estaciones mineras del Cinturón. Cuando su tripulación y él se topan con la Scopuli, una nave abandonada, descubren un secreto que desearían no haber encontrado. Un secreto por el que alguien sería capaz de matar, matar a una escala que Jim y su tripulación no imaginan. La guerra en el Sistema Solar está a punto de comenzar, a menos que sean capaces de descubrir quién abandonó la nave y por qué. El inspector Miller busca a una chica. Una chica entre mil millones, pero los padres de ella son gente adinerada, y el dinero lo es todo. Cuando las pistas lo llevan a la Scopuli y a Holden, un simpatizante de los rebeldes, se da cuenta de que aquella chica quizá sea la clave de todo. Holden y Miller deben atar los cabos entre el gobierno de la Tierra, los revolucionarios de los planetas exteriores y corporaciones secretas, y lo tienen todo en su contra. Pero en el Cinturón hay otras reglas, y una pequeña nave puede cambiar el destino del universo.")
 		libros.add(leviatan)
 
 		val calibanImagen = "https://1.bp.blogspot.com/-iWQam0OWJNI/YBvjzjc-NSI/AAAAAAAAabU/uwHc9-dyZP4Mfayu6bE2aatdQ6UL1ly6ACNcBGAsYHQ/s2048/la%2Bguerra%2Bde%2Bcaliban.jpg"
-		val caliban = Libro("La Guerra de Caliban" ,"James S. A. Corey", "Estados Unidos", calibanImagen, leviatanLinks, LocalDate.parse("07-06-2012",formatter),leviatanGeneros)
+		val caliban = Libro("La Guerra de Caliban" ,"James S. A. Corey", "Estados Unidos", calibanImagen, leviatanLinks, LocalDate.parse("07-06-2012",formatter),leviatanGeneros,"Dieciocho meses después de los eventos que se desatan en El Despertar del Leviatán, Ganimedes, una de las lunas más grandes de Júpiter y fuente de recursos de los planetas exteriores, es asolada por una guerra entre la Tierra y Marte. En la Tierra, Chrisjen Avasarala, una política de alto rango hace todo lo posible para evitar que se desate otra guerra interplanetaria. Y en Venus, la protomolécula se ha hecho con el planeta y ha desencadenado una serie de cambios misteriosos que amenazan con extenderse por el Sistema Solar.")
 		libros.add(caliban)
 
 		val abadonImagen = "https://m.media-amazon.com/images/I/519qqD2rVQL.jpg"
-		val abadon = Libro("La Puerta de Abadon" ,"James S. A. Corey", "Estados Unidos", abadonImagen, leviatanLinks, LocalDate.parse("04-06-2013",formatter),leviatanGeneros)
+		val abadon = Libro("La Puerta de Abadon" ,"James S. A. Corey", "Estados Unidos", abadonImagen, leviatanLinks, LocalDate.parse("04-06-2013",formatter),leviatanGeneros,"Durante generaciones, el Sistema Solar (Marte, la Luna y el cinturón de asteroides) ha conformado la gran frontera de la humanidad. Hasta ahora. El artefacto alienígena que realizaba su obra bajo las nubes de Venus ha aparecido en la órbita de Urano, donde ha construido una puerta enorme que se abre hacia un espacio sin estrellas.\n" +
+				"\n" +
+				"James Holden y la tripulación de la Rocinante forman parte de una gran flota de naves militares y científicas que parten para examinar el artefacto. Mientras los emisarios de la especie humana intentan ponerse de acuerdo acerca de si el Anillo construido por la protomolécula constituye una oportunidad o una amenaza, ignoran que el mayor de los peligros se encuentra entre sus filas.")
 		libros.add(abadon)
 
 		val akiraImagen = "https://i.imgur.com/o1n5kD5.jpg"
 		val akiraGeneros = listOf<String>("Cyberpunk", "Acción")
 		val akiraLinks = listOf<String>("https://www.netflix.com/ar/title/60021103")
-		val akira = Libro("Akira", "Katsuhiro Otomo" , "Japon", akiraImagen, akiraLinks,LocalDate.parse("20-12-1982",formatter),akiraGeneros)
+		val akira = Libro("Akira", "Katsuhiro Otomo" , "Japon", akiraImagen, akiraLinks,LocalDate.parse("20-12-1982",formatter),akiraGeneros, "1988: El mundo está al borde de la destrucción absoluta. La tecnología avanzada fue la causa de una terrible explosión que desencadenó una guerra nuclear y devastó las grandes ciudades del planeta. Treinta años después, sobre las ruinas de Tokio, se alza la megalópolis de Neo-Tokio, una ciudad opresiva e inhumana cargada de problemas como el desempleo, la violencia, la droga y el terrorismo. Las sectas religiosas y los grupos extremistas, aprovechándose de la insatisfacción de los ciudadanos, cultivan el mito de Akira, un \"niño cobaya\" depositario de la \"energía absoluta\" cuya resurrección significaría para Japón el amanecer de una nueva era.")
   		libros.add(akira)
 
 
