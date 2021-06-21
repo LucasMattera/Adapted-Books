@@ -1,7 +1,20 @@
 .centro{
-	text-align: center;
+  margin-left: 4vw;
+  margin-top: -2vh;
+}
+.text-light{
+  text-align: left;
+  margin-top: 2vh;
+  margin-bottom: -1vh;
+}
+.formBookContainer{
+  margin-top: 4vh;
+  width: max-content;
 }
 
+.generoMapping{
+  margin-top: 1vh;
+}
 
 .imagePreview{
 border: 1px solid #ddd; /* Gray border */
@@ -27,13 +40,6 @@ border: 1px solid #ddd; /* Gray border */
   grid-column: 1 / 5;
 }
 
-.genero{
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 20px;
-  
-}
-
 .link{
   white-space: nowrap;
   overflow: hidden;
@@ -52,20 +58,19 @@ border: 1px solid #ddd; /* Gray border */
 }
 
 .genero-l{
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 10px;
-  padding-bottom: 0px;
+  
 }
 
 
 .list-menu{
-  margin-left: auto;
+  margin-left: -1vw;
   margin-right: auto;
   overflow:hidden;
   width: 70%;
   border-radius: 10px;
 }
+
+
 
 .list-item{
   overflow:hidden;
@@ -115,3 +120,4 @@ border: 1px solid #ddd; /* Gray border */
     padding:12px;
     width: 400px;
 }
+

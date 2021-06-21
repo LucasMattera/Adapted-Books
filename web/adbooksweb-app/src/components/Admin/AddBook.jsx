@@ -140,7 +140,7 @@ function AddBook() {
 
     return(
     <>
-        <div class="container">
+        <div class="container formBookContainer">
         <div class="row">
         <div class="col">
         </div>
@@ -148,7 +148,7 @@ function AddBook() {
         <div className="addBookContainer" data-test="add-book">
         <div className="centro">
             
-        <form  onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit} className="form">
             
             <div className="title" >
                 <label htmlFor="titulo">
@@ -269,24 +269,25 @@ function AddBook() {
             <div class= "form-group">
               <p className="text-light genero" >Generos: </p>
             </div>
-            {
-                genresDefault.map (genero => 
-                    <div class="form-check form-check-inline margenBajo">
-                        <input 
-                            class="form-check-input" 
-                            type="checkbox" 
-                            data-test ={genero} 
-                            id={genero} 
-                            value={genero} 
-                            onClick={handleInputGenero}
-                        />
-                        <label 
-                            class="text-light" 
-                            for="inlineCheckbox1">{genero}</label>
-                    </div>
-                )
-            }
-            
+            <div className="generoMapping">
+                {
+                    genresDefault.map (genero => 
+                        <div class="form-check form-check-inline margenBajo">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                data-test ={genero} 
+                                id={genero} 
+                                value={genero} 
+                                onClick={handleInputGenero}
+                            />
+                            <label 
+                                class="" 
+                                for="inlineCheckbox1">{genero}</label>
+                        </div>
+                    )
+                }
+            </div>
             
             <div class="form-group" >
                 <label htmlFor="descripcion"  class="form-label">

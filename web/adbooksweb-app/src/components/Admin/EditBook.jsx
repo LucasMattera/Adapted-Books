@@ -299,20 +299,23 @@ function EditBook() {
                         <div class="form-group" >
                             <p class="text-light genero">Generos: </p>
                         </div>
-                        {
-                            genresDefault.map(genero =>
-                                <div class="form-check form-check-inline margenBajo">
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        data-test={genero}
-                                        id={genero}
-                                        value={genero}
-                                        onClick={handleInputGenero} />
-                                    <label class="text-light"
-                                        for="inlineCheckbox1">{genero}</label>
-                                </div>
-                            )
-                        }  
+
+                        <div className="generoMapping">
+                            {
+                                genresDefault.map(genero =>
+                                    <div class="form-check form-check-inline margenBajo">
+                                        <input class="form-check-input"
+                                            type="checkbox"
+                                            data-test={genero}
+                                            id={genero}
+                                            value={genero}
+                                            onClick={handleInputGenero} />
+                                        <label class=""
+                                            for="inlineCheckbox1">{genero}</label>
+                                    </div>
+                                )
+                            }
+                        </div>  
                         <div class="form-group" >
                             <label htmlFor="descripcion" class="form-label">
                                 <p class="text-light genero">Descripción:</p>
