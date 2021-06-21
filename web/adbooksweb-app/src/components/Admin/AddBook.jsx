@@ -134,15 +134,17 @@ function AddBook() {
         <div className="addBookContainer" data-test="add-book">
         <div className="centro">
         {added && (
-            <div class="alert alert-success" role="alert">
-            Libro agregado Correctamente!
-        </div>)}
-        {   
-            error && (
-                <div class="alert alert-danger" role="alert">
-                    El Libro no fue Agregado!
-                </div>)
-        }
+            <div className="success-added" data-test="success-added">
+                <i aria-hidden="true"/>
+                Libro agregado 
+            </div>  
+        )}
+        {error && (
+            <div className="unsuccess-added" data-test="unsuccess-added">
+                <i aria-hidden="true"/>
+                No se ha podido agregar el libro 
+            </div>
+        )}
             
         <form  onSubmit={handleSubmit}>
             

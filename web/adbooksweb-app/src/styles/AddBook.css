@@ -89,3 +89,29 @@ border: 1px solid #ddd; /* Gray border */
     padding:12px;
     width: 400px;
 }
+
+.fa-exclamation-triangle:before{
+    margin-right:10px;
+}
+
+.success-added {
+    color: #ffffff;
+    background-color: #50ba30;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:12px;
+    width: 400px;
+}
+
+.unsuccess-added {
+    color: #ffffff;
+    background-color: #eb3030;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:12px;
+    width: 400px;
+}
