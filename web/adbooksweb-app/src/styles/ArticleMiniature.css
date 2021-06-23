@@ -28,6 +28,7 @@
     height: 450px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    overflow: hidden;
   }
 
   
@@ -59,4 +60,16 @@
   .link-title:hover {
       color: rgb(4, 71, 4);
       cursor:pointer;
+  }
+
+  .autor{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .description{
+    margin-top: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    text-align: left;
   }
