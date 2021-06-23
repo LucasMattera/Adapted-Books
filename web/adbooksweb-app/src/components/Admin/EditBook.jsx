@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/AddBook.css";
+import "../../styles/EditBook.css";
 import axios from "axios";
 import UseQuery from "../Search/UseQuery";
 import { useHistory } from "react-router";
