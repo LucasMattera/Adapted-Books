@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/AddBook.css";
-import "../../styles/EditBook.css"
 import axios from "axios";
 import UseQuery from "../Search/UseQuery";
 import { useHistory } from "react-router";
@@ -303,16 +302,21 @@ function EditBook() {
                         <div className="generoMapping">
                             {
                                 genresDefault.map(genero =>
-                                    <div class="form-check form-check-inline margenBajo">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            data-test={genero}
-                                            id={genero}
-                                            value={genero}
-                                            onClick={handleInputGenero} />
-                                        <label class=""
-                                            for="inlineCheckbox1">{genero}</label>
+                                    <div className="genero-tag">
+                                        <div class="margenBajo">
+                                            <input class="form-check-input"
+                                                type="checkbox"
+                                                data-test={genero}
+                                                id={genero}
+                                                value={genero}
+                                                onClick={handleInputGenero}
+                                            />
+                                            <label class="texto-genero"
+                                                for="inlineCheckbox1">{genero}</label>
+
+                                        </div>
                                     </div>
+                                    
                                 )
                             }
                         </div>  
