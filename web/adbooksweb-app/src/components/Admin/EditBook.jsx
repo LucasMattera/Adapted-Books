@@ -115,11 +115,16 @@ function EditBook() {
                     <i aria-hidden="true"/>
                     No se han podido actualizar los datos
                 </div>
-            )
+            );
         }
-
+        removeAlertOfBookUpdatedOrNotUpdated();
     }
 
+    const removeAlertOfBookUpdatedOrNotUpdated =() =>{
+        window.setTimeout(function(){
+            setBookUpdated();
+         },4000)
+    }
     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
         if (isImage.test(data.image)) {
@@ -183,7 +188,7 @@ function EditBook() {
     return (
         <>
 
-            (<div class="container">
+            (<div class="container formBookContainer">
         <div class="row">
         <div class="col">
         </div>
@@ -302,7 +307,7 @@ function EditBook() {
                         <div className="generoMapping">
                             {
                                 genresDefault.map(genero =>
-                                    <div className="genero-tag">
+                                    <div className="form-check form-check-inline genero-tag margenBajo">
                                         <div class="margenBajo">
                                             <input class="form-check-input"
                                                 type="checkbox"
