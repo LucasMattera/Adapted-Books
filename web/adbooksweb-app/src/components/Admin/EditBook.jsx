@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import "../../styles/AddBook.css";
 import "../../styles/EditBook.css"
+=======
+import "../../styles/EditBook.css";
+>>>>>>> 9889c31ce793627c9ffb7842f9b45f89330266a2
 import axios from "axios";
 import UseQuery from "../Search/UseQuery";
 import { useHistory } from "react-router";
@@ -116,11 +120,16 @@ function EditBook() {
                     <i aria-hidden="true"/>
                     No se han podido actualizar los datos
                 </div>
-            )
+            );
         }
-
+        removeAlertOfBookUpdatedOrNotUpdated();
     }
 
+    const removeAlertOfBookUpdatedOrNotUpdated =() =>{
+        window.setTimeout(function(){
+            setBookUpdated();
+         },4000)
+    }
     const handleSubmitImage = (event) => {
         var isImage = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
         if (isImage.test(data.image)) {
@@ -184,7 +193,7 @@ function EditBook() {
     return (
         <>
 
-            (<div class="container">
+            (<div class="container formBookContainer">
         <div class="row">
         <div class="col">
         </div>
@@ -303,6 +312,7 @@ function EditBook() {
                         <div className="generoMapping">
                             {
                                 genresDefault.map(genero =>
+<<<<<<< HEAD
                                     <div class="form-check form-check-inline margenBajo">
                                         <input class="form-check-input"
                                             type="checkbox"
@@ -312,6 +322,21 @@ function EditBook() {
                                             onClick={handleInputGenero} />
                                         <label class=""
                                             for="inlineCheckbox1">{genero}</label>
+=======
+                                    <div className="form-check form-check-inline genero-tag margenBajo">
+                                        <div class="margenBajo">
+                                            <input class="form-check-input"
+                                                type="checkbox"
+                                                data-test={genero}
+                                                id={genero}
+                                                value={genero}
+                                                onClick={handleInputGenero}
+                                            />
+                                            <label class="texto-genero"
+                                                for="inlineCheckbox1">{genero}</label>
+
+                                        </div>
+>>>>>>> 9889c31ce793627c9ffb7842f9b45f89330266a2
                                     </div>
                                 )
                             }

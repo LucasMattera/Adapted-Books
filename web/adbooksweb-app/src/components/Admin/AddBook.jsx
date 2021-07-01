@@ -272,7 +272,7 @@ function AddBook() {
             <div className="generoMapping">
                 {
                     genresDefault.map (genero => 
-                        <div class="form-check form-check-inline margenBajo">
+                        <div class="form-check form-check-inline margenBajo genero-tag">
                             <input 
                                 class="form-check-input" 
                                 type="checkbox" 
@@ -282,7 +282,7 @@ function AddBook() {
                                 onClick={handleInputGenero}
                             />
                             <label 
-                                class="" 
+                                class="texto-genero" 
                                 for="inlineCheckbox1">{genero}</label>
                         </div>
                     )

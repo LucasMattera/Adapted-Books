@@ -9,10 +9,15 @@
 }
 .formBookContainer{
   margin-top: 4vh;
-  width: 100vw;
+  min-width: 1000px;
+  width: 100vh;
+  
 }
 
 .generoMapping{
+  display: grid;
+  grid-template-columns:repeat(3, 170px);
+  grid-gap: 10px;
   margin-top: 1vh;
 }
 
@@ -57,8 +62,22 @@ border: 1px solid #ddd; /* Gray border */
   padding-top:5px;
 }
 
-.genero-l{
-  
+.genero-tag{
+  background-color: #253025;
+  border-radius: 10%;
+  max-width: max-content;
+  max-height: max-content;
+
+
+}
+.margenBajo{
+  display: flex;
+}
+
+.texto-genero{
+  white-space: nowrap;
+  margin-right: 1vw;
+  color: #ddd;
 }
 
 
