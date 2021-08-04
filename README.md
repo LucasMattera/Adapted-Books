@@ -1,20 +1,11 @@
 # AdaptedBooks-EIS
 
+A webpage where you can see the adaptations of your fauvorite readings. With Admin user feature.
 
-## Repositorio 🚀
-```
-https://github.com/GonzaloBaez/AdaptedBooks-EIS/tree/master
-```
-## Backlog general ⚙️
-
-```
-https://trello.com/b/kbbSJEzt/adapted-books
-```
-
-## Documento del  reporte ☕
-```
-https://docs.google.com/document/d/1wawsxZCGk5UTes7ThYJOLr60lXkv5UqyJGPzTl9y2UQ/edit?usp=sharing
-```
-
-**Url del producto:** localhost:3000
-
+Tech stack: 
+  - Frontend: ReactJS, Axios, HTML, CSS, Bootstrap
+  - Backend: SpringBoot, MySQL
+  - Testing: Cucumber
+  - Organization: Scrum, Trello
+  - Development methodologies: BDD, ATDD
+  - The team: Gonzalo Baez, Francisco Arciniega, Braian Rosales, Jeremias Fuentes y Lucas Mattera
